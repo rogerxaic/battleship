@@ -48,36 +48,36 @@ public class Printer {
         String headerP2 = " ";
 
         for (int i = 0; i < p1.plateau[0].length; i++) {
-            headerP1 += " " + i;
+            headerP1 += " "+i+" ";
         }
         for (int i = 0; i < p2.plateau[0].length; i++) {
-            headerP2 += " " + i;
+            headerP2 += " " +i+" ";
         }
         String header = (p1Bigger)
-                ? headerP1 + "             " + headerP2 + "\n"
-                : headerP2 + "             " + headerP1 + "\n";
+                ? headerP1 + "            " + headerP2 + "\n"
+                : headerP2 + "            " + headerP1 + "\n";
 
         base += header;
 
         if (p1Bigger) {
             for (int i = 0; i < p1.plateau.length; i++) {
-                base += ABC.charAt(i) + " ";
+                base += ABC.charAt(i) ;
                 for (int j = 0; j < p1.plateau[i].length; j++) {
                     switch (p1.plateau[i][j]) {
                         case 1:
-                            base += ANSI_BLUE + "▓" + ANSI_RESET + " ";
+                            base += ANSI_BLUE + " ▓" + ANSI_RESET + " ";
                             break;
                         case 2:
-                            base += ANSI_GREEN + "o" + ANSI_RESET + " ";
+                            base += ANSI_GREEN + " o" + ANSI_RESET + " ";
                             break;
                         case 3:
-                            base += ANSI_RED + "h" + ANSI_RESET + " ";
+                            base += ANSI_RED + " h" + ANSI_RESET + " ";
                             break;
                         case 4:
-                            base += ANSI_YELLOW + "x" + ANSI_RESET + " ";
+                            base += ANSI_YELLOW + " x" + ANSI_RESET + " ";
                             break;
                         default:
-                            base += "▓ ";
+                            base += " ▓ ";
                             break;
                     }
                 }
@@ -85,23 +85,23 @@ public class Printer {
 
                 if (i < p2.plateau.length) {
                     //Print line's columns
-                    base += "           " + ABC.charAt(i) + " ";
+                    base += "           " + ABC.charAt(i);
                     for (int j = 0; j < p2.plateau[i].length; j++) {
                         switch (p2.plateau[i][j]) {
                             case 1:
-                                base += ANSI_BLUE + "▓" + ANSI_RESET + " ";
+                                base += ANSI_BLUE + " ▓" + ANSI_RESET + " ";
                                 break;
                             case 2:
-                                base += ANSI_GREEN + "o" + ANSI_RESET + " ";
+                                base += ANSI_GREEN + " o" + ANSI_RESET + " ";
                                 break;
                             case 3:
-                                base += ANSI_RED + "h" + ANSI_RESET + " ";
+                                base += ANSI_RED + " h" + ANSI_RESET + " ";
                                 break;
                             case 4:
-                                base += ANSI_YELLOW + "x" + ANSI_RESET + " ";
+                                base += ANSI_YELLOW + " x" + ANSI_RESET + " ";
                                 break;
                             default:
-                                base += "▓ ";
+                                base += " ▓ ";
                                 break;
                         }
                     }
@@ -113,23 +113,23 @@ public class Printer {
 
         } else {
             for (int i = 0; i < p2.plateau.length; i++) {
-                base += ABC.charAt(i) + " ";
+                base += ABC.charAt(i);
                 for (int j = 0; j < p2.plateau[i].length; j++) {
                     switch (p2.plateau[i][j]) {
                         case 1:
-                            base += ANSI_BLUE + "▓" + ANSI_RESET + " ";
+                            base += ANSI_BLUE + " ▓" + ANSI_RESET + " ";
                             break;
                         case 2:
-                            base += ANSI_GREEN + "o" + ANSI_RESET + " ";
+                            base += ANSI_GREEN + " o" + ANSI_RESET + " ";
                             break;
                         case 3:
-                            base += ANSI_RED + "h" + ANSI_RESET + " ";
+                            base += ANSI_RED + " h" + ANSI_RESET + " ";
                             break;
                         case 4:
-                            base += ANSI_YELLOW + "x" + ANSI_RESET + " ";
+                            base += ANSI_YELLOW + " x" + ANSI_RESET + " ";
                             break;
                         default:
-                            base += "▓ ";
+                            base += " ▓ ";
                             break;
                     }
                 }
@@ -141,19 +141,19 @@ public class Printer {
                     for (int j = 0; j < p1.plateau[i].length; j++) {
                         switch (p1.plateau[i][j]) {
                             case 1:
-                                base += ANSI_BLUE + "▓" + ANSI_RESET + " ";
+                                base += ANSI_BLUE + " ▓" + ANSI_RESET + " ";
                                 break;
                             case 2:
-                                base += ANSI_GREEN + "o" + ANSI_RESET + " ";
+                                base += ANSI_GREEN + " o" + ANSI_RESET + " ";
                                 break;
                             case 3:
-                                base += ANSI_RED + "h" + ANSI_RESET + " ";
+                                base += ANSI_RED + " h" + ANSI_RESET + " ";
                                 break;
                             case 4:
-                                base += ANSI_YELLOW + "x" + ANSI_RESET + " ";
+                                base += ANSI_YELLOW + " x" + ANSI_RESET + " ";
                                 break;
                             default:
-                                base += "▓ ";
+                                base += " ▓ ";
                                 break;
                         }
                     }
