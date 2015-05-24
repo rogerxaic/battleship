@@ -13,5 +13,10 @@ import java.util.logging.Logger;
  */
 public class Plateau {
 
+    protected int [][] plateau;
     private static final Logger LOG = Logger.getLogger(Plateau.class.getName());
+    
+    public Plateau(int width, int height) { 
+        this.plateau = new int[width][height];
+    }
 }

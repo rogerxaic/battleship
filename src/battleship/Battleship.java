@@ -21,9 +21,22 @@ public class Battleship {
 
         String username = System.getProperty("user.name");
         clear();
-        System.out.println(username);
-
-        //System.out.println(neteja);
+//        System.out.println("Benvingut" + username);
+        String base = "                     BATAILLE NAVALE\n" +
+"      Mon plateau			Son plateau\n" +
+"  0 1 2 3 4 5 6 7 8 9               0 1 2 3 4 5 6 7 8 9\n" +
+"A · · · · · · · · · · A           A · · · · · · · · · · A\n" +
+"B · · · · · · · · · · B           B · · · · · · · · · · B\n" +
+"C · · · · · · · · · · C           C · · · · · · · · · · C\n" +
+"D · · · · · · · · · · D           D · · · · · · · · · · D\n" +
+"E · · · · · · · · · · E           E · · · · · · · · · · E\n" +
+"F · · · · · · · · · · F           F · · · · · · · · · · F\n" +
+"G · · · · · · · · · · G           G · · · · · · · · · · G\n" +
+"H · · · · · · · · · · H           H · · · · · · · · · · H\n" +
+"I · · · · · · · · · · I           I · · · · · · · · · · I\n" +
+"J · · · · · · · · · · J           J · · · · · · · · · · J\n" +
+"  0 1 2 3 4 5 6 7 8 9               0 1 2 3 4 5 6 7 8 9";
+        System.out.println(base);
     }
 
     public static void clear() throws IOException {
