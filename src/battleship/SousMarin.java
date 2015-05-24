@@ -7,8 +7,8 @@ package battleship;
 
 /**
  *
- * @author Roger
+ * @author MartaCD
  */
-public class Bateau {
+public class SousMarin extends Bateau {
     
 }

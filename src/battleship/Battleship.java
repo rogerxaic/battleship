@@ -25,6 +25,12 @@ public class Battleship {
         Plateau p1 = new Plateau(10,10);
         Plateau p2 = new Plateau(10,10);
         
+        Bateau a = new Croiseur();
+        Bateau b = new Torpilleur();
+        Bateau c = new PorteAvions();
+        Bateau d = new ContreTorpilleurs();
+        Bateau e = new SousMarin();
+        
         Printer pr = new Printer(p1,p2);
         
         System.out.println("Bienvenu(e) " + username);
