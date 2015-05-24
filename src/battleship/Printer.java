@@ -41,8 +41,8 @@ public class Printer {
         String base = "                     BATAILLE NAVALE\n";
 
         base = (p1Bigger)
-                ? base + "      Mon plateau			Son plateau\n"
-                : base + "      Son plateau			Mon plateau\n";
+                ? base + "      Mon plateau                                 Son plateau\n"
+                : base + "      Son plateau                                 Mon plateau\n";
 
         String headerP1 = " ";
         String headerP2 = " ";
@@ -54,8 +54,8 @@ public class Printer {
             headerP2 += " " +i+" ";
         }
         String header = (p1Bigger)
-                ? headerP1 + "             " + headerP2 + "\n"
-                : headerP2 + "             " + headerP1 + "\n";
+                ? headerP1 + "            " + headerP2 + "\n"
+                : headerP2 + "            " + headerP1 + "\n";
 
         base += header;
 
