@@ -20,8 +20,14 @@ public class Battleship {
     public static void main(String[] args) throws IOException {
 
         String username = System.getProperty("user.name");
-        clear();
-//        System.out.println("Benvingut" + username);
+        //clear();
+        
+        Plateau p1 = new Plateau(10,10);
+        Plateau p2 = new Plateau(25,10);
+        
+        Printer pr = new Printer(p1,p2);
+        
+        System.out.println("Bienvenu " + username);
         String base = "                     BATAILLE NAVALE\n" +
 "      Mon plateau			Son plateau\n" +
 "  0 1 2 3 4 5 6 7 8 9               0 1 2 3 4 5 6 7 8 9\n" +
@@ -36,7 +42,7 @@ public class Battleship {
 "I · · · · · · · · · · I           I · · · · · · · · · · I\n" +
 "J · · · · · · · · · · J           J · · · · · · · · · · J\n" +
 "  0 1 2 3 4 5 6 7 8 9               0 1 2 3 4 5 6 7 8 9";
-        System.out.println(base);
+        System.out.println(pr.getAffiche());
     }
 
     public static void clear() throws IOException {

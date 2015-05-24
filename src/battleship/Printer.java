@@ -54,8 +54,8 @@ public class Printer {
             headerP2 += " " + i;
         }
         String header = (p1Bigger)
-                ? headerP1 + "              " + headerP2 + "\n"
-                : headerP2 + "              " + headerP1 + "\n";
+                ? headerP1 + "             " + headerP2 + "\n"
+                : headerP2 + "             " + headerP1 + "\n";
 
         base += header;
 
@@ -65,19 +65,19 @@ public class Printer {
                 for (int j = 0; j < p1.plateau[i].length; j++) {
                     switch (p1.plateau[i][j]) {
                         case 1:
-                            base += ANSI_BLUE + "·" + ANSI_RESET + " ";
+                            base += ANSI_BLUE + "▓" + ANSI_RESET + " ";
                             break;
                         case 2:
                             base += ANSI_GREEN + "o" + ANSI_RESET + " ";
                             break;
                         case 3:
-                            base += ANSI_RED + "o" + ANSI_RESET + " ";
+                            base += ANSI_RED + "h" + ANSI_RESET + " ";
                             break;
                         case 4:
-                            base += ANSI_YELLOW + "o" + ANSI_RESET + " ";
+                            base += ANSI_YELLOW + "x" + ANSI_RESET + " ";
                             break;
                         default:
-                            base += "· ";
+                            base += "▓ ";
                             break;
                     }
                 }
@@ -89,19 +89,19 @@ public class Printer {
                     for (int j = 0; j < p2.plateau[i].length; j++) {
                         switch (p2.plateau[i][j]) {
                             case 1:
-                                base += ANSI_BLUE + "·" + ANSI_RESET + " ";
+                                base += ANSI_BLUE + "▓" + ANSI_RESET + " ";
                                 break;
                             case 2:
                                 base += ANSI_GREEN + "o" + ANSI_RESET + " ";
                                 break;
                             case 3:
-                                base += ANSI_RED + "o" + ANSI_RESET + " ";
+                                base += ANSI_RED + "h" + ANSI_RESET + " ";
                                 break;
                             case 4:
-                                base += ANSI_YELLOW + "o" + ANSI_RESET + " ";
+                                base += ANSI_YELLOW + "x" + ANSI_RESET + " ";
                                 break;
                             default:
-                                base += "· ";
+                                base += "▓ ";
                                 break;
                         }
                     }
@@ -117,19 +117,19 @@ public class Printer {
                 for (int j = 0; j < p2.plateau[i].length; j++) {
                     switch (p2.plateau[i][j]) {
                         case 1:
-                            base += ANSI_BLUE + "·" + ANSI_RESET + " ";
+                            base += ANSI_BLUE + "▓" + ANSI_RESET + " ";
                             break;
                         case 2:
                             base += ANSI_GREEN + "o" + ANSI_RESET + " ";
                             break;
                         case 3:
-                            base += ANSI_RED + "o" + ANSI_RESET + " ";
+                            base += ANSI_RED + "h" + ANSI_RESET + " ";
                             break;
                         case 4:
-                            base += ANSI_YELLOW + "o" + ANSI_RESET + " ";
+                            base += ANSI_YELLOW + "x" + ANSI_RESET + " ";
                             break;
                         default:
-                            base += "· ";
+                            base += "▓ ";
                             break;
                     }
                 }
@@ -141,19 +141,19 @@ public class Printer {
                     for (int j = 0; j < p1.plateau[i].length; j++) {
                         switch (p1.plateau[i][j]) {
                             case 1:
-                                base += ANSI_BLUE + "·" + ANSI_RESET + " ";
+                                base += ANSI_BLUE + "▓" + ANSI_RESET + " ";
                                 break;
                             case 2:
                                 base += ANSI_GREEN + "o" + ANSI_RESET + " ";
                                 break;
                             case 3:
-                                base += ANSI_RED + "o" + ANSI_RESET + " ";
+                                base += ANSI_RED + "h" + ANSI_RESET + " ";
                                 break;
                             case 4:
-                                base += ANSI_YELLOW + "o" + ANSI_RESET + " ";
+                                base += ANSI_YELLOW + "x" + ANSI_RESET + " ";
                                 break;
                             default:
-                                base += "· ";
+                                base += "▓ ";
                                 break;
                         }
                     }
@@ -165,6 +165,6 @@ public class Printer {
 
         }
 
-        return "";
+        return base;
     }
 }

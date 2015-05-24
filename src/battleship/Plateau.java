@@ -18,5 +18,11 @@ public class Plateau {
     
     public Plateau(int width, int height) { 
         this.plateau = new int[width][height];
+        
+        for(int i=0;i<plateau.length;i++){
+            for(int j=0;j<plateau[i].length;j++){
+                this.plateau[i][j]=1;
+            }
+        }
     }
 }
