@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -24,6 +24,8 @@ public class Battleship {
         String username = System.getProperty("user.name");
 
         Process p = Runtime.getRuntime().exec(neteja);
+        
+        System.out.println(neteja);
 
     }
 
