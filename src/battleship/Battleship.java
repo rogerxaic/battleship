@@ -5,17 +5,26 @@
  */
 package battleship;
 
+import java.io.*;
+import java.util.*;
+
 /**
  *
- * @author Roger
+ * @author Roger MIRET & Marta CORTÉS
  */
 public class Battleship {
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    public static void main(String[] args) throws IOException {
+
+        String OS = System.getProperty("os.name").toLowerCase();
+        String neteja = (OS.indexOf("win") >= 0) ? "ipconfig" : "clear";
+        String username = System.getProperty("user.name");
+
+        Process p = Runtime.getRuntime().exec(neteja);
+
     }
-    
+
 }
