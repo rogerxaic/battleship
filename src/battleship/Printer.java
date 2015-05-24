@@ -36,7 +36,7 @@ public class Printer {
     public String getAffiche() {
 
         //p1 bigger?
-        boolean p1Bigger = (p1.plateau.length > p2.plateau.length);
+        boolean p1Bigger = (p1.plateau.length >= p2.plateau.length);
 
         String base = "                     BATAILLE NAVALE\n";
 
@@ -54,8 +54,8 @@ public class Printer {
             headerP2 += " " +i+" ";
         }
         String header = (p1Bigger)
-                ? headerP1 + "            " + headerP2 + "\n"
-                : headerP2 + "            " + headerP1 + "\n";
+                ? headerP1 + "             " + headerP2 + "\n"
+                : headerP2 + "             " + headerP1 + "\n";
 
         base += header;
 
