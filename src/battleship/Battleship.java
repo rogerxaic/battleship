@@ -23,7 +23,7 @@ public class Battleship {
         //clear();
         
         Plateau p1 = new Plateau(10,10);
-        Plateau p2 = new Plateau(25,10);
+        Plateau p2 = new Plateau(10,10);
         
         Printer pr = new Printer(p1,p2);
         
