@@ -13,12 +13,17 @@ public class SousMarin extends Bateau {
     
     private char[] sousmarin;
     
-    public SousMarin(){
-        sousmarin = new char[3];
-        for(int i =0; i<= sousmarin.length-1; i++){
-            sousmarin[i]= 'X';
-        }
+//    public SousMarin(){
+//        sousmarin = new char[3];
+//        for(int i =0; i<= sousmarin.length-1; i++){
+//            sousmarin[i]= 'X';
+//        }
+//    }
+
+    public SousMarin(int taille, boolean horizontal) {
+        super(taille, horizontal);
     }
+    
     public String toString() { 
 		String message = "[";                      
 		for(int i =0; i<= sousmarin.length-1; i++){     

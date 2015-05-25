@@ -13,14 +13,19 @@ public class PorteAvions extends Bateau{
     
     private char[] porteavions; 
     
-    public PorteAvions(){
-        porteavions= new char[5];
-        
-        for(int i =0; i<= porteavions.length-1; i++){
-            porteavions[i]= 'X';
-        }
-        
+//    public PorteAvions(){
+//        porteavions= new char[5];
+//        
+//        for(int i =0; i<= porteavions.length-1; i++){
+//            porteavions[i]= 'X';
+//        }
+//        
+//    }
+
+    public PorteAvions(int taille, boolean horizontal) {
+        super(taille, horizontal);
     }
+    
     
     public String toString() { 
 		String message = "[";                      

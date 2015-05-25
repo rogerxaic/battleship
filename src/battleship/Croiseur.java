@@ -12,14 +12,20 @@ package battleship;
 public class Croiseur extends Bateau {
     
     private char[] croiseur;
-    
-    public Croiseur(){
-        croiseur = new char[4];
-    
-        for(int i =0; i<= croiseur.length-1; i++){
-            croiseur[i]= 'X';
-        }
+
+    public Croiseur(int taille, boolean horizontal) {
+        super(taille, horizontal);
     }
+    
+    
+    
+//    public Croiseur(){
+//        croiseur = new char[4];
+//    
+//        for(int i =0; i<= croiseur.length-1; i++){
+//            croiseur[i]= 'X';
+//        }
+//    }
     public String toString() { 
 		String message = "[";                      
 		for(int i =0; i<= croiseur.length-1; i++){     

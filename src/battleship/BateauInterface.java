@@ -11,4 +11,7 @@ package battleship;
  */
 public interface BateauInterface {
     public boolean isPositioned();
+    public void setPositionX(int x);
+    public void setPositionY(int y);
+    
 }

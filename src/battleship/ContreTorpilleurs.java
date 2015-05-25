@@ -10,5 +10,10 @@ package battleship;
  * @author MartaCD
  */
 public class ContreTorpilleurs extends Bateau {
+
+    public ContreTorpilleurs(int taille, boolean horizontal) {
+//        int taille = 4;
+        super(taille, horizontal);
+    }
     
 }
