@@ -50,18 +50,27 @@ public class Battleship {
                 break;
             case 2:
                 width = 10;
+                height = 15;
                 break;
             case 3:
+                width = 15;
+                height = 15;
                 break;
             case 4:
+                width = 15;
+                height = 20;
                 break;
             case 5:
+                width = 20;
+                height = 20;
                 break;
             default:
                 width = 10;
+                height = 10;
                 break;
         }
         
+        clear();
 
         Plateau p1 = new Plateau(height, width);
         Plateau p2 = new Plateau(height, width);
