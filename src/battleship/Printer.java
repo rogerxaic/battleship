@@ -48,10 +48,10 @@ public class Printer {
         String headerP2 = " ";
 
         for (int i = 0; i < p1.plateau[0].length; i++) {
-            headerP1 += " "+i+" ";
+            headerP1 += (i<10)?" "+i+" ":" "+i;
         }
         for (int i = 0; i < p2.plateau[0].length; i++) {
-            headerP2 += " " +i+" ";
+            headerP2 += (i<10)?" "+i+" ":" "+i;
         }
         String header = (p1Bigger)
                 ? headerP1 + "            " + headerP2 + "\n"
