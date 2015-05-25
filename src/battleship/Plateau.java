@@ -11,7 +11,7 @@ import java.util.logging.Logger;
  *
  * @author Roger
  */
-public class Plateau {
+public class Plateau implements PlateauInterface{
 
     protected int [][] plateau;
     private static final Logger LOG = Logger.getLogger(Plateau.class.getName());
@@ -24,5 +24,10 @@ public class Plateau {
                 this.plateau[i][j]=1;
             }
         }
+    }
+
+    @Override
+    public int[][] getState() {
+        return plateau;
     }
 }

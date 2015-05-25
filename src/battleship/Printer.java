@@ -11,8 +11,8 @@ package battleship;
  */
 public class Printer {
 
-    private Plateau p1;
-    private Plateau p2;
+//    private Plateau p1;
+//    private Plateau p2;
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_BLACK = "\u001B[30m";
     public static final String ANSI_RED = "\u001B[31m";
@@ -24,19 +24,19 @@ public class Printer {
     public static final String ANSI_WHITE = "\u001B[37m";
     public static final String ABC = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-    public Printer(Plateau p1, Plateau p2) {
-        this.p1 = p1;
-        this.p2 = p2;
+    public Printer() {
+//        this.p1 = p1;
+//        this.p2 = p2;
     }
 
-    public void affiche() {
-        System.out.println(getAffiche());
+    public void affiche(int[][]plat1, int[][] plat2) {
+        System.out.println(getAffiche(plat1, plat2));
     }
 
-    public String getAffiche() {
+    public String getAffiche(int[][] plat1, int[][] plat2) {
 
         //p1 bigger?
-        boolean p1Bigger = (p1.plateau.length >= p2.plateau.length);
+        boolean p1Bigger = (plat1.length >= plat2.length);
 
         String base = "                     BATAILLE NAVALE\n";
 
@@ -47,10 +47,10 @@ public class Printer {
         String headerP1 = " ";
         String headerP2 = " ";
 
-        for (int i = 0; i < p1.plateau[0].length; i++) {
+        for (int i = 0; i < plat1[0].length; i++) {
             headerP1 += (i<10)?" "+i+" ":" "+i;
         }
-        for (int i = 0; i < p2.plateau[0].length; i++) {
+        for (int i = 0; i < plat2[0].length; i++) {
             headerP2 += (i<10)?" "+i+" ":" "+i;
         }
         String header = (p1Bigger)
@@ -60,10 +60,10 @@ public class Printer {
         base += header;
 
         if (p1Bigger) {
-            for (int i = 0; i < p1.plateau.length; i++) {
+            for (int i = 0; i < plat1.length; i++) {
                 base += ABC.charAt(i) ;
-                for (int j = 0; j < p1.plateau[i].length; j++) {
-                    switch (p1.plateau[i][j]) {
+                for (int j = 0; j < plat1[i].length; j++) {
+                    switch (plat1[i][j]) {
                         case 1:
                             base += ANSI_BLUE + " ▓" + ANSI_RESET + " ";
                             break;
@@ -83,11 +83,11 @@ public class Printer {
                 }
                 base += ABC.charAt(i);
 
-                if (i < p2.plateau.length) {
+                if (i < plat2.length) {
                     //Print line's columns
                     base += "           " + ABC.charAt(i);
-                    for (int j = 0; j < p2.plateau[i].length; j++) {
-                        switch (p2.plateau[i][j]) {
+                    for (int j = 0; j < plat2[i].length; j++) {
+                        switch (plat2[i][j]) {
                             case 1:
                                 base += ANSI_BLUE + " ▓" + ANSI_RESET + " ";
                                 break;
@@ -112,10 +112,10 @@ public class Printer {
             }
 
         } else {
-            for (int i = 0; i < p2.plateau.length; i++) {
+            for (int i = 0; i < plat2.length; i++) {
                 base += ABC.charAt(i);
-                for (int j = 0; j < p2.plateau[i].length; j++) {
-                    switch (p2.plateau[i][j]) {
+                for (int j = 0; j < plat2[i].length; j++) {
+                    switch (plat2[i][j]) {
                         case 1:
                             base += ANSI_BLUE + " ▓" + ANSI_RESET + " ";
                             break;
@@ -135,11 +135,11 @@ public class Printer {
                 }
                 base += ABC.charAt(i);
 
-                if (i < p1.plateau.length) {
+                if (i < plat1.length) {
                     //Print line's columns
                     base += "           " + ABC.charAt(i) + " ";
-                    for (int j = 0; j < p1.plateau[i].length; j++) {
-                        switch (p1.plateau[i][j]) {
+                    for (int j = 0; j < plat1[i].length; j++) {
+                        switch (plat1[i][j]) {
                             case 1:
                                 base += ANSI_BLUE + " ▓" + ANSI_RESET + " ";
                                 break;

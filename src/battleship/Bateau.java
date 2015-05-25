@@ -9,6 +9,16 @@ package battleship;
  *
  * @author Roger
  */
-public class Bateau {
+public class Bateau implements BateauInterface {
+    
+    protected int taille;
+    protected boolean horizontal;
+    protected int x;
+    protected int y;
+
+    @Override
+    public boolean isPositioned() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

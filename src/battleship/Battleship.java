@@ -23,7 +23,7 @@ public class Battleship {
         Scanner sc = new Scanner(System.in);
         clear();
 
-        System.out.println("Bienvenu(e) " + username);
+        System.out.println("Bienvenue " + username);
         //PEDIR TAILLE PLATEAUX
         String selectTaille = "Introduisez la taille des plateaux :\n"
                 + "\t1. 10x10\n"
@@ -41,6 +41,7 @@ public class Battleship {
             if (tailleSelected > 0 && tailleSelected < 6) {
                 break;
             }
+            System.out.print("\nCe n'est pas une option.\nTAILLE : ");
         }
         int width ,height;
         switch (tailleSelected) {
@@ -71,6 +72,39 @@ public class Battleship {
         }
 
         clear();
+        
+        
+        //PEDIR TAILLE PLATEAUX
+        String selectVs = "Comment voulez vous jouer :\n"
+                + "\t1. Vs. Ordinateur\n"
+                + "\t2. Vs. Quelqu'un\n\n"
+                + "ADVERSAIRE : ";
+
+        System.out.print(selectVs);
+        boolean isComputer = false;
+        int vsSelected = 0;
+        while (true) {
+            vsSelected = sc.nextInt();
+            if (vsSelected > 0 && vsSelected < 3) {
+                break;
+            }
+            System.out.print("\nCe n'est pas une option.\nADVERSAIRE : ");
+        }
+        
+        switch (vsSelected) {
+            case 1:
+                isComputer = true;
+                break;
+            case 2:
+                isComputer = false;
+                break;
+            default:
+                isComputer = true;
+                break;
+        }
+
+        
+        clear();
 
         Plateau p1 = new Plateau(height, width);
         Plateau p2 = new Plateau(height, width);
@@ -80,15 +114,16 @@ public class Battleship {
         Bateau c = new PorteAvions();
         Bateau d = new ContreTorpilleurs();
         Bateau e = new SousMarin();
+        
 
-        Printer pr = new Printer(p1, p2);
+        Printer pr = new Printer();
 
 //        1 porte-avions (5 cases)
 //        1 croiseur (4 cases)
 //        1 contre-torpilleurs (3 cases)
 //        1 sous-marin (3 cases)
 //        1 torpilleur (2 cases)
-        System.out.println(pr.getAffiche());
+        System.out.println(pr.getAffiche(p1.getState(), p2.getState()));
     }
 
     public static void clear() throws IOException {
