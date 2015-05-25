@@ -164,7 +164,8 @@ public class Printer {
             }
 
         }
+        
 
-        return base;
+        return base+header;
     }
 }
