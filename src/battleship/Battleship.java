@@ -106,14 +106,20 @@ public class Battleship {
         
         clear();
 
+        Bateau a1 = new Croiseur();
+        Bateau b1 = new Torpilleur();
+        Bateau c1 = new PorteAvions();
+        Bateau d1 = new ContreTorpilleurs();
+        Bateau e1 = new SousMarin();
+        
+        Bateau a2 = new Croiseur();
+        Bateau b2 = new Torpilleur();
+        Bateau c2 = new PorteAvions();
+        Bateau d2 = new ContreTorpilleurs();
+        Bateau e2 = new SousMarin();
+        
         Plateau p1 = new Plateau(height, width);
         Plateau p2 = new Plateau(height, width);
-
-        Bateau a = new Croiseur();
-        Bateau b = new Torpilleur();
-        Bateau c = new PorteAvions();
-        Bateau d = new ContreTorpilleurs();
-        Bateau e = new SousMarin();
         
 
         Printer pr = new Printer();
