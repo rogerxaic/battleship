@@ -21,4 +21,12 @@ public class Bateau implements BateauInterface {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    private PorteAvions porteavions;
+    private SousMarin sousmarin;
+    private Croiseur croiseur;
+    private ContreTorpilleurs cortetorpilleurs;
+    private Torpilleur torpilleur; 
+    
+    
+    
 }
