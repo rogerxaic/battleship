@@ -20,41 +20,82 @@ public class Battleship {
     public static void main(String[] args) throws IOException {
 
         String username = System.getProperty("user.name");
+        Scanner sc = new Scanner(System.in);
         clear();
+
+        //PEDIR TAILLE PLATEAUX
+        String selectTaille = "Introduisez la taille des plateaux :\n"
+                + "\t1. 10x10\n"
+                + "\t2. 15x10\n"
+                + "\t3. 15x15\n"
+                + "\t4. 15x20\n"
+                + "\t5. 20x20\n\n"
+                + "TAILLE : ";
+
+        System.out.print(selectTaille);
+        boolean isNumero = false;
+        int tailleSelected = 0;
+        while (!isNumero) {
+            tailleSelected = sc.nextInt();
+            if (tailleSelected > 0 && tailleSelected < 6) {
+                break;
+            }
+        }
+        int width = 10;
+        int height = 10;
+        switch (tailleSelected) {
+            case 1:
+                width = 10;
+                height = 10;
+                break;
+            case 2:
+                width = 10;
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            default:
+                width = 10;
+                break;
+        }
         
-        Plateau p1 = new Plateau(10,10);
-        Plateau p2 = new Plateau(10,10);
-        
+
+        Plateau p1 = new Plateau(height, width);
+        Plateau p2 = new Plateau(height, width);
+
         Bateau a = new Croiseur();
         Bateau b = new Torpilleur();
         Bateau c = new PorteAvions();
         Bateau d = new ContreTorpilleurs();
         Bateau e = new SousMarin();
-        
-        Printer pr = new Printer(p1,p2);
-        
+
+        Printer pr = new Printer(p1, p2);
+
         System.out.println("Bienvenu(e) " + username);
-        
+
 //        1 porte-avions (5 cases)
 //        1 croiseur (4 cases)
 //        1 contre-torpilleurs (3 cases)
 //        1 sous-marin (3 cases)
 //        1 torpilleur (2 cases)
-        
         System.out.println(pr.getAffiche());
     }
 
     public static void clear() throws IOException {
         String OS = System.getProperty("os.name").toLowerCase();
-        if(OS.indexOf("win") >= 0){} else {
+        if (OS.indexOf("win") >= 0) {
+        } else {
             String neteja = (OS.indexOf("win") >= 0) ? "clear" : "clear";
 
-    //        J'ai créé le fichier clear.exe (trouvable dans 
-    //                                        ./external/clear/bin/Debug)
-    //        J'ai placé ce fichier dans System32 pour que Windows ne 
-    //        donne pas d'erreurs. La commande clear est cls, mais NetBeans ne veut
-    //        pas la prendre car c'est cmd qui interprète cls, donc n'est pas un 
-    //        executable Windows que NetBeans puisse executer.
+            //        J'ai créé le fichier clear.exe (trouvable dans 
+            //                                        ./external/clear/bin/Debug)
+            //        J'ai placé ce fichier dans System32 pour que Windows ne 
+            //        donne pas d'erreurs. La commande clear est cls, mais NetBeans ne veut
+            //        pas la prendre car c'est cmd qui interprète cls, donc n'est pas un 
+            //        executable Windows que NetBeans puisse executer.
             Process p = Runtime.getRuntime().exec(neteja);
 
             try (BufferedReader br = new BufferedReader(
