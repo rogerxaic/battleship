@@ -23,6 +23,7 @@ public class Battleship {
         Scanner sc = new Scanner(System.in);
         clear();
 
+        System.out.println("Bienvenu(e) " + username);
         //PEDIR TAILLE PLATEAUX
         String selectTaille = "Introduisez la taille des plateaux :\n"
                 + "\t1. 10x10\n"
@@ -41,8 +42,7 @@ public class Battleship {
                 break;
             }
         }
-        int width = 10;
-        int height = 10;
+        int width ,height;
         switch (tailleSelected) {
             case 1:
                 width = 10;
@@ -69,7 +69,7 @@ public class Battleship {
                 height = 10;
                 break;
         }
-        
+
         clear();
 
         Plateau p1 = new Plateau(height, width);
@@ -82,8 +82,6 @@ public class Battleship {
         Bateau e = new SousMarin();
 
         Printer pr = new Printer(p1, p2);
-
-        System.out.println("Bienvenu(e) " + username);
 
 //        1 porte-avions (5 cases)
 //        1 croiseur (4 cases)
