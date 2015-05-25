@@ -11,4 +11,27 @@ package battleship;
  */
 public class Torpilleur extends Bateau {
     
+    private char[] torpilleur;
+    
+    public Torpilleur(){
+        torpilleur = new char[2];
+        for(int i =0; i<= torpilleur.length-1; i++){
+            torpilleur[i]= 'X';
+        }
+    }
+    public String toString() { 
+		String message = "[";                      
+		for(int i =0; i<= torpilleur.length-1; i++){     
+			if (i == torpilleur.length-1) { 			   
+				message = message + torpilleur[i] + "]";  
+			} else {
+				message = message + torpilleur[i];	
+			}
+			
+		}
+		return message;
+    }
+
 }
+
+
