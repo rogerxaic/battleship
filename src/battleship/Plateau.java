@@ -12,19 +12,24 @@ import java.util.logging.Logger;
  *
  * @author Roger
  */
-public class Plateau implements PlateauInterface{
+public class Plateau implements PlateauInterface {
 
-    protected int [][] plateau;
+    protected int[][] plateau;
     private static final Logger LOG = Logger.getLogger(Plateau.class.getName());
-    protected HashMap<String, Bateau> flota; 
-    
-    public Plateau(int width, int height, HashMap<String, Bateau> flota) { 
+    protected HashMap<String, Bateau> flota;
+    protected String propietari;
+    protected boolean[][] waterBateau; // Is there ship? True / false
+
+    public Plateau(int width, int height, HashMap<String, Bateau> flota, String propietari) {
         this.plateau = new int[width][height];
+        this.waterBateau = new boolean[width][height];
         this.flota = flota;
-        
-        for(int i=0;i<plateau.length;i++){
-            for(int j=0;j<plateau[i].length;j++){
-                this.plateau[i][j]=1;
+        this.propietari = propietari;
+
+        for (int i = 0; i < plateau.length; i++) {
+            for (int j = 0; j < plateau[i].length; j++) {
+                this.plateau[i][j] = 1;
+                this.waterBateau[i][j] = false;
             }
         }
     }
@@ -36,7 +41,13 @@ public class Plateau implements PlateauInterface{
 
     @Override
     public boolean isSetAllBateaux() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean isSet = true;
+        for (String entry : flota.keySet()) {
+            String key = entry;
+            Bateau value = flota.get(key);
+            isSet &= value.isPositioned();
+        }
+        return isSet;
     }
 
     @Override
@@ -48,18 +59,24 @@ public class Plateau implements PlateauInterface{
             if (!value.isPositioned()) {
                 toPlace += key;
             }
-            //System.out.println(value.toString());
-
-            // do what you have to do here
-            // In your case, an other loop.
         }
         return toPlace;
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     @Override
     public boolean isRoom(int x, int y, boolean horizontal, int taille) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        int b = (horizontal) ? x : y;
+        int lc = (horizontal) ? y : x;
+
+        boolean isShip = false;
+
+        for (int i = b; (i < i + taille); i++) {
+            isShip |= (horizontal) ? waterBateau[x][i] : waterBateau[i][y];
+        }
+
+        return !isShip;
     }
 
     @Override
@@ -71,4 +88,5 @@ public class Plateau implements PlateauInterface{
     public void setBateau(Bateau bat, int x, int y, boolean horizontal) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
 }

@@ -5,6 +5,7 @@
  */
 package battleship;
 
+import com.sun.deploy.uitoolkit.impl.fx.ui.FXUIFactory;
 import java.io.*;
 import java.util.*;
 
@@ -13,6 +14,9 @@ import java.util.*;
  * @author Roger MIRET & Marta CORTÉS
  */
 public class Battleship {
+
+    public static final String ABC = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    public static final String abc = "abcdefghijklmnopqrstuvwxyz";
 
     /**
      * @param args the command line arguments
@@ -103,20 +107,34 @@ public class Battleship {
                 break;
         }
 
+        String nomJoueur = "Comment s'appelle-t-il le joueur 2 :\n\n"
+                + "NOM : ";
+        if (!isComputer) {
+            clear();
+
+            System.out.print(nomJoueur);
+
+            nomJoueur = sc.next();
+        } else {
+            nomJoueur = "Ordinateur";
+        }
+
         clear();
 
         HashMap<String, Bateau> flota1 = new HashMap<>();
         HashMap<String, Bateau> flota2 = new HashMap<>();
 
-        Bateau a1 = new Bateau(4, false); //4 BBBB V B8
+        HashMap<String, Plateau> tablero = new HashMap<>();
+
+        Bateau a1 = new Bateau(4, false, 8, 1); //4 BBBB V B8
         flota1.put("A", a1);
-        Bateau b1 = new Bateau(2, true); //2 PP H G6
+        Bateau b1 = new Bateau(2, true, 6, 6); //2 PP H G6
         flota1.put("B", b1);
-        Bateau c1 = new Bateau(5, true); //5 AAAAA H I2
+        Bateau c1 = new Bateau(5, true, 2, 8); //5 AAAAA H I2
         flota1.put("C", c1);
-        Bateau d1 = new Bateau(3, true); //3 DDD H C0
+        Bateau d1 = new Bateau(3, true, 0, 3); //3 DDD H C0
         flota1.put("D", d1);
-        Bateau e1 = new Bateau(3, false); //3 SSS V E0
+        Bateau e1 = new Bateau(3, false, 0, 4); //3 SSS V E0
         flota1.put("E", e1);
 
         Bateau a2 = new Bateau(4, false);
@@ -130,8 +148,10 @@ public class Battleship {
         Bateau e2 = new Bateau(3, false);
         flota2.put("E", e2);
 
-        Plateau p1 = new Plateau(height, width, flota1);
-        Plateau p2 = new Plateau(height, width, flota2);
+        Plateau p1 = new Plateau(height, width, flota1, username);
+        tablero.put("P1", p1);
+        Plateau p2 = new Plateau(height, width, flota2, nomJoueur);
+        tablero.put("P2", p2);
 
         Printer pr = new Printer();
 
@@ -141,12 +161,16 @@ public class Battleship {
 //        1 sous-marin (3 cases)
 //        1 torpilleur (2 cases)
         
+     //   placerAll(tablero, sc);
+        
+        System.out.println(pr.getAffiche(p1.getState(), p2.getState()) + "");
+        //String ddd = sc.next();
 
-        String information = "Selectionnez bateau [" + p1.getBateauxToSet() + "] à placer";
-        System.out.println(pr.getAffiche(p1.getState(), p2.getState()) + information);
-        String ddd = sc.next();
+        //System.out.println("---" + ddd + "---");
 
-        System.out.println("---" + ddd + "---");
+        System.out.println(p1.isSetAllBateaux());
+        
+        System.out.println(p1.isRoom(8, 1, true, 5));
 
     }
 
@@ -175,4 +199,31 @@ public class Battleship {
         }
     }
 
+    public static void placerAll(HashMap<String, Plateau> tablero, Scanner sc) {
+        for (String entry : tablero.keySet()) {
+            
+            
+            
+            
+            String key = entry;
+//            Plateau value = tablero.get(key);
+            while (!tablero.get(key).isSetAllBateaux()) {
+                String information = "Selectionnez bateau [" + tablero.get(key).getBateauxToSet() + "] à placer";
+                
+                System.out.println(information);
+                
+                String ddd = sc.next();
+                while(true) {
+                    if(ddd.length() == 1){
+                        if (tablero.get(key).flota.containsKey(ddd.toUpperCase())){
+                            System.out.println("TRUE");
+                        }
+                    }
+                }
+            }
+            
+            
+            
+        }
+    }
 }

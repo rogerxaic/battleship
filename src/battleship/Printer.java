@@ -23,6 +23,7 @@ public class Printer {
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
     public static final String ABC = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    public static final String abc = "abcdefghijklmnopqrstuvwxyz";
 
     public Printer() {
 //        this.p1 = p1;

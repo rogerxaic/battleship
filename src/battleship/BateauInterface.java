@@ -15,5 +15,6 @@ public interface BateauInterface {
     public void setPositionY(int y);
     public int getTaille();
     public void setHorizontal(boolean horizontal);
-    public void setStartPosition(int x, int y);
+    public void setStartPosition(int x, int y, boolean horizontal);
+    public boolean isBateau(int x, int y);
 }
