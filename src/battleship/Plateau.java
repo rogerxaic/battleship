@@ -6,7 +6,6 @@
 package battleship;
 
 import java.util.HashMap;
-import java.util.logging.Logger;
 
 /**
  *
@@ -15,7 +14,6 @@ import java.util.logging.Logger;
 public class Plateau implements PlateauInterface {
 
     protected int[][] plateau;
-    private static final Logger LOG = Logger.getLogger(Plateau.class.getName());
     protected HashMap<String, Bateau> flota;
     protected String propietari;
     protected boolean[][] waterBateau; // Is there ship? True / false
@@ -72,21 +70,41 @@ public class Plateau implements PlateauInterface {
 
         boolean isShip = false;
 
-        for (int i = b; (i < i + taille); i++) {
-            isShip |= (horizontal) ? waterBateau[x][i] : waterBateau[i][y];
-        }
+        if ((horizontal && (x + taille) <= waterBateau[y].length) || (!horizontal && (y + taille) <= waterBateau.length)) {
 
+            for (int i = b; i < (b + taille); i++) {
+//                if(horizontal){
+//                    System.out.println( i + " " +waterBateau[y][i]);
+////                    isShip |= waterBateau[y][i];
+//                } else {
+//                    isShip |= waterBateau[i][x];
+//                }
+                isShip |= (horizontal) ? waterBateau[y][i] : waterBateau[i][x];
+            }
+        }
         return !isShip;
     }
 
     @Override
     public boolean isRoom(int x, int y, boolean horizontal, Bateau bat) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return isRoom(x, y, horizontal, bat.getTaille());
     }
 
     @Override
     public void setBateau(Bateau bat, int x, int y, boolean horizontal) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (isRoom(x, y, horizontal, bat)) {
+
+            bat.setStartPosition(x, y, horizontal);
+            int b = (horizontal) ? x : y;
+            for (int i = b; (i < b + bat.getTaille()); i++) {
+                if (horizontal) {
+                    waterBateau[y][i] = true;
+                } else {
+                    waterBateau[i][x] = true;
+                }
+
+            }
+        }
     }
 
 }

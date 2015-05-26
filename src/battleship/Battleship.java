@@ -5,7 +5,6 @@
  */
 package battleship;
 
-import com.sun.deploy.uitoolkit.impl.fx.ui.FXUIFactory;
 import java.io.*;
 import java.util.*;
 
@@ -160,16 +159,14 @@ public class Battleship {
 //        1 contre-torpilleurs (3 cases)
 //        1 sous-marin (3 cases)
 //        1 torpilleur (2 cases)
-        
-     //   placerAll(tablero, sc);
-        
+        placerAll(tablero, sc);
+
         System.out.println(pr.getAffiche(p1.getState(), p2.getState()) + "");
         //String ddd = sc.next();
 
         //System.out.println("---" + ddd + "---");
-
         System.out.println(p1.isSetAllBateaux());
-        
+
         System.out.println(p1.isRoom(8, 1, true, 5));
 
     }
@@ -199,31 +196,62 @@ public class Battleship {
         }
     }
 
-    public static void placerAll(HashMap<String, Plateau> tablero, Scanner sc) {
+    public static void placerAll(HashMap<String, Plateau> tablero, Scanner sc) throws IOException {
         for (String entry : tablero.keySet()) {
-            
-            
-            
-            
+
             String key = entry;
 //            Plateau value = tablero.get(key);
+            clear();
             while (!tablero.get(key).isSetAllBateaux()) {
-                String information = "Selectionnez bateau [" + tablero.get(key).getBateauxToSet() + "] à placer";
-                
-                System.out.println(information);
-                
-                String ddd = sc.next();
-                while(true) {
-                    if(ddd.length() == 1){
-                        if (tablero.get(key).flota.containsKey(ddd.toUpperCase())){
-                            System.out.println("TRUE");
+
+                String information = "Selectionnez bateau [" + tablero.get(key).getBateauxToSet() + "] à placer : ";
+
+                System.out.print(information);
+
+                while (true) {
+                    String ddd = sc.next();
+                    String dd = "" + ddd.toUpperCase().charAt(0);
+                    if (tablero.get(key).flota.containsKey(dd) && !tablero.get(key).flota.get(dd).isPositioned()) {
+                        String donde = "Où placer le bateau? LETTRE : ";
+                        System.out.print(donde);
+                        while (true) {
+                            String letra = sc.next();
+                            int y = 0;
+                            for (int i = 0; i < ABC.length(); i++) {
+                                if (letra.toUpperCase().charAt(0) == ABC.charAt(i)) {
+                                    y = i;
+                                }
+                            }
+                            System.out.print("NUMÉRO :");
+                            String numero = sc.next();
+                            int x;
+                            x = Integer.parseInt("" + numero.charAt(0));
+
+                            System.out.print("VERTICAL ou HORIZONTAL ? [V/H]");
+                            String vouh = sc.next();
+                            boolean horizontal = false;
+                            horizontal = (vouh.charAt(0) == 'H' || vouh.charAt(0) == 'h');
+
+                            if (tablero.get(key).isRoom(x, y, horizontal, tablero.get(key).flota.get(dd))) {
+                                tablero.get(key).setBateau(tablero.get(key).flota.get(dd), x, y, horizontal);
+                                System.out.println("HOLAHOLAHOLAHOLA");
+
+                            } else {
+                                System.out.println("Il n'y a pas de place. ");
+                            }
+                            break;
+
                         }
+//                            System.out.println("TRUE");
+                    } else {
+
+                        System.out.print("Bateau incorrect/inexistant. Choisissez BATEAU : ");
                     }
+                    break;
+
                 }
             }
-            
-            
-            
+
         }
     }
 }

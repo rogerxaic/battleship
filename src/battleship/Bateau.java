@@ -55,8 +55,10 @@ public class Bateau implements BateauInterface {
 
     @Override
     public String toString() {
-        return "Bateau{" + "taille=" + taille + ", horizontal=" + horizontal + ", x=" + x + ", y=" + y + ", positioned=" + positioned + '}';
+        return "Bateau{" + "taille=" + taille + ", horizontal=" + horizontal + ", x=" + x + ", y=" + y + ", positioned=" + positioned + ", status=" + status + '}';
     }
+
+    
 
     @Override
     public int getTaille() {
