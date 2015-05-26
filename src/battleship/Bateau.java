@@ -17,6 +17,10 @@ public class Bateau implements BateauInterface {
     protected int y;
     protected boolean positioned = false;
 
+    public Bateau(int taille) {
+        this.taille = taille;
+    }
+
     public Bateau(int taille, boolean horizontal) {
         this.taille = taille;
         this.horizontal = horizontal;
@@ -29,7 +33,6 @@ public class Bateau implements BateauInterface {
         this.y = y;
         this.positioned = true;
     }
-    
 
     @Override
     public boolean isPositioned() {
@@ -49,6 +52,21 @@ public class Bateau implements BateauInterface {
     @Override
     public String toString() {
         return "Bateau{" + "taille=" + taille + ", horizontal=" + horizontal + ", x=" + x + ", y=" + y + ", positioned=" + positioned + '}';
+    }
+
+    @Override
+    public int getTaille() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setHorizontal(boolean horizontal) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setStartPosition(int x, int y) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

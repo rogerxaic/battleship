@@ -10,7 +10,17 @@ package battleship;
  * @author Roger
  */
 public interface PlateauInterface {
-    
+
     public int[][] getState();
-    
+
+    public boolean isSetAllBateaux();
+
+    public String getBateauxToSet();
+
+    public boolean isRoom(int x, int y, boolean horizontal, int taille);
+
+    public boolean isRoom(int x, int y, boolean horizontal, Bateau bat);
+
+    public void setBateau(Bateau bat, int x, int y, boolean horizontal);
+
 }

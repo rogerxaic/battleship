@@ -105,33 +105,33 @@ public class Battleship {
 
         clear();
 
-        HashMap<String, Bateau> bat1 = new HashMap<>();
-        HashMap<String, Bateau> bat2 = new HashMap<>();
+        HashMap<String, Bateau> flota1 = new HashMap<>();
+        HashMap<String, Bateau> flota2 = new HashMap<>();
 
         Bateau a1 = new Bateau(4, false); //4 BBBB V B8
-        bat1.put("A", a1);
+        flota1.put("A", a1);
         Bateau b1 = new Bateau(2, true); //2 PP H G6
-        bat1.put("B", b1);
+        flota1.put("B", b1);
         Bateau c1 = new Bateau(5, true); //5 AAAAA H I2
-        bat1.put("C", c1);
+        flota1.put("C", c1);
         Bateau d1 = new Bateau(3, true); //3 DDD H C0
-        bat1.put("D", d1);
+        flota1.put("D", d1);
         Bateau e1 = new Bateau(3, false); //3 SSS V E0
-        bat1.put("E", e1);
+        flota1.put("E", e1);
 
         Bateau a2 = new Bateau(4, false);
-        bat2.put("A", a2);
+        flota2.put("A", a2);
         Bateau b2 = new Bateau(2, true);
-        bat2.put("B", b2);
+        flota2.put("B", b2);
         Bateau c2 = new Bateau(5, true);
-        bat2.put("C", c2);
+        flota2.put("C", c2);
         Bateau d2 = new Bateau(3, true);
-        bat2.put("D", d2);
+        flota2.put("D", d2);
         Bateau e2 = new Bateau(3, false);
-        bat2.put("E", e2);
+        flota2.put("E", e2);
 
-        Plateau p1 = new Plateau(height, width, bat1);
-        Plateau p2 = new Plateau(height, width, bat2);
+        Plateau p1 = new Plateau(height, width, flota1);
+        Plateau p2 = new Plateau(height, width, flota2);
 
         Printer pr = new Printer();
 
@@ -140,20 +140,9 @@ public class Battleship {
 //        1 contre-torpilleurs (3 cases)
 //        1 sous-marin (3 cases)
 //        1 torpilleur (2 cases)
-        String toPlace = "";
-        for (String entry : bat1.keySet()) {
-            String key = entry;
-            Bateau value = bat1.get(key);
-            if (!value.isPositioned()) {
-                toPlace += key;
-            }
-            //System.out.println(value.toString());
+        
 
-            // do what you have to do here
-            // In your case, an other loop.
-        }
-
-        String information = "Selectionnez bateau [" + toPlace + "] à placer";
+        String information = "Selectionnez bateau [" + p1.getBateauxToSet() + "] à placer";
         System.out.println(pr.getAffiche(p1.getState(), p2.getState()) + information);
         String ddd = sc.next();
 
