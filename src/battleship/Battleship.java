@@ -229,7 +229,7 @@ public class Battleship {
 
                 String errorBat = c.red("Bateau incorrect/inexistant. \n");
 
-                String information = tablero.get(key).getPropietari() + ", selectionnez bateau [" + tablero.get(key).getBateauxToSet() + "] à placer : ";
+                String information = tablero.get(key).getPropietari() + ", selectionnez bateau [" + tablero.get(key).getBateauxToSet() + " R] à placer : ";
 
                 System.out.print(((errorBateau) ? errorBat + information : information));
                 errorBateau = false;
@@ -239,7 +239,7 @@ public class Battleship {
                     String dd = "" + ddd.toUpperCase().charAt(0);
                     if (tablero.get(key).flota.containsKey(dd) && !tablero.get(key).flota.get(dd).isPositioned()) {
                         String donde = "\nCe bateau a une taille de "
-                                + tablero.get(key).flota.get(dd).getTaille() +" \n"
+                                + tablero.get(key).flota.get(dd).getTaille() + " \n"
                                 + "Où placer le bateau? LETTRE : ";
                         System.out.print(donde);
                         while (true) {
@@ -269,15 +269,14 @@ public class Battleship {
 
                         }
 //                            System.out.println("TRUE");
+                    } else if ("R".equals(dd)) {
+                        tablero.get(key).placerAll();
                     } else {
                         errorBateau = true;
-
                     }
                     break;
-
                 }
             }
-
         }
     }
 }

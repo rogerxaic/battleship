@@ -30,11 +30,11 @@ public class Printer {
 //        this.p2 = p2;
     }
 
-    public void affiche(int[][]plat1, int[][] plat2) {
+    public void affiche(int[][] plat1, int[][] plat2) {
         System.out.println(getAffiche(plat1, plat2));
     }
-    
-    public void affiche(int[][]plat1, int[][] plat2, String info) {
+
+    public void affiche(int[][] plat1, int[][] plat2, String info) {
         System.out.println(getAffiche(plat1, plat2) + info);
     }
 
@@ -53,10 +53,10 @@ public class Printer {
         String headerP2 = " ";
 
         for (int i = 0; i < plat1[0].length; i++) {
-            headerP1 += (i<10)?" "+i+" ":" "+i;
+            headerP1 += (i < 10) ? " " + i + " " : " " + i;
         }
         for (int i = 0; i < plat2[0].length; i++) {
-            headerP2 += (i<10)?" "+i+" ":" "+i;
+            headerP2 += (i < 10) ? " " + i + " " : " " + i;
         }
         String header = (p1Bigger)
                 ? headerP1 + "            " + headerP2 + "\n"
@@ -64,64 +64,35 @@ public class Printer {
 
         base += header;
 
-        if (p1Bigger) {
-            for (int i = 0; i < plat1.length; i++) {
-                base += ABC.charAt(i) ;
-                for (int j = 0; j < plat1[i].length; j++) {
-                    switch (plat1[i][j]) {
-                        case 1:
-                            base += ANSI_BLUE + " ▓" + ANSI_RESET + " "; //WATER
-                            break;
-                        case 2:
-                            base += ANSI_GREEN + " o" + ANSI_RESET + " "; //FAIL SHOT
-                            break;
-                        case 3:
-                            base += ANSI_RED + " h" + ANSI_RESET + " "; //GOOD SHOT
-                            break;
-                        case 4:
-                            base += ANSI_YELLOW + " X" + ANSI_RESET + " "; //SUNK 
-                            break;
-                        case 5:
-                            base += ANSI_PURPLE + " H" + ANSI_RESET + " "; //SUNK 
-                            break;
-                        default:
-                            base += " ▓ ";
-                            break;
-                    }
+        for (int i = 0; i < plat1.length; i++) {
+            base += ABC.charAt(i);
+            for (int j = 0; j < plat1[i].length; j++) {
+                switch (plat1[i][j]) {
+                    case 1:
+                        base += ANSI_BLUE + " ▓" + ANSI_RESET + " "; //WATER
+                        break;
+                    case 2:
+                        base += ANSI_GREEN + " o" + ANSI_RESET + " "; //FAIL SHOT
+                        break;
+                    case 3:
+                        base += ANSI_RED + " h" + ANSI_RESET + " "; //GOOD SHOT
+                        break;
+                    case 4:
+                        base += ANSI_YELLOW + " X" + ANSI_RESET + " "; //SUNK 
+                        break;
+                    case 5:
+                        base += ANSI_PURPLE + " H" + ANSI_RESET + " "; //SUNK 
+                        break;
+                    default:
+                        base += " ▓ ";
+                        break;
                 }
-                base += ABC.charAt(i);
-
-                if (i < plat2.length) {
-                    //Print line's columns
-                    base += "           " + ABC.charAt(i);
-                    for (int j = 0; j < plat2[i].length; j++) {
-                        switch (plat2[i][j]) {
-                            case 1:
-                                base += ANSI_BLUE + " ▓" + ANSI_RESET + " ";
-                                break;
-                            case 2:
-                                base += ANSI_GREEN + " o" + ANSI_RESET + " ";
-                                break;
-                            case 3:
-                                base += ANSI_RED + " h" + ANSI_RESET + " ";
-                                break;
-                            case 4:
-                                base += ANSI_YELLOW + " x" + ANSI_RESET + " ";
-                                break;
-                            default:
-                                base += ANSI_BLUE + " ▓ "+ANSI_RESET;
-                                break;
-                        }
-                    }
-                    base += ABC.charAt(i);
-                }
-                base += "\n";
-
             }
+            base += ABC.charAt(i);
 
-        } else {
-            for (int i = 0; i < plat2.length; i++) {
-                base += ABC.charAt(i);
+            if (i < plat2.length) {
+                //Print line's columns
+                base += "           " + ABC.charAt(i);
                 for (int j = 0; j < plat2[i].length; j++) {
                     switch (plat2[i][j]) {
                         case 1:
@@ -137,43 +108,16 @@ public class Printer {
                             base += ANSI_YELLOW + " x" + ANSI_RESET + " ";
                             break;
                         default:
-                            base += " ▓ ";
+                            base += ANSI_BLUE + " ▓ " + ANSI_RESET;
                             break;
                     }
                 }
                 base += ABC.charAt(i);
-
-                if (i < plat1.length) {
-                    //Print line's columns
-                    base += "           " + ABC.charAt(i) + " ";
-                    for (int j = 0; j < plat1[i].length; j++) {
-                        switch (plat1[i][j]) {
-                            case 1:
-                                base += ANSI_BLUE + " ▓" + ANSI_RESET + " ";
-                                break;
-                            case 2:
-                                base += ANSI_GREEN + " o" + ANSI_RESET + " ";
-                                break;
-                            case 3:
-                                base += ANSI_RED + " h" + ANSI_RESET + " ";
-                                break;
-                            case 4:
-                                base += ANSI_YELLOW + " x" + ANSI_RESET + " ";
-                                break;
-                            default:
-                                base += " ▓ ";
-                                break;
-                        }
-                    }
-                    base += ABC.charAt(i);
-                }
-                base += "\n";
-
             }
+            base += "\n";
 
         }
-        
 
-        return base+header;
+        return base + header;
     }
 }
