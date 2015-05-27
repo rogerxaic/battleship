@@ -21,6 +21,10 @@ public interface PlateauInterface {
 
     public boolean isRoom(int x, int y, boolean horizontal, Bateau bat);
 
-    public void setBateau(Bateau bat, int x, int y, boolean horizontal);
+    public boolean setBateau(Bateau bat, int x, int y, boolean horizontal);
+    
+    public void placerRandom(Bateau bat);
+    
+    public void placerAll();
 
 }

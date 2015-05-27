@@ -204,7 +204,7 @@ public class Battleship {
             clear();
             while (!tablero.get(key).isSetAllBateaux()) {
 
-                String information = "Selectionnez bateau [" + tablero.get(key).getBateauxToSet() + "] à placer : ";
+                String information = tablero.get(key).getPropietari()+", selectionnez bateau [" + tablero.get(key).getBateauxToSet() + "] à placer : ";
 
                 System.out.print(information);
 
@@ -234,8 +234,6 @@ public class Battleship {
 
                             if (tablero.get(key).isRoom(x, y, horizontal, tablero.get(key).flota.get(dd))) {
                                 tablero.get(key).setBateau(tablero.get(key).flota.get(dd), x, y, horizontal);
-                                System.out.println("HOLAHOLAHOLAHOLA");
-
                             } else {
                                 System.out.println("Il n'y a pas de place. ");
                             }
@@ -245,7 +243,7 @@ public class Battleship {
 //                            System.out.println("TRUE");
                     } else {
 
-                        System.out.print("Bateau incorrect/inexistant. Choisissez BATEAU : ");
+                        System.out.print("Bateau incorrect/inexistant. ");
                     }
                     break;
 

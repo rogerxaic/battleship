@@ -6,6 +6,7 @@
 package battleship;
 
 import java.util.HashMap;
+import java.util.Random;
 
 /**
  *
@@ -17,6 +18,7 @@ public class Plateau implements PlateauInterface {
     protected HashMap<String, Bateau> flota;
     protected String propietari;
     protected boolean[][] waterBateau; // Is there ship? True / false
+    private static Random rnd = new Random();
 
     public Plateau(int width, int height, HashMap<String, Bateau> flota, String propietari) {
         this.plateau = new int[width][height];
@@ -91,7 +93,8 @@ public class Plateau implements PlateauInterface {
     }
 
     @Override
-    public void setBateau(Bateau bat, int x, int y, boolean horizontal) {
+    public boolean setBateau(Bateau bat, int x, int y, boolean horizontal) {
+        boolean resultat;
         if (isRoom(x, y, horizontal, bat)) {
 
             bat.setStartPosition(x, y, horizontal);
@@ -104,7 +107,34 @@ public class Plateau implements PlateauInterface {
                 }
 
             }
+            resultat = true;
+        } else {
+            resultat = false;
         }
+        return resultat;
+    }
+
+    public String getPropietari() {
+        return propietari;
+    }
+
+    @Override
+    public void placerRandom(Bateau bat) {
+        while (true) {            
+            boolean horizontal = rnd.nextBoolean();
+            int y = rnd.nextInt(plateau.length);
+            int x = rnd.nextInt(plateau[y].length);
+            
+            if(setBateau(bat, x, y, horizontal)){
+                break;
+            }
+            
+        }
+    }
+
+    @Override
+    public void placerAll() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
