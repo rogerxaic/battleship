@@ -14,7 +14,7 @@ import java.util.Random;
  */
 public class Plateau implements PlateauInterface {
 
-    protected int[][] plateau;
+    protected int[][] plateau; //1=WATER;2=FAIL;3=GOOD;4=SUNK;5=SHIP
     protected HashMap<String, Bateau> flota;
     protected String propietari;
     protected boolean[][] waterBateau; // Is there ship? True / false
@@ -102,8 +102,10 @@ public class Plateau implements PlateauInterface {
             for (int i = b; i < (b + bat.getTaille()); i++) {
                 if (horizontal) {
                     waterBateau[y][i] = true;
+                    plateau[y][i] = 5;
                 } else {
                     waterBateau[i][x] = true;
+                    plateau[i][x] = 5;
                 }
 
             }

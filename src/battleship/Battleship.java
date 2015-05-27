@@ -168,12 +168,7 @@ public class Battleship {
         //String ddd = sc.next();
 
         //System.out.println("---" + ddd + "---");
-        System.out.println(p1.isSetAllBateaux());
-
-        System.out.println(p1.isRoom(8, 1, true, 5));
-
-        exe("finish");
-
+//        exe("finish");
     }
 
     public static void exe(String command) throws IOException {
@@ -243,7 +238,9 @@ public class Battleship {
                     String ddd = sc.next();
                     String dd = "" + ddd.toUpperCase().charAt(0);
                     if (tablero.get(key).flota.containsKey(dd) && !tablero.get(key).flota.get(dd).isPositioned()) {
-                        String donde = "Où placer le bateau? LETTRE : ";
+                        String donde = "\nCe bateau a une taille de "
+                                + tablero.get(key).flota.get(dd).getTaille() +" \n"
+                                + "Où placer le bateau? LETTRE : ";
                         System.out.print(donde);
                         while (true) {
                             String letra = sc.next();

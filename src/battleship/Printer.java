@@ -70,16 +70,19 @@ public class Printer {
                 for (int j = 0; j < plat1[i].length; j++) {
                     switch (plat1[i][j]) {
                         case 1:
-                            base += ANSI_BLUE + " ▓" + ANSI_RESET + " ";
+                            base += ANSI_BLUE + " ▓" + ANSI_RESET + " "; //WATER
                             break;
                         case 2:
-                            base += ANSI_GREEN + " o" + ANSI_RESET + " ";
+                            base += ANSI_GREEN + " o" + ANSI_RESET + " "; //FAIL SHOT
                             break;
                         case 3:
-                            base += ANSI_RED + " h" + ANSI_RESET + " ";
+                            base += ANSI_RED + " h" + ANSI_RESET + " "; //GOOD SHOT
                             break;
                         case 4:
-                            base += ANSI_YELLOW + " x" + ANSI_RESET + " ";
+                            base += ANSI_YELLOW + " X" + ANSI_RESET + " "; //SUNK 
+                            break;
+                        case 5:
+                            base += ANSI_PURPLE + " H" + ANSI_RESET + " "; //SUNK 
                             break;
                         default:
                             base += " ▓ ";
@@ -106,7 +109,7 @@ public class Printer {
                                 base += ANSI_YELLOW + " x" + ANSI_RESET + " ";
                                 break;
                             default:
-                                base += " ▓ ";
+                                base += ANSI_BLUE + " ▓ "+ANSI_RESET;
                                 break;
                         }
                     }
