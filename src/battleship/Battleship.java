@@ -125,26 +125,26 @@ public class Battleship {
 
         HashMap<String, Plateau> tablero = new HashMap<>();
 
-        Bateau a1 = new Bateau(4, false, 8, 1); //4 BBBB V B8
+        Bateau a1 = new Bateau(4/*, false/*, 8, 1*/); //4 BBBB V B8
         flota1.put("A", a1);
-        Bateau b1 = new Bateau(2, true, 6, 6); //2 PP H G6
+        Bateau b1 = new Bateau(2/*, true/*, 6, 6*/); //2 PP H G6
         flota1.put("B", b1);
-        Bateau c1 = new Bateau(5, true, 2, 8); //5 AAAAA H I2
+        Bateau c1 = new Bateau(5/*, true/*, 2, 8*/); //5 AAAAA H I2
         flota1.put("C", c1);
-        Bateau d1 = new Bateau(3, true, 0, 3); //3 DDD H C0
+        Bateau d1 = new Bateau(3/*, true/*, 0, 3*/); //3 DDD H C0
         flota1.put("D", d1);
-        Bateau e1 = new Bateau(3, false, 0, 4); //3 SSS V E0
+        Bateau e1 = new Bateau(3/*, false/*, 0, 4*/); //3 SSS V E0
         flota1.put("E", e1);
 
-        Bateau a2 = new Bateau(4, false);
+        Bateau a2 = new Bateau(4/*, false*/);
         flota2.put("A", a2);
-        Bateau b2 = new Bateau(2, true);
+        Bateau b2 = new Bateau(2/*, true*/);
         flota2.put("B", b2);
-        Bateau c2 = new Bateau(5, true);
+        Bateau c2 = new Bateau(5/*, true*/);
         flota2.put("C", c2);
-        Bateau d2 = new Bateau(3, true);
+        Bateau d2 = new Bateau(3/*, true*/);
         flota2.put("D", d2);
-        Bateau e2 = new Bateau(3, false);
+        Bateau e2 = new Bateau(3/*, false*/);
         flota2.put("E", e2);
 
         Plateau p1 = new Plateau(height, width, flota1, username);
@@ -159,6 +159,9 @@ public class Battleship {
 //        1 contre-torpilleurs (3 cases)
 //        1 sous-marin (3 cases)
 //        1 torpilleur (2 cases)
+        if(isComputer) {
+       //     p2.placerAll();
+        }
         placerAll(tablero, sc);
 
         System.out.println(pr.getAffiche(p1.getState(), p2.getState()) + "");

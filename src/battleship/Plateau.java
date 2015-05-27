@@ -73,7 +73,7 @@ public class Plateau implements PlateauInterface {
         boolean isShip = false;
 
         if ((horizontal && (x + taille) <= waterBateau[y].length) || (!horizontal && (y + taille) <= waterBateau.length)) {
-
+            System.out.println(horizontal +" "+ x +" "+ taille +" "+ waterBateau[y]+" "+waterBateau[y].length);
             for (int i = b; i < (b + taille); i++) {
 //                if(horizontal){
 //                    System.out.println( i + " " +waterBateau[y][i]);
@@ -93,8 +93,7 @@ public class Plateau implements PlateauInterface {
     }
 
     @Override
-    public boolean setBateau(Bateau bat, int x, int y, boolean horizontal) {
-        boolean resultat;
+    public void setBateau(Bateau bat, int x, int y, boolean horizontal) {
         if (isRoom(x, y, horizontal, bat)) {
 
             bat.setStartPosition(x, y, horizontal);
@@ -107,11 +106,8 @@ public class Plateau implements PlateauInterface {
                 }
 
             }
-            resultat = true;
-        } else {
-            resultat = false;
+
         }
-        return resultat;
     }
 
     public String getPropietari() {
@@ -120,21 +116,25 @@ public class Plateau implements PlateauInterface {
 
     @Override
     public void placerRandom(Bateau bat) {
-        while (true) {            
+        while (!bat.isPositioned()) {
             boolean horizontal = rnd.nextBoolean();
             int y = rnd.nextInt(plateau.length);
             int x = rnd.nextInt(plateau[y].length);
-            
-            if(setBateau(bat, x, y, horizontal)){
-                break;
+
+            System.out.println(bat + " : " + horizontal + " " + y + " " + x);
+            if (isRoom(x, y, horizontal, bat)) {
+                setBateau(bat, x, y, horizontal);
             }
-            
+
         }
     }
 
     @Override
     public void placerAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (String entry : flota.keySet()) {
+            placerRandom(flota.get(entry));
+        }
+
     }
 
 }
