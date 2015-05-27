@@ -22,7 +22,8 @@ public class Battleship {
      * @throws java.io.IOException
      */
     public static void main(String[] args) throws IOException {
-        exe("startclear");
+        exe("start");
+        exe("clear");
         String username = System.getProperty("user.name");
         Scanner sc = new Scanner(System.in);
 
@@ -192,9 +193,6 @@ public class Battleship {
                     break;
                 case "finish":
                     toPass = (isWindows) ? "" : "tput rmcup";
-                    break;
-                case "startclear":
-                    toPass = (isWindows) ? "" : "tput smcup";
                     break;
                 default:
                     toPass = "";
