@@ -205,11 +205,18 @@ public class Battleship {
             String key = entry;
 //            Plateau value = tablero.get(key);
             clear();
+            
+            boolean errorBateau=false;
             while (!tablero.get(key).isSetAllBateaux()) {
+                
+                clear();
+                
+                String errorBat = "Bateau incorrect/inexistant. ";
 
                 String information = tablero.get(key).getPropietari()+", selectionnez bateau [" + tablero.get(key).getBateauxToSet() + "] à placer : ";
 
-                System.out.print(information);
+                System.out.print(((errorBateau)?errorBat+information:information));
+                errorBateau = false;
 
                 while (true) {
                     String ddd = sc.next();
@@ -245,8 +252,8 @@ public class Battleship {
                         }
 //                            System.out.println("TRUE");
                     } else {
-
-                        System.out.print("Bateau incorrect/inexistant. ");
+                        errorBateau = true;
+                        
                     }
                     break;
 
