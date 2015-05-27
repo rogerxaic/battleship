@@ -200,6 +200,7 @@ public class Battleship {
     }
 
     public static void placerAll(HashMap<String, Plateau> tablero, Scanner sc) throws IOException {
+        Color c = new Color();
         for (String entry : tablero.keySet()) {
 
             String key = entry;
@@ -211,7 +212,7 @@ public class Battleship {
                 
                 clear();
                 
-                String errorBat = "Bateau incorrect/inexistant. ";
+                String errorBat = c.red("Bateau incorrect/inexistant. \n");
 
                 String information = tablero.get(key).getPropietari()+", selectionnez bateau [" + tablero.get(key).getBateauxToSet() + "] à placer : ";
 
