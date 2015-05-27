@@ -160,7 +160,7 @@ public class Battleship {
 //        1 sous-marin (3 cases)
 //        1 torpilleur (2 cases)
         if(isComputer) {
-       //     p2.placerAll();
+               p2.placerAll();
         }
         placerAll(tablero, sc);
 

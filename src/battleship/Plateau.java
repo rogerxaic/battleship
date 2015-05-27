@@ -70,10 +70,9 @@ public class Plateau implements PlateauInterface {
         int b = (horizontal) ? x : y;
         int lc = (horizontal) ? y : x;
 
-        boolean isShip = false;
+        boolean isThereShip = false;
 
         if ((horizontal && (x + taille) <= waterBateau[y].length) || (!horizontal && (y + taille) <= waterBateau.length)) {
-            System.out.println(horizontal +" "+ x +" "+ taille +" "+ waterBateau[y]+" "+waterBateau[y].length);
             for (int i = b; i < (b + taille); i++) {
 //                if(horizontal){
 //                    System.out.println( i + " " +waterBateau[y][i]);
@@ -81,10 +80,12 @@ public class Plateau implements PlateauInterface {
 //                } else {
 //                    isShip |= waterBateau[i][x];
 //                }
-                isShip |= (horizontal) ? waterBateau[y][i] : waterBateau[i][x];
+                isThereShip |= (horizontal) ? waterBateau[y][i] : waterBateau[i][x];
             }
+        } else {
+            isThereShip = true;
         }
-        return !isShip;
+        return !isThereShip;
     }
 
     @Override
@@ -98,7 +99,7 @@ public class Plateau implements PlateauInterface {
 
             bat.setStartPosition(x, y, horizontal);
             int b = (horizontal) ? x : y;
-            for (int i = b; (i < b + bat.getTaille()); i++) {
+            for (int i = b; i < (b + bat.getTaille()); i++) {
                 if (horizontal) {
                     waterBateau[y][i] = true;
                 } else {
@@ -121,7 +122,6 @@ public class Plateau implements PlateauInterface {
             int y = rnd.nextInt(plateau.length);
             int x = rnd.nextInt(plateau[y].length);
 
-            System.out.println(bat + " : " + horizontal + " " + y + " " + x);
             if (isRoom(x, y, horizontal, bat)) {
                 setBateau(bat, x, y, horizontal);
             }
