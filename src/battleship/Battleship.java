@@ -194,7 +194,7 @@ public class Battleship {
                     toPass = (isWindows) ? "" : "tput rmcup";
                     break;
                 case "startclear":
-                    toPass = (isWindows) ? "" : "tput rmcup; clear";
+                    toPass = (isWindows) ? "" : "tput smcup; clear";
                     break;
                 default:
                     toPass = "";
