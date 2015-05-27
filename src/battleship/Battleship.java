@@ -22,10 +22,9 @@ public class Battleship {
      * @throws java.io.IOException
      */
     public static void main(String[] args) throws IOException {
-
+        exe("startclear");
         String username = System.getProperty("user.name");
         Scanner sc = new Scanner(System.in);
-        clear();
 
         System.out.println("Bienvenue " + username);
         //PEDIR TAILLE PLATEAUX
@@ -75,7 +74,7 @@ public class Battleship {
                 break;
         }
 
-        clear();
+        exe("clear");
 
         //PEDIR Adversaire
         String selectVs = "Comment voulez vous jouer :\n"
@@ -109,7 +108,7 @@ public class Battleship {
         String nomJoueur = "Comment s'appelle-t-il le joueur 2 :\n\n"
                 + "NOM : ";
         if (!isComputer) {
-            clear();
+            exe("clear");
 
             System.out.print(nomJoueur);
 
@@ -118,7 +117,7 @@ public class Battleship {
             nomJoueur = "Ordinateur";
         }
 
-        clear();
+        exe("clear");
 
         HashMap<String, Bateau> flota1 = new HashMap<>();
         HashMap<String, Bateau> flota2 = new HashMap<>();
@@ -159,8 +158,8 @@ public class Battleship {
 //        1 contre-torpilleurs (3 cases)
 //        1 sous-marin (3 cases)
 //        1 torpilleur (2 cases)
-        if(isComputer) {
-               p2.placerAll();
+        if (isComputer) {
+            p2.placerAll();
         }
         placerAll(tablero, sc);
 
@@ -172,13 +171,35 @@ public class Battleship {
 
         System.out.println(p1.isRoom(8, 1, true, 5));
 
+        exe("finish");
+
     }
 
-    public static void clear() throws IOException {
+    public static void exe(String command) throws IOException {
         String OS = System.getProperty("os.name").toLowerCase();
-        if (OS.contains("win")) {
-        } else {
-            String neteja = (OS.contains("win")) ? "clear" : "clear";
+        boolean isWindows = OS.contains("win");
+
+        String toPass = "";
+
+        if (!isWindows) {
+
+            switch (command) {
+                case "clear":
+                    toPass = (isWindows) ? "" : "clear";
+                    break;
+                case "start":
+                    toPass = (isWindows) ? "" : "tput smcup";
+                    break;
+                case "finish":
+                    toPass = (isWindows) ? "" : "tput rmcup";
+                    break;
+                case "startclear":
+                    toPass = (isWindows) ? "" : "tput rmcup; clear";
+                    break;
+                default:
+                    toPass = "";
+                    break;
+            }
 
             //        J'ai créé le fichier clear.exe (trouvable dans 
             //                                        ./external/clear/bin/Debug)
@@ -186,7 +207,7 @@ public class Battleship {
             //        donne pas d'erreurs. La commande clear est cls, mais NetBeans ne veut
             //        pas la prendre car c'est cmd qui interprète cls, donc n'est pas un 
             //        executable Windows que NetBeans puisse executer.
-            Process p = Runtime.getRuntime().exec(neteja);
+            Process p = Runtime.getRuntime().exec(toPass);
 
             try (BufferedReader br = new BufferedReader(
                     new InputStreamReader(p.getInputStream()))) {
@@ -197,6 +218,7 @@ public class Battleship {
                 }
             }
         }
+
     }
 
     public static void placerAll(HashMap<String, Plateau> tablero, Scanner sc) throws IOException {
@@ -205,18 +227,18 @@ public class Battleship {
 
             String key = entry;
 //            Plateau value = tablero.get(key);
-            clear();
-            
-            boolean errorBateau=false;
+            exe("clear");
+
+            boolean errorBateau = false;
             while (!tablero.get(key).isSetAllBateaux()) {
-                
-                clear();
-                
+
+                exe("clear");
+
                 String errorBat = c.red("Bateau incorrect/inexistant. \n");
 
-                String information = tablero.get(key).getPropietari()+", selectionnez bateau [" + tablero.get(key).getBateauxToSet() + "] à placer : ";
+                String information = tablero.get(key).getPropietari() + ", selectionnez bateau [" + tablero.get(key).getBateauxToSet() + "] à placer : ";
 
-                System.out.print(((errorBateau)?errorBat+information:information));
+                System.out.print(((errorBateau) ? errorBat + information : information));
                 errorBateau = false;
 
                 while (true) {
@@ -254,7 +276,7 @@ public class Battleship {
 //                            System.out.println("TRUE");
                     } else {
                         errorBateau = true;
-                        
+
                     }
                     break;
 
