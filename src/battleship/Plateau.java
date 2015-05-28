@@ -26,7 +26,7 @@ public class Plateau implements PlateauInterface {
         this.waterBateau = new boolean[width][height];
         this.flota = flota;
         this.propietari = propietari;
-        this.tirsFaits=0;
+        this.tirsFaits = 0;
 
         for (int i = 0; i < plateau.length; i++) {
             for (int j = 0; j < plateau[i].length; j++) {
@@ -165,8 +165,28 @@ public class Plateau implements PlateauInterface {
                 this.waterBateau[i][j] = false;
             }
         }
-        
+
     }
-    
+
+    public int[][] plateauGr() {
+        int[][] resultat = new int[plateau.length][plateau[0].length];
+
+        for (int i = 0; i < plateau.length; i++) {
+            for (int j = 0; i < plateau[i].length; j++) {
+                switch (plateau[i][j]) {
+                    case 1:
+                        resultat[i][j] = 0;
+                    case 2:
+                        resultat[i][j] = 1;
+                    case 3:
+                        resultat[i][j] = 2;
+                    default:
+                        resultat[i][j] = 2;
+                }
+            }
+        }
+
+        return resultat;
+    }
 
 }

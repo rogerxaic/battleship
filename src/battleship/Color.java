@@ -78,6 +78,38 @@ public class Color {
         return ANSI_WHITE + noir + ANSI_RESET;
     }
     
+     public String bblue(String noir) {
+        return ANSI_BG_BLUE + noir + ANSI_RESET;
+    }
+
+    public String bblack(String noir) {
+        return ANSI_BG_BLACK + noir + ANSI_RESET;
+    }
+
+    public String bred(String noir) {
+        return ANSI_BG_RED + noir + ANSI_RESET;
+    }
+
+    public String bgreen(String noir) {
+        return ANSI_BG_GREEN + noir + ANSI_RESET;
+    }
+
+    public String byellow(String noir) {
+        return ANSI_BG_YELLOW + noir + ANSI_RESET;
+    }
+
+    public String bpurple(String noir) {
+        return ANSI_BG_PURPLE + noir + ANSI_RESET;
+    }
+
+    public String bcyan(String noir) {
+        return ANSI_BG_CYAN + noir + ANSI_RESET;
+    }
+    
+    public String bwhite(String noir) {
+        return ANSI_BG_WHITE + noir + ANSI_RESET;
+    }
+    
     public String clear(){
         return ANSI_REMOVE + ANSI_MOVE;
     }
