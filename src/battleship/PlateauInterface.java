@@ -26,5 +26,7 @@ public interface PlateauInterface {
     public void placerRandom(Bateau bat);
     
     public void placerAll();
+    
+    public boolean isDeadAllBateaux();
 
 }

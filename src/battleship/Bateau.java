@@ -17,27 +17,30 @@ public class Bateau implements BateauInterface {
     protected int y = -1;
     protected boolean positioned = false;
     protected boolean[] status; //1 flottant, 0 touché
+    protected boolean coule;
 
     public Bateau(int taille) {
         this.taille = taille;
         this.status = new boolean[taille];
+        for (int i = 0; i < status.length; i++) {
+            status[i] = true;
+        }
     }
 
-    public Bateau(int taille, boolean horizontal) {
-        this.taille = taille;
-        this.horizontal = horizontal;
-        this.status = new boolean[taille];
-    }
-
-    public Bateau(int taille, boolean horizontal, int x, int y) {
-        this.taille = taille;
-        this.horizontal = horizontal;
-        this.x = x;
-        this.y = y;
-        this.positioned = true;
-        this.status = new boolean[taille];
-    }
-
+//    public Bateau(int taille, boolean horizontal) {
+//        this.taille = taille;
+//        this.horizontal = horizontal;
+//        this.status = new boolean[taille];
+//    }
+//
+//    public Bateau(int taille, boolean horizontal, int x, int y) {
+//        this.taille = taille;
+//        this.horizontal = horizontal;
+//        this.x = x;
+//        this.y = y;
+//        this.positioned = true;
+//        this.status = new boolean[taille];
+//    }
     @Override
     public boolean isPositioned() {
         return (positioned || (x > -1 && y > -1));
@@ -97,6 +100,7 @@ public class Bateau implements BateauInterface {
         return true;
     }
 
+
     public boolean tir(int x, int y) {
 
         boolean tir = false;
@@ -121,5 +125,15 @@ public class Bateau implements BateauInterface {
             }
         }
         return tir;
+    }
+    
+    @Override
+    public boolean isCoule() {
+        boolean resultat = false;
+        for (int i = 0; i < status.length; i++) {
+            resultat |= status[i];
+        }
+        return !resultat;
+
     }
 }

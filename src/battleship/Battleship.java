@@ -1,8 +1,3 @@
- /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package battleship;
 
 import java.io.*;
@@ -153,22 +148,33 @@ public class Battleship {
         tablero.put("P2", p2);
 
         Printer pr = new Printer();
-
+        
+        while (true) {
 //        1 porte-avions (5 cases)
 //        1 croiseur (4 cases)
 //        1 contre-torpilleurs (3 cases)
 //        1 sous-marin (3 cases)
 //        1 torpilleur (2 cases)
-        if (isComputer) {
-            p2.placerAll();
+            if (isComputer) {
+                p2.placerAll();
+            }
+            placerAll(tablero, sc);
+
+            System.out.println(pr.getAffiche(p1.getState(), p2.getState()) + "");
+            //String ddd = sc.next();
+            
+            //JEU
+            
+            System.out.println("Rejouer ? [YN] ");
+            String rejouer = sc.next();
+            boolean rejeu = (rejouer.charAt(0) == 'Y' || rejouer.charAt(0) == 'y');
+            if(!rejeu){
+                break;
+            }
+            
         }
-        placerAll(tablero, sc);
-
-        System.out.println(pr.getAffiche(p1.getState(), p2.getState()) + "");
-        //String ddd = sc.next();
-
         //System.out.println("---" + ddd + "---");
-//        exe("finish");
+        exe("finish");
     }
 
     public static void exe(String command) throws IOException {

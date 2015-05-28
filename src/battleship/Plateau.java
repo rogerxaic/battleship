@@ -139,4 +139,13 @@ public class Plateau implements PlateauInterface {
 
     }
 
+    @Override
+    public boolean isDeadAllBateaux() {
+        boolean isDead = true;
+        for (String entry : flota.keySet()) {
+            isDead &= flota.get(entry).isCoule();
+        }
+        return isDead;
+    }
+
 }
