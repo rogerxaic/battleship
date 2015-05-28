@@ -159,6 +159,8 @@ public class Battleship {
                 p2.placerAll();
             }
             placerAll(tablero, sc, pr);
+            
+            exe("clear");
 
             System.out.println(pr.getAffiche(p1.getState(), p2.getState()) + "");
             //String ddd = sc.next();
