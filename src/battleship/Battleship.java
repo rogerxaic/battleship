@@ -21,6 +21,10 @@ public class Battleship {
         exe("clear");
         String username = System.getProperty("user.name");
         Scanner sc = new Scanner(System.in);
+        
+        Panneau banner = new Panneau();
+        
+        banner.Banner();
 
         System.out.println("Bienvenue " + username);
         //PEDIR TAILLE PLATEAUX
