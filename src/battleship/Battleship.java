@@ -95,7 +95,7 @@ public class Battleship {
                 break;
             }
             else if (isNumber(inter)) {
-                vsSelected = Integer.parseInt(sc.next());
+                vsSelected = Integer.parseInt(inter);
                 break;
             } 
             if (vsSelected > 0 && vsSelected < 3) { ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -126,11 +126,13 @@ public class Battleship {
         }
 
         exe("clear");
-
+        
+        HashMap<String, Plateau> tablero = new HashMap<>();
+        
         HashMap<String, Bateau> flota1 = new HashMap<>();
         HashMap<String, Bateau> flota2 = new HashMap<>();
 
-        HashMap<String, Plateau> tablero = new HashMap<>();
+        
 
         /**
          * Affichage des profs. Not working /w my code.
