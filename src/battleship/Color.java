@@ -40,6 +40,7 @@ public class Color {
     public static final String ANSI_BG_DEFAULT  = "\u001B[49m";
     public static final String ANSI_REMOVE  = "\u001B[2J";
     public static final String ANSI_MOVE = "\u001B[H";
+    public static final String ANSI_BELL = "\u0007";
 
 
     public Color() {
@@ -79,6 +80,14 @@ public class Color {
     
     public String clear(){
         return ANSI_REMOVE + ANSI_MOVE;
+    }
+    
+    public void bell(){
+        System.out.print(gBell());
+    }
+    
+    public String gBell() {
+        return ANSI_BELL;
     }
 
 }

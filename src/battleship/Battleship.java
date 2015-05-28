@@ -173,6 +173,10 @@ public class Battleship {
             boolean rejeu = (rejouer.charAt(0) == 'Y' || rejouer.charAt(0) == 'y');
             if (!rejeu) {
                 break;
+            } else {
+                for (String entry : tablero.keySet()) {
+                    tablero.get(entry).reset();
+                }
             }
 
         }
@@ -291,6 +295,6 @@ public class Battleship {
 
     public static void clear() {
         Color c = new Color();
-        System.out.println(c.clear());
+        System.out.print(c.clear());
     }
 }

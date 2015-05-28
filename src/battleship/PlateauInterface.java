@@ -28,5 +28,7 @@ public interface PlateauInterface {
     public void placerAll();
     
     public boolean isDeadAllBateaux();
+    
+    public void reset();
 
 }

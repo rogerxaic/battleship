@@ -153,6 +153,13 @@ public class Plateau implements PlateauInterface {
     public boolean[][] getWaterBateau() {
         return waterBateau;
     }
+
+    @Override
+    public void reset() {
+        for (String entry : flota.keySet()) {
+            flota.get(entry).resetBateau();
+        }
+    }
     
 
 }
