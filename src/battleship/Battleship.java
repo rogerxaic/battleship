@@ -8,7 +8,7 @@ import java.util.*;
  * @author Roger MIRET & Marta CORTÉS
  */
 public class Battleship {
-
+    
     public static final String ABC = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     public static final String abc = "abcdefghijklmnopqrstuvwxyz";
 
@@ -25,7 +25,7 @@ public class Battleship {
         Panneau banner = new Panneau();
         
         banner.Banner();
-
+        
         System.out.println("Bienvenue " + username);
         //PEDIR TAILLE PLATEAUX
         String selectTaille = "Introduisez la taille des plateaux :\n"
@@ -35,7 +35,7 @@ public class Battleship {
                 + "\t4. 15x20\n"
                 + "\t5. 20x20\n\n"
                 + "TAILLE : ";
-
+        
         System.out.print(selectTaille);
         boolean isNumero = false;
         int tailleSelected = 0;
@@ -73,7 +73,7 @@ public class Battleship {
                 height = 10;
                 break;
         }
-
+        
         exe("clear");
 
         //PEDIR Adversaire
@@ -81,7 +81,7 @@ public class Battleship {
                 + "\t1. Vs. Ordinateur\n"
                 + "\t2. Vs. Quelqu'un\n\n"
                 + "ADVERSAIRE : ";
-
+        
         System.out.print(selectVs);
         boolean isComputer = false;
         int vsSelected = 0;
@@ -92,7 +92,7 @@ public class Battleship {
             }
             System.out.print("\nCe n'est pas une option.\nADVERSAIRE : ");
         }
-
+        
         switch (vsSelected) {
             case 1:
                 isComputer = true;
@@ -104,26 +104,26 @@ public class Battleship {
                 isComputer = true;
                 break;
         }
-
+        
         String nomJoueur = "Comment s'appelle-t-il le joueur 2 :\n\n"
                 + "NOM : ";
         if (!isComputer) {
             exe("clear");
-
+            
             System.out.print(nomJoueur);
-
+            
             nomJoueur = sc.next();
         } else {
             nomJoueur = "Ordinateur";
         }
-
+        
         exe("clear");
-
+        
         HashMap<String, Bateau> flota1 = new HashMap<>();
         HashMap<String, Bateau> flota2 = new HashMap<>();
-
+        
         HashMap<String, Plateau> tablero = new HashMap<>();
-
+        
         Bateau a1 = new Bateau(4/*, false/*, 8, 1*/); //4 BBBB V B8
         flota1.put("A", a1);
         Bateau b1 = new Bateau(2/*, true/*, 6, 6*/); //2 PP H G6
@@ -134,7 +134,7 @@ public class Battleship {
         flota1.put("D", d1);
         Bateau e1 = new Bateau(3/*, false/*, 0, 4*/); //3 SSS V E0
         flota1.put("E", e1);
-
+        
         Bateau a2 = new Bateau(4/*, false*/);
         flota2.put("A", a2);
         Bateau b2 = new Bateau(2/*, true*/);
@@ -145,14 +145,14 @@ public class Battleship {
         flota2.put("D", d2);
         Bateau e2 = new Bateau(3/*, false*/);
         flota2.put("E", e2);
-
+        
         Plateau p1 = new Plateau(height, width, flota1, username);
         tablero.put("P1", p1);
         Plateau p2 = new Plateau(height, width, flota2, nomJoueur);
         tablero.put("P2", p2);
-
+        
         Printer pr = new Printer();
-
+        
         while (true) {
 //        1 porte-avions (5 cases)
 //        1 croiseur (4 cases)
@@ -166,7 +166,7 @@ public class Battleship {
 
             //exe("clear");
             clear();
-
+            
             System.out.println(pr.getAffiche(p1.getState(), p2.getState()) + "");
             //String ddd = sc.next();
 
@@ -175,12 +175,11 @@ public class Battleship {
             while (true) {
 
                 /**
-                 * 
+                 *
                  */
                 for (String entry : tablero.keySet()) {
 //                    dead |= tablero.get(entry).isDeadAllBateaux();
                 }
-                
                 
                 boolean dead = false;
                 for (String entry : tablero.keySet()) {
@@ -190,7 +189,7 @@ public class Battleship {
                     break;
                 }
             }
-
+            
             System.out.println("Rejouer ? [YN] ");
             String rejouer = sc.next();
             boolean rejeu = (rejouer.charAt(0) == 'Y' || rejouer.charAt(0) == 'y');
@@ -201,20 +200,20 @@ public class Battleship {
                     tablero.get(entry).reset();
                 }
             }
-
+            
         }
         //System.out.println("---" + ddd + "---");
         exe("finish");
     }
-
+    
     public static void exe(String command) throws IOException {
         String OS = System.getProperty("os.name").toLowerCase();
         boolean isWindows = OS.contains("win");
-
+        
         String toPass = "";
-
+        
         if (!isWindows) {
-
+            
             switch (command) {
                 case "clear":
                     toPass = (isWindows) ? "" : "clear";
@@ -237,46 +236,51 @@ public class Battleship {
             //        pas la prendre car c'est cmd qui interprète cls, donc n'est pas un 
             //        executable Windows que NetBeans puisse executer.
             Process p = Runtime.getRuntime().exec(toPass);
-
+            
             try (BufferedReader br = new BufferedReader(
                     new InputStreamReader(p.getInputStream()))) {
-
+                
                 String line;
                 while ((line = br.readLine()) != null) {
                     System.out.println(line);
                 }
             }
         }
-
+        
     }
-
+    
     public static void placerAll(HashMap<String, Plateau> tablero, Scanner sc, Printer pr) throws IOException {
         Color c = new Color();
         for (String entry : tablero.keySet()) {
-
+            
             String key = entry;
 //            Plateau value = tablero.get(key);
             exe("clear");
-
+            
             boolean errorBateau = false;
+            boolean pasDePlace = false;
             while (!tablero.get(key).isSetAllBateaux()) {
-
+                
                 exe("clear");
-
+                
                 String errorBat = c.red("Bateau incorrect/inexistant. \n");
-
+                String errorPlace = c.red("Il n'y a pas de place. \n");
                 String information = tablero.get(key).getPropietari() + ", selectionnez bateau [" + tablero.get(key).getBateauxToSet() + " R] à placer : ";
-
-                System.out.print(pr.monPlacement(tablero.get(key).getState()) + "\n" + ((errorBateau) ? errorBat + information : information));
+                
+                System.out.print(pr.monPlacement(tablero.get(key).getState()) + "\n"
+                        + ((errorBateau) ? errorBat + information : "")
+                        + ((pasDePlace) ? errorPlace + information : "")
+                        + ((!pasDePlace && !errorBateau) ? information : ""));
                 errorBateau = false;
-
+                pasDePlace = false;
+                
                 while (true) {
                     String ddd = sc.next();
                     String dd = "" + ddd.toUpperCase().charAt(0);
                     if (tablero.get(key).flota.containsKey(dd) && !tablero.get(key).flota.get(dd).isPositioned()) {
                         String donde = "\nCe bateau a une taille de "
                                 + tablero.get(key).flota.get(dd).getTaille() + " \n"
-                                + "Où placer le bateau? LETTRE : ";
+                                + "Où placer le bateau? LETTRE ou LETTRE+NUMÉRO : ";
                         System.out.print(donde);
                         while (true) {
                             String letra = sc.next();
@@ -286,23 +290,27 @@ public class Battleship {
                                     y = i;
                                 }
                             }
-                            System.out.print("NUMÉRO :");
-                            String numero = sc.next();
                             int x;
-                            x = Integer.parseInt("" + numero.charAt(0));
-
+                            if (letra.length() > 1) {
+                                x = Integer.parseInt(letra.substring(1));
+                            } else {
+                                System.out.print("NUMÉRO :");
+                                String numero = sc.next();
+                                
+                                x = Integer.parseInt("" + numero.charAt(0));
+                            }
                             System.out.print("VERTICAL ou HORIZONTAL ? [V/H]");
                             String vouh = sc.next();
                             boolean horizontal = false;
                             horizontal = (vouh.charAt(0) == 'H' || vouh.charAt(0) == 'h');
-
+                            
                             if (tablero.get(key).isRoom(x, y, horizontal, tablero.get(key).flota.get(dd))) {
                                 tablero.get(key).setBateau(tablero.get(key).flota.get(dd), x, y, horizontal);
                             } else {
-                                System.out.println("Il n'y a pas de place. ");
+                                pasDePlace = true;
                             }
                             break;
-
+                            
                         }
 //                            System.out.println("TRUE");
                     } else if ("R".equals(dd)) {
@@ -315,7 +323,7 @@ public class Battleship {
             }
         }
     }
-
+    
     public static void clear() {
         Color c = new Color();
         System.out.print(c.clear());
