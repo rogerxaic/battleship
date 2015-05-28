@@ -19,12 +19,14 @@ public class Plateau implements PlateauInterface {
     protected String propietari;
     protected boolean[][] waterBateau; // Is there ship? True / false
     private static Random rnd = new Random();
+    protected int tirsFaits;
 
     public Plateau(int width, int height, HashMap<String, Bateau> flota, String propietari) {
         this.plateau = new int[width][height];
         this.waterBateau = new boolean[width][height];
         this.flota = flota;
         this.propietari = propietari;
+        this.tirsFaits=0;
 
         for (int i = 0; i < plateau.length; i++) {
             for (int j = 0; j < plateau[i].length; j++) {

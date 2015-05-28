@@ -164,6 +164,7 @@ public class Battleship {
             //String ddd = sc.next();
             
             //JEU
+            //si tirs==, tira 1(atack 2); sinon tira qui tirs>>
             
             System.out.println("Rejouer ? [YN] ");
             String rejouer = sc.next();
