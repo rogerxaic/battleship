@@ -12,6 +12,9 @@ public class Battleship {
     public static final String ABC = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     public static final String abc = "abcdefghijklmnopqrstuvwxyz";
     public static final Color c = new Color();
+    public static final Printer pr = new Printer();
+    public static final Scanner sc = new Scanner(System.in);
+    
 
     /**
      * @param args the command line arguments
@@ -21,7 +24,7 @@ public class Battleship {
         exe("start");
         exe("clear");
         String username = System.getProperty("user.name");
-        Scanner sc = new Scanner(System.in);
+        
 
         Panneau banner = new Panneau();
 
@@ -90,22 +93,18 @@ public class Battleship {
         int vsSelected = -1;
         while (true) {
             String inter = sc.next();
-            if(inter.toUpperCase().charAt(0) == 'N') {
+            if (inter.toUpperCase().charAt(0) == 'N') {
                 networking = true;
                 break;
-            }
-            else if (isNumber(inter)) {
+            } else if (isNumber(inter)) {
                 vsSelected = Integer.parseInt(inter);
-                break;
-            } 
-            if (vsSelected > 0 && vsSelected < 3) { ////////////////////////////////////////////////////////////////////////////////////////////////////////
                 break;
             }
             System.out.print("\nCe n'est pas une option.\nADVERSAIRE : ");
         }
 
         switch (vsSelected) {
-            case 1:
+            case 0:
                 isComputer = true;
                 break;
             default:
@@ -126,13 +125,11 @@ public class Battleship {
         }
 
         exe("clear");
-        
+
         HashMap<String, Plateau> tablero = new HashMap<>();
-        
+
         HashMap<String, Bateau> flota1 = new HashMap<>();
         HashMap<String, Bateau> flota2 = new HashMap<>();
-
-        
 
         /**
          * Affichage des profs. Not working /w my code.
@@ -161,12 +158,12 @@ public class Battleship {
         Bateau e2 = new Bateau(3);
         flota2.put("E", e2);
 
-        Plateau p1 = new Plateau(height, width, flota1, username);
-        tablero.put("P1", p1);
-        Plateau p2 = new Plateau(height, width, flota2, nomJoueur);
-        tablero.put("P2", p2);
+        Plateau p1 = new Plateau(height, width, flota1, username, false);
+        tablero.put("A", p1);
+        Plateau p2 = new Plateau(height, width, flota2, nomJoueur, isComputer);
+        tablero.put("B", p2);
 
-        Printer pr = new Printer();
+        
 
         while (true) {
 //        1 porte-avions (5 cases)
@@ -177,7 +174,7 @@ public class Battleship {
             if (isComputer) {
                 p2.placerAll();
             }
-            placerAll(tablero, sc, pr);
+            placerAll(tablero);
 
             //exe("clear");
             clear();
@@ -199,8 +196,38 @@ public class Battleship {
                 for (String entry : tablero.keySet()) {
 //                    dead |= tablero.get(entry).isDeadAllBateaux();
                     Plateau pla = tablero.get(entry);
+                    HashMap<String, Plateau> clone = new HashMap((Map) tablero.clone());
+//                    clone = tablero.clone();
                     System.out.println("Tir de " + pla.getPropietari() + " : ");
+                    clone.remove(entry);
 
+                    String target;
+                    if (clone.size() > 1) {
+                        //Qui attacker?
+                        String toAttack = "";
+                        for (String placer : clone.keySet()) {
+                            Plateau value = clone.get(placer);
+                            String prop = value.getPropietari();
+                            toAttack += " - [" + placer + "] " + prop;
+                        }
+                        System.out.println("Selectionnez qui attacker : " + toAttack.substring(3));
+
+                        while (true) {
+                            String adver = sc.next();
+                            if (clone.containsKey(adver.toUpperCase())) {
+                                System.out.println("BO!");
+                                target = adver.toUpperCase();
+                                break;
+                            }
+                            System.out.print("\nCe n'est pas une option.\nADVERSAIRE : ");
+                        }
+                    } else {
+                        for (String placer : clone.keySet()) {
+                            target = placer;
+                        }
+                    }
+
+                    sc.next();
                 }
 
                 boolean dead = false;
@@ -271,7 +298,7 @@ public class Battleship {
 
     }
 
-    public static void placerAll(HashMap<String, Plateau> tablero, Scanner sc, Printer pr) throws IOException {
+    public static void placerAll(HashMap<String, Plateau> tablero) throws IOException {
 //        Color c = new Color();
         for (String entry : tablero.keySet()) {
 
