@@ -14,7 +14,6 @@ public class Battleship {
     public static final Color c = new Color();
     public static final Printer pr = new Printer();
     public static final Scanner sc = new Scanner(System.in);
-    
 
     /**
      * @param args the command line arguments
@@ -24,7 +23,6 @@ public class Battleship {
         exe("start");
         exe("clear");
         String username = System.getProperty("user.name");
-        
 
         Panneau banner = new Panneau();
 
@@ -112,30 +110,11 @@ public class Battleship {
                 break;
         }
 
-        String nomJoueur = "Comment s'appelle-t-il le joueur 2 :\n\n"
-                + "NOM : ";
-        if (!isComputer) {
-            exe("clear");
-
-            System.out.print(nomJoueur);
-
-            nomJoueur = sc.next();
-        } else {
-            nomJoueur = "Ordinateur";
-        }
-
-        exe("clear");
-
         HashMap<String, Plateau> tablero = new HashMap<>();
 
+        ////////////////////////////////////////////////////////////////////////
         HashMap<String, Bateau> flota1 = new HashMap<>();
-        HashMap<String, Bateau> flota2 = new HashMap<>();
 
-        /**
-         * Affichage des profs. Not working /w my code.
-         *
-         * PlateauGraphique pg = new PlateauGraphique();
-         */
         Bateau a1 = new Bateau(4); //4 BBBB V B8
         flota1.put("A", a1);
         Bateau b1 = new Bateau(2); //2 PP H G6
@@ -147,39 +126,79 @@ public class Battleship {
         Bateau e1 = new Bateau(3); //3 SSS V E0
         flota1.put("E", e1);
 
-        Bateau a2 = new Bateau(4);
-        flota2.put("A", a2);
-        Bateau b2 = new Bateau(2);
-        flota2.put("B", b2);
-        Bateau c2 = new Bateau(5);
-        flota2.put("C", c2);
-        Bateau d2 = new Bateau(3);
-        flota2.put("D", d2);
-        Bateau e2 = new Bateau(3);
-        flota2.put("E", e2);
-
         Plateau p1 = new Plateau(height, width, flota1, username, false);
         tablero.put("A", p1);
-        Plateau p2 = new Plateau(height, width, flota2, nomJoueur, isComputer);
-        tablero.put("B", p2);
 
-        
+        ////////////////////////////////////////////////////////////////////////
+        String nomJoueur;
+        if (!isComputer && !networking) {
+            exe("clear");
 
+            //On a un nombre de joueurs vsSelected.
+            for (int i = 1; i < vsSelected + 1; i++) {
+                int joueur = i + 1;
+                System.out.println("Comment s'appelle-t-il le joueur " + joueur + " :\n\n"
+                        + "NOM : ");
+                nomJoueur = sc.next();
+
+                HashMap<String, Bateau> flota = new HashMap<>();
+
+                Bateau a2 = new Bateau(4);
+                flota.put("A", a2);
+                Bateau b2 = new Bateau(2);
+                flota.put("B", b2);
+                Bateau c2 = new Bateau(5);
+                flota.put("C", c2);
+                Bateau d2 = new Bateau(3);
+                flota.put("D", d2);
+                Bateau e2 = new Bateau(3);
+                flota.put("E", e2);
+
+                Plateau p2 = new Plateau(height, width, flota, nomJoueur, false);
+                tablero.put("" + ABC.charAt(i), p2);
+            }
+
+//            System.out.print(nomJoueur);
+        } else if (isComputer) {
+            nomJoueur = "Ordinateur";
+
+            HashMap<String, Bateau> flota = new HashMap<>();
+
+            Bateau a2 = new Bateau(4);
+            flota.put("A", a2);
+            Bateau b2 = new Bateau(2);
+            flota.put("B", b2);
+            Bateau c2 = new Bateau(5);
+            flota.put("C", c2);
+            Bateau d2 = new Bateau(3);
+            flota.put("D", d2);
+            Bateau e2 = new Bateau(3);
+            flota.put("E", e2);
+
+            Plateau p2 = new Plateau(height, width, flota, nomJoueur, true);
+            tablero.put("B", p2);
+        }
+
+        exe("clear");
+
+        /**
+         * Affichage des profs. Not working /w my code.
+         *
+         * PlateauGraphique pg = new PlateauGraphique();
+         */
         while (true) {
 //        1 porte-avions (5 cases)
 //        1 croiseur (4 cases)
 //        1 contre-torpilleurs (3 cases)
 //        1 sous-marin (3 cases)
 //        1 torpilleur (2 cases)
-            if (isComputer) {
-                p2.placerAll();
-            }
+
             placerAll(tablero);
 
             //exe("clear");
             clear();
 
-            System.out.println(pr.getAffiche(p1.getState(), p2.getState()) + "");
+            System.out.println(pr.getAffiche(p1.getState(), p1.getState()) + "");
             //String ddd = sc.next();
 
             /**
@@ -310,6 +329,11 @@ public class Battleship {
 
             boolean errorBateau = false;
             boolean pasDePlace = false;
+
+            if (plat.isComputer) {
+                plat.placerAll();
+            }
+
             while (!plat.isSetAllBateaux()) {
 
                 exe("clear");
