@@ -168,6 +168,25 @@ public class Battleship {
 
             //JEU
             //si tirs==, tira 1(atack 2); sinon tira qui tirs>>
+            while (true) {
+
+                /**
+                 * 
+                 */
+                for (String entry : tablero.keySet()) {
+//                    dead |= tablero.get(entry).isDeadAllBateaux();
+                }
+                
+                
+                boolean dead = false;
+                for (String entry : tablero.keySet()) {
+                    dead |= tablero.get(entry).isDeadAllBateaux();
+                }
+                if (dead) {
+                    break;
+                }
+            }
+
             System.out.println("Rejouer ? [YN] ");
             String rejouer = sc.next();
             boolean rejeu = (rejouer.charAt(0) == 'Y' || rejouer.charAt(0) == 'y');
