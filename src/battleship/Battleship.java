@@ -238,7 +238,7 @@ public class Battleship {
 
                 String information = tablero.get(key).getPropietari() + ", selectionnez bateau [" + tablero.get(key).getBateauxToSet() + " R] à placer : ";
 
-                System.out.print(pr.monPlacement(tablero.get(key).getState()) + ((errorBateau) ? errorBat + information : information));
+                System.out.print(pr.monPlacement(tablero.get(key).getState()) +"\n"+ ((errorBateau) ? errorBat + information : information));
                 errorBateau = false;
 
                 while (true) {
