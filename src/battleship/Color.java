@@ -11,7 +11,14 @@ package battleship;
  */
 public class Color {
 
+
     public static final String ANSI_RESET  = "\u001B[0m";
+    public static final String ANSI_BOLD  = "\u001B[1m";
+    public static final String ANSI_HALF_BRIGHT  = "\u001B[2m";
+    public static final String ANSI_UNDERSCORE  = "\u001B[4m";
+    public static final String ANSI_BLINK  = "\u001B[7m";
+    public static final String ANSI_UNDERLINE_OFF  = "\u001B[24m";
+    public static final String ANSI_BLINK_OFF  = "\u001B[25m";
     public static final String ANSI_BLACK  = "\u001B[30m";
     public static final String ANSI_RED    = "\u001B[31m";
     public static final String ANSI_GREEN  = "\u001B[32m";
@@ -20,6 +27,20 @@ public class Color {
     public static final String ANSI_PURPLE = "\u001B[35m";
     public static final String ANSI_CYAN   = "\u001B[36m";
     public static final String ANSI_WHITE  = "\u001B[37m";
+    public static final String ANSI_UNDERSCORE_ON  = "\u001B[38m";
+    public static final String ANSI_UNDERSCORE_OFF  = "\u001B[39m";
+    public static final String ANSI_BG_BLACK    = "\u001B[40m";
+    public static final String ANSI_BG_RED  = "\u001B[41m";
+    public static final String ANSI_BG_GREEN = "\u001B[42m";
+    public static final String ANSI_BG_YELLOW   = "\u001B[43m";
+    public static final String ANSI_BG_BLUE = "\u001B[44m";
+    public static final String ANSI_BG_PURPLE   = "\u001B[45m";
+    public static final String ANSI_BG_CYAN  = "\u001B[46m";
+    public static final String ANSI_BG_WHITE  = "\u001B[47m";
+    public static final String ANSI_BG_DEFAULT  = "\u001B[49m";
+    public static final String ANSI_REMOVE  = "\u001B[2J";
+    public static final String ANSI_MOVE = "\u001B[H";
+
 
     public Color() {
     }

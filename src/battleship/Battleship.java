@@ -158,7 +158,7 @@ public class Battleship {
             if (isComputer) {
                 p2.placerAll();
             }
-            placerAll(tablero, sc);
+            placerAll(tablero, sc, pr);
 
             System.out.println(pr.getAffiche(p1.getState(), p2.getState()) + "");
             //String ddd = sc.next();
@@ -221,7 +221,7 @@ public class Battleship {
 
     }
 
-    public static void placerAll(HashMap<String, Plateau> tablero, Scanner sc) throws IOException {
+    public static void placerAll(HashMap<String, Plateau> tablero, Scanner sc, Printer pr) throws IOException {
         Color c = new Color();
         for (String entry : tablero.keySet()) {
 
@@ -238,7 +238,7 @@ public class Battleship {
 
                 String information = tablero.get(key).getPropietari() + ", selectionnez bateau [" + tablero.get(key).getBateauxToSet() + " R] à placer : ";
 
-                System.out.print(((errorBateau) ? errorBat + information : information));
+                System.out.print(pr.monPlacement(tablero.get(key).getState()) + ((errorBateau) ? errorBat + information : information));
                 errorBateau = false;
 
                 while (true) {

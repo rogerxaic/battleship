@@ -150,4 +150,9 @@ public class Plateau implements PlateauInterface {
         return isDead;
     }
 
+    public boolean[][] getWaterBateau() {
+        return waterBateau;
+    }
+    
+
 }

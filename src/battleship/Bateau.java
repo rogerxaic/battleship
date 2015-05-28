@@ -101,6 +101,7 @@ public class Bateau implements BateauInterface {
     }
 
 
+    @Override
     public boolean tir(int x, int y) {
 
         boolean tir = false;
