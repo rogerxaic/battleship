@@ -136,4 +136,16 @@ public class Bateau implements BateauInterface {
         return !resultat;
 
     }
+
+    public void resetBateau() {
+
+        for (int i = 0; i < status.length; i++) {
+            status[i] = true;
+        }
+        this.coule = false;
+        this.x = -1;
+        this.y = -1;
+        this.positioned = false ;
+    }
+
 }
