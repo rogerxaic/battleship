@@ -17,27 +17,30 @@ public class Bateau implements BateauInterface {
     protected int y = -1;
     protected boolean positioned = false;
     protected boolean[] status; //1 flottant, 0 touché
+    protected boolean coule;
 
     public Bateau(int taille) {
         this.taille = taille;
         this.status = new boolean[taille];
+        for (int i = 0; i < status.length; i++) {
+            status[i] = true;
+        }
     }
 
-    public Bateau(int taille, boolean horizontal) {
-        this.taille = taille;
-        this.horizontal = horizontal;
-        this.status = new boolean[taille];
-    }
-
-    public Bateau(int taille, boolean horizontal, int x, int y) {
-        this.taille = taille;
-        this.horizontal = horizontal;
-        this.x = x;
-        this.y = y;
-        this.positioned = true;
-        this.status = new boolean[taille];
-    }
-
+//    public Bateau(int taille, boolean horizontal) {
+//        this.taille = taille;
+//        this.horizontal = horizontal;
+//        this.status = new boolean[taille];
+//    }
+//
+//    public Bateau(int taille, boolean horizontal, int x, int y) {
+//        this.taille = taille;
+//        this.horizontal = horizontal;
+//        this.x = x;
+//        this.y = y;
+//        this.positioned = true;
+//        this.status = new boolean[taille];
+//    }
     @Override
     public boolean isPositioned() {
         return (positioned || (x > -1 && y > -1));
@@ -57,8 +60,6 @@ public class Bateau implements BateauInterface {
     public String toString() {
         return "Bateau{" + "taille=" + taille + ", horizontal=" + horizontal + ", x=" + x + ", y=" + y + ", positioned=" + positioned + ", status=" + status + '}';
     }
-
-    
 
     @Override
     public int getTaille() {
@@ -97,5 +98,14 @@ public class Bateau implements BateauInterface {
                 ? (this.y == y) && (x >= this.x && x < (this.x + this.taille))
                 : (this.x == x) && (y >= this.y && y < (this.y + this.taille));
         return true;
+    }
+
+    @Override
+    public boolean isCoule() {
+        boolean resultat = false;
+        for (int i = 0; i < status.length; i++) {
+            resultat |= status[i];
+        }
+        return !resultat;
     }
 }
