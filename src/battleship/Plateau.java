@@ -159,6 +159,13 @@ public class Plateau implements PlateauInterface {
         for (String entry : flota.keySet()) {
             flota.get(entry).resetBateau();
         }
+        for (int i = 0; i < plateau.length; i++) {
+            for (int j = 0; j < plateau[i].length; j++) {
+                this.plateau[i][j] = 1;
+                this.waterBateau[i][j] = false;
+            }
+        }
+        
     }
     
 
