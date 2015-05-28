@@ -61,5 +61,23 @@ public class Panneau extends Battleship {
         exe("clear");
         
     }
+    
+    public static String getLetra(int x) {
+        String letra = "";
+        if(x<26){
+            letra = ""+ABC.charAt(x);
+        } else {
+            int fois = 0;
+            while(x>=0){
+                letra = "" + ABC.charAt(x%26);
+                x -= 26;
+                fois++;
+            }
+            if(fois<26){
+                letra = ABC.charAt(fois-2) + letra;
+            }
+        }
+        return letra;
+    }
 
 }

@@ -155,7 +155,7 @@ public class Battleship {
                 flota.put("E", e2);
 
                 Plateau p2 = new Plateau(height, width, flota, nomJoueur, false);
-                tablero.put("" + ABC.charAt(i), p2);
+                tablero.put("" + banner.getLetra(i), p2);
             }
 
 //            System.out.print(nomJoueur);
