@@ -109,16 +109,18 @@ public class Bateau implements BateauInterface {
             for (int i = this.x; i < this.x + this.taille; i++) {
                 if (x == i && y == this.y) {
                     tir = true;
+                    status[x-this.x]= false;  
                     break;
                 } else {
                     tir = false;
                 }
-
+                
             }
         } else {
             for (int i = this.y; i < this.y + this.taille; i++) {
                 if (y == i && x == this.x) {
                     tir = true;
+                    status[y-this.y]= false;
                     break;
                 } else {
                     tir = false;
