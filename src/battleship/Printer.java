@@ -131,7 +131,7 @@ public class Printer {
             headerP1 += (i < 10) ? " " + i + " " : " " + i;
         }
 
-        base += headerP1;
+        base += headerP1+"\n";
 
         for (int i = 0; i < plat1.length; i++) {
             base += ABC.charAt(i);
