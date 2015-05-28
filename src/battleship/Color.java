@@ -76,5 +76,9 @@ public class Color {
     public String white(String noir) {
         return ANSI_WHITE + noir + ANSI_RESET;
     }
+    
+    public String clear(){
+        return ANSI_REMOVE + ANSI_MOVE;
+    }
 
 }

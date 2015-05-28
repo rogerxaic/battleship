@@ -148,7 +148,7 @@ public class Battleship {
         tablero.put("P2", p2);
 
         Printer pr = new Printer();
-        
+
         while (true) {
 //        1 porte-avions (5 cases)
 //        1 croiseur (4 cases)
@@ -159,22 +159,22 @@ public class Battleship {
                 p2.placerAll();
             }
             placerAll(tablero, sc, pr);
-            
-            exe("clear");
+
+            //exe("clear");
+            clear();
 
             System.out.println(pr.getAffiche(p1.getState(), p2.getState()) + "");
             //String ddd = sc.next();
-            
+
             //JEU
             //si tirs==, tira 1(atack 2); sinon tira qui tirs>>
-            
             System.out.println("Rejouer ? [YN] ");
             String rejouer = sc.next();
             boolean rejeu = (rejouer.charAt(0) == 'Y' || rejouer.charAt(0) == 'y');
-            if(!rejeu){
+            if (!rejeu) {
                 break;
             }
-            
+
         }
         //System.out.println("---" + ddd + "---");
         exe("finish");
@@ -240,7 +240,7 @@ public class Battleship {
 
                 String information = tablero.get(key).getPropietari() + ", selectionnez bateau [" + tablero.get(key).getBateauxToSet() + " R] à placer : ";
 
-                System.out.print(pr.monPlacement(tablero.get(key).getState()) +"\n"+ ((errorBateau) ? errorBat + information : information));
+                System.out.print(pr.monPlacement(tablero.get(key).getState()) + "\n" + ((errorBateau) ? errorBat + information : information));
                 errorBateau = false;
 
                 while (true) {
@@ -287,5 +287,10 @@ public class Battleship {
                 }
             }
         }
+    }
+
+    public static void clear() {
+        Color c = new Color();
+        System.out.println(c.clear());
     }
 }
