@@ -58,8 +58,6 @@ public class Bateau implements BateauInterface {
         return "Bateau{" + "taille=" + taille + ", horizontal=" + horizontal + ", x=" + x + ", y=" + y + ", positioned=" + positioned + ", status=" + status + '}';
     }
 
-    
-
     @Override
     public int getTaille() {
         return taille;
@@ -97,5 +95,31 @@ public class Bateau implements BateauInterface {
                 ? (this.y == y) && (x >= this.x && x < (this.x + this.taille))
                 : (this.x == x) && (y >= this.y && y < (this.y + this.taille));
         return true;
+    }
+
+    public boolean tir(int x, int y) {
+
+        boolean tir = false;
+        if (horizontal) {
+            for (int i = this.x; i < this.x + this.taille; i++) {
+                if (x == i && y == this.y) {
+                    tir = true;
+                    break;
+                } else {
+                    tir = false;
+                }
+
+            }
+        } else {
+            for (int i = this.y; i < this.y + this.taille; i++) {
+                if (y == i && x == this.x) {
+                    tir = true;
+                    break;
+                } else {
+                    tir = false;
+                }
+            }
+        }
+        return tir;
     }
 }
