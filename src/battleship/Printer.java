@@ -120,4 +120,41 @@ public class Printer {
 
         return base + header;
     }
+
+    public String monPlacement(int[][] plat1) {
+
+        String base = "";
+
+        String headerP1 = " ";
+
+        for (int i = 0; i < plat1[0].length; i++) {
+            headerP1 += (i < 10) ? " " + i + " " : " " + i;
+        }
+
+        base += headerP1;
+
+        for (int i = 0; i < plat1.length; i++) {
+            base += ABC.charAt(i);
+            for (int j = 0; j < plat1[i].length; j++) {
+                switch (plat1[i][j]) {
+                    case 1:
+                        base += ANSI_BLUE + " ▓" + ANSI_RESET + " "; //WATER
+                        break;
+
+                    case 5:
+                        base += ANSI_PURPLE + " H" + ANSI_RESET + " "; //SHIP 
+                        break;
+                    default:
+                        base += " ▓ ";
+                        break;
+                }
+            }
+            base += ABC.charAt(i);
+
+            base += "\n";
+
+        }
+
+        return base + headerP1;
+    }
 }
