@@ -201,7 +201,7 @@ public class Plateau implements PlateauInterface {
     @Override
     public boolean tirer(int x, int y) {
         for (String entry : flota.keySet()) {
-            flota.get(entry).resetBateau();
+//            flota.get(entry).resetBateau();
         }
         
         return false;
