@@ -30,5 +30,7 @@ public interface PlateauInterface {
     public boolean isDeadAllBateaux();
     
     public void reset();
+    
+    public boolean tirer(int x, int y);
 
 }
