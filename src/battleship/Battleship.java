@@ -27,6 +27,7 @@ public class Battleship extends Printer {
         /**
          * On cherche la taille du plateau
          *
+         * Possibilité de taille perso
          */
         String selectTaille = "Introduisez la taille des plateaux :\n"
                 + "\t1. 10x10\n"
