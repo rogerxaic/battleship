@@ -9,7 +9,7 @@ import java.util.*;
  */
 public class Battleship extends Printer {
 
-    public static final Printer pr = new Printer();
+//    public static final Printer pr = new Printer();
     public static final Scanner sc = new Scanner(System.in);
 
     /**
@@ -21,7 +21,7 @@ public class Battleship extends Printer {
         exe("clear");
         String username = System.getProperty("user.name");
 
-        pr.Banner();
+        Printer.Banner();
 
         System.out.println("Bienvenue " + username);
         //PEDIR TAILLE PLATEAUX
@@ -74,9 +74,9 @@ public class Battleship extends Printer {
         exe("clear");
 
         //PEDIR Adversaire
-        String selectVs = "Combien de joueurs voulez vous jouer avec :" + bred("  --PAS COMPLÈTEMENT IMPLEMENTÉ (MAX 2)--  ") + "\n"
+        String selectVs = "Combien de joueurs voulez vous jouer avec :" + bred("  --PAS COMPLÈTEMENT IMPLEMENTÉ (MAX 26)--  ") + "\n"
                 + "\t0. (contre Ordinateur)\n"
-                + "\t#. (e.g. 2, vous et 2 autre)\n\n"
+                + "\t#. (e.g. 2, vous et 2 autres)\n\n"
                 + "\tN. Network playing" + bred("PAS IMPLEMENTÉ") + "\n\n"
                 + "ADVERSAIRE : ";
 
