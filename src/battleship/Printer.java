@@ -126,8 +126,8 @@ public class Printer extends Color {
                 ? base + "      Mon plateau                                 Son plateau\n"
                 : base + "      Son plateau                                 Mon plateau\n";
 
-        String headerP1 = " ";
-        String headerP2 = " ";
+        String headerP1 = "  ";
+        String headerP2 = "  ";
 
         for (int i = 0; i < plat1[0].length; i++) {
             headerP1 += (i < 10) ? " " + i + " " : " " + i;
@@ -142,7 +142,7 @@ public class Printer extends Color {
         base += header;
 
         for (int i = 0; i < plat1.length; i++) {
-            base += ABC.charAt(i);
+            base += (i<26)?getLletra(i)+" ":getLletra(i);
             for (int j = 0; j < plat1[i].length; j++) {
                 switch (plat1[i][j]) {
                     case 1:
