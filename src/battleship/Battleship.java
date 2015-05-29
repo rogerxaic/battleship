@@ -9,7 +9,7 @@ import java.util.*;
  */
 public class Battleship extends Printer {
 
-//    public static final Printer pr = new Printer();
+    public static final Printer pr = new Printer();
     public static final Scanner sc = new Scanner(System.in);
 
     /**
