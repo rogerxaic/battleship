@@ -254,7 +254,7 @@ public class Printer extends Color {
         base += headerP1 + "\n";
 
         for (int i = 0; i < plat1.length; i++) {
-            base += ABC.charAt(i);
+            base += (i<26)?getLletra(i)+" ":getLletra(i);
             for (int j = 0; j < plat1[i].length; j++) {
                 switch (plat1[i][j]) {
                     case 1:
@@ -269,7 +269,7 @@ public class Printer extends Color {
                         break;
                 }
             }
-            base += ABC.charAt(i);
+            base += getLletra(i);
 
             base += "\n";
 

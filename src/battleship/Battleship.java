@@ -233,7 +233,6 @@ public class Battleship extends Printer {
              * pg.afficher(p1.plateauGr());
              */
             //JEU
-            //si tirs==, tira 1(atack 2); sinon tira qui tirs>>
             while (true) {
 
                 /**
