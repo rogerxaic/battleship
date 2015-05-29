@@ -5,40 +5,117 @@
  */
 package battleship;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 /**
  *
  * @author Roger
  */
-public class Printer {
+public class Printer extends Color {
 
 //    private Plateau p1;
 //    private Plateau p2;
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_BLACK = "\u001B[30m";
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_GREEN = "\u001B[32m";
-    public static final String ANSI_YELLOW = "\u001B[33m";
-    public static final String ANSI_BLUE = "\u001B[34m";
-    public static final String ANSI_PURPLE = "\u001B[35m";
-    public static final String ANSI_CYAN = "\u001B[36m";
-    public static final String ANSI_WHITE = "\u001B[37m";
     public static final String ABC = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     public static final String abc = "abcdefghijklmnopqrstuvwxyz";
+
+    protected static String[] banner = new String[23];
 
     public Printer() {
 //        this.p1 = p1;
 //        this.p2 = p2;
+
+        banner[0] = "   888888b.            888             d8b 888 888          ";
+        banner[1] = "   888  \"88b           888             Y8P 888 888          ";
+        banner[2] = "   888  .88P           888                 888 888          ";
+        banner[3] = "   8888888K.   8888b.  888888  8888b.  888 888 888  .d88b.  ";
+        banner[4] = "   888  \"Y88b     \"88b 888        \"88b 888 888 888 d8P  Y8b ";
+        banner[5] = "   888    888 .d888888 888    .d888888 888 888 888 88888888 ";
+        banner[6] = "   888   d88P 888  888 Y88b.  888  888 888 888 888 Y8b.     ";
+        banner[7] = "   8888888P\"  \"Y888888  \"Y888 \"Y888888 888 888 888  \"Y8888  ";
+        banner[8] = "                                                         ";
+        banner[9] = "                                                         ";
+        banner[10] = "                                                         ";
+        banner[11] = "                                       888                  ";
+        banner[12] = "                                       888                  ";
+        banner[13] = "                                       888                  ";
+        banner[14] = "   88888b.   8888b.  888  888  8888b.  888  .d88b.          ";
+        banner[15] = "   888 \"88b     \"88b 888  888     \"88b 888 d8P  Y8b         ";
+        banner[16] = "   888  888 .d888888 Y88  88P .d888888 888 88888888         ";
+        banner[17] = "   888  888 888  888  Y8bd8P  888  888 888 Y8b.             ";
+        banner[18] = "   888  888 \"Y888888   Y88P   \"Y888888 888  \"Y8888          ";
+        banner[19] = "                                                         ";
+        banner[20] = "                                                         ";
+        banner[21] = "                                                         ";
+        banner[22] = "              [Press ENTER to continue]                   ";
+
     }
 
-    public void affiche(int[][] plat1, int[][] plat2) {
+    public static void affiche(int[][] plat1, int[][] plat2) {
         System.out.println(getAffiche(plat1, plat2));
     }
 
-    public void affiche(int[][] plat1, int[][] plat2, String info) {
+    public static void affiche(int[][] plat1, int[][] plat2, String info) {
         System.out.println(getAffiche(plat1, plat2) + info);
     }
 
-    public String getAffiche(int[][] plat1, int[][] plat2) {
+    public static void Banner() throws IOException {
+        System.out.println(getBanner());
+
+        try {
+            System.in.read();
+        } catch (Exception e) {
+        }
+
+        exe("clear");
+
+    }
+
+    public static void exe(String command) throws IOException {
+        String OS = System.getProperty("os.name").toLowerCase();
+        boolean isWindows = OS.contains("win");
+
+        String toPass = "";
+
+        if (!isWindows) {
+
+            switch (command) {
+                case "clear":
+                    toPass = (isWindows) ? "" : "clear";
+                    break;
+                case "start":
+                    toPass = (isWindows) ? "" : "tput smcup";
+                    break;
+                case "finish":
+                    toPass = (isWindows) ? "" : "tput rmcup";
+                    break;
+                default:
+                    toPass = "";
+                    break;
+            }
+
+            //        J'ai créé le fichier clear.exe (trouvable dans 
+            //                                        ./external/clear/bin/Debug)
+            //        J'ai placé ce fichier dans System32 pour que Windows ne 
+            //        donne pas d'erreurs. La commande clear est cls, mais NetBeans ne veut
+            //        pas la prendre car c'est cmd qui interprète cls, donc n'est pas un 
+            //        executable Windows que NetBeans puisse executer.
+            Process p = Runtime.getRuntime().exec(toPass);
+
+            try (BufferedReader br = new BufferedReader(
+                    new InputStreamReader(p.getInputStream()))) {
+
+                String line;
+                while ((line = br.readLine()) != null) {
+                    System.out.println(line);
+                }
+            }
+        }
+
+    }
+
+    public static String getAffiche(int[][] plat1, int[][] plat2) {
 
         //p1 bigger?
         boolean p1Bigger = (plat1.length >= plat2.length);
@@ -121,7 +198,50 @@ public class Printer {
         return base + header;
     }
 
-    public String monPlacement(int[][] plat1) {
+    public static String getBanner() {
+        String resultat = "";
+        for (int i = 0; i < banner.length; i++) {
+            resultat += banner[i] + "\n";
+        }
+        return resultat;
+    }
+
+    public static String getLettre(int x) {
+        String letra = "";
+        if (x < 26) {
+            letra = "" + ABC.charAt(x);
+        } else {
+            int fois = 0;
+            while (x >= 0) {
+                letra = "" + ABC.charAt(x % 26);
+                x -= 26;
+                fois++;
+            }
+            if (fois < 26) {
+                letra = ABC.charAt(fois - 2) + letra;
+            }
+        }
+        return letra;
+    }
+
+    public static String getLletra(int x) {
+        String resultat;
+        for (resultat = ""; x >= 0; x = Integer.parseInt("" + (x / 26)) - 1) {
+            resultat = (char) (x % 26 + 0x41) + resultat;
+        }
+        return resultat;
+    }
+
+    public static boolean isNumber(String string) {
+        try {
+            Long.parseLong(string);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+    
+    public static String monPlacement(int[][] plat1) {
 
         String base = "";
 
@@ -131,7 +251,7 @@ public class Printer {
             headerP1 += (i < 10) ? " " + i + " " : " " + i;
         }
 
-        base += headerP1+"\n";
+        base += headerP1 + "\n";
 
         for (int i = 0; i < plat1.length; i++) {
             base += ABC.charAt(i);

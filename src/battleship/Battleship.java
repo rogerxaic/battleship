@@ -7,11 +7,8 @@ import java.util.*;
  *
  * @author Roger MIRET & Marta CORTÉS
  */
-public class Battleship {
+public class Battleship extends Printer {
 
-    public static final String ABC = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    public static final String abc = "abcdefghijklmnopqrstuvwxyz";
-    public static final Color c = new Color();
     public static final Printer pr = new Printer();
     public static final Scanner sc = new Scanner(System.in);
 
@@ -24,9 +21,7 @@ public class Battleship {
         exe("clear");
         String username = System.getProperty("user.name");
 
-        Panneau banner = new Panneau();
-
-        banner.Banner();
+        pr.Banner();
 
         System.out.println("Bienvenue " + username);
         //PEDIR TAILLE PLATEAUX
@@ -79,10 +74,10 @@ public class Battleship {
         exe("clear");
 
         //PEDIR Adversaire
-        String selectVs = "Combien de joueurs voulez vous jouer avec :" + c.bred("  --PAS COMPLÈTEMENT IMPLEMENTÉ (MAX 2)--  ") + "\n"
+        String selectVs = "Combien de joueurs voulez vous jouer avec :" + bred("  --PAS COMPLÈTEMENT IMPLEMENTÉ (MAX 2)--  ") + "\n"
                 + "\t0. (contre Ordinateur)\n"
                 + "\t#. (e.g. 2, vous et 2 autre)\n\n"
-                + "\tN. Network playing" + c.bred("PAS IMPLEMENTÉ") + "\n\n"
+                + "\tN. Network playing" + bred("PAS IMPLEMENTÉ") + "\n\n"
                 + "ADVERSAIRE : ";
 
         System.out.print(selectVs);
@@ -155,7 +150,7 @@ public class Battleship {
                 flota.put("E", e2);
 
                 Plateau p2 = new Plateau(height, width, flota, nomJoueur, false);
-                tablero.put("" + banner.getLetra(i), p2);
+                tablero.put("" + getLletra(i), p2);
             }
 
 //            System.out.print(nomJoueur);
@@ -198,7 +193,7 @@ public class Battleship {
             //exe("clear");
             clear();
 
-            System.out.println(pr.getAffiche(p1.getState(), p1.getState()) + "");
+            System.out.println(getAffiche(p1.getState(), p1.getState()) + "");
             //String ddd = sc.next();
 
             /**
@@ -274,49 +269,6 @@ public class Battleship {
         exe("finish");
     }
 
-    public static void exe(String command) throws IOException {
-        String OS = System.getProperty("os.name").toLowerCase();
-        boolean isWindows = OS.contains("win");
-
-        String toPass = "";
-
-        if (!isWindows) {
-
-            switch (command) {
-                case "clear":
-                    toPass = (isWindows) ? "" : "clear";
-                    break;
-                case "start":
-                    toPass = (isWindows) ? "" : "tput smcup";
-                    break;
-                case "finish":
-                    toPass = (isWindows) ? "" : "tput rmcup";
-                    break;
-                default:
-                    toPass = "";
-                    break;
-            }
-
-            //        J'ai créé le fichier clear.exe (trouvable dans 
-            //                                        ./external/clear/bin/Debug)
-            //        J'ai placé ce fichier dans System32 pour que Windows ne 
-            //        donne pas d'erreurs. La commande clear est cls, mais NetBeans ne veut
-            //        pas la prendre car c'est cmd qui interprète cls, donc n'est pas un 
-            //        executable Windows que NetBeans puisse executer.
-            Process p = Runtime.getRuntime().exec(toPass);
-
-            try (BufferedReader br = new BufferedReader(
-                    new InputStreamReader(p.getInputStream()))) {
-
-                String line;
-                while ((line = br.readLine()) != null) {
-                    System.out.println(line);
-                }
-            }
-        }
-
-    }
-
     public static void placerAll(HashMap<String, Plateau> tablero) throws IOException {
 //        Color c = new Color();
         for (String entry : tablero.keySet()) {
@@ -338,11 +290,11 @@ public class Battleship {
 
                 exe("clear");
 
-                String errorBat = c.red("Bateau incorrect/inexistant. \n");
-                String errorPlace = c.red("Il n'y a pas de place. \n");
+                String errorBat = red("Bateau incorrect/inexistant. \n");
+                String errorPlace = red("Il n'y a pas de place. \n");
                 String information = plat.getPropietari() + ", selectionnez bateau [" + plat.getBateauxToSet() + " R] à placer : ";
 
-                System.out.print(pr.monPlacement(plat.getState()) + "\n"
+                System.out.print(monPlacement(plat.getState()) + "\n"
                         + ((errorBateau) ? errorBat + information : "")
                         + ((pasDePlace) ? errorPlace + information : "")
                         + ((!pasDePlace && !errorBateau) ? information : ""));
@@ -399,17 +351,4 @@ public class Battleship {
         }
     }
 
-    public static void clear() {
-        Color c = new Color();
-        System.out.print(c.clear());
-    }
-
-    public static boolean isNumber(String string) {
-        try {
-            Long.parseLong(string);
-        } catch (Exception e) {
-            return false;
-        }
-        return true;
-    }
 }
