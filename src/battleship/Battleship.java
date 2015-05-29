@@ -24,50 +24,81 @@ public class Battleship extends Printer {
         Printer.Banner();
 
         System.out.println("Bienvenue " + username);
-        //PEDIR TAILLE PLATEAUX
+        /**
+         * On cherche la taille du plateau
+         *
+         */
         String selectTaille = "Introduisez la taille des plateaux :\n"
                 + "\t1. 10x10\n"
                 + "\t2. 15x10\n"
                 + "\t3. 15x15\n"
                 + "\t4. 15x20\n"
                 + "\t5. 20x20\n\n"
+                + "\tou #FILES X #COLONNES (e.g 8X18)\n\n"
                 + "TAILLE : ";
 
         System.out.print(selectTaille);
-        boolean isNumero = false;
-        int tailleSelected = 0;
-        while (!isNumero) {
-            tailleSelected = sc.nextInt();
-            if (tailleSelected > 0 && tailleSelected < 6) {
+
+        String tailleSelected;
+        while (true) {
+            tailleSelected = sc.next();
+            if (isNumber(tailleSelected) && Integer.parseInt(tailleSelected) > 0 && Integer.parseInt(tailleSelected) < 6) {
                 break;
+            } else if (tailleSelected.toUpperCase().contains("X")) {
+
+                int position = 0;
+                for (int i = 0; i < tailleSelected.length(); i++) {
+                    if (tailleSelected.toUpperCase().charAt(i) == 'X') {
+                        position = i;
+                        break;
+                    }
+                }
+                if(isNumber(tailleSelected.substring(0, position)) 
+                        && isNumber(tailleSelected.substring(position + 1)) ) {
+                    break;
+                }
             }
             System.out.print("\nCe n'est pas une option.\nTAILLE : ");
         }
         int width, height;
         switch (tailleSelected) {
-            case 1:
+            case "1":
                 width = 10;
                 height = 10;
                 break;
-            case 2:
+            case "2":
                 width = 10;
                 height = 15;
                 break;
-            case 3:
+            case "3":
                 width = 15;
                 height = 15;
                 break;
-            case 4:
+            case "4":
                 width = 15;
                 height = 20;
                 break;
-            case 5:
+            case "5":
                 width = 20;
                 height = 20;
                 break;
             default:
-                width = 10;
-                height = 10;
+                if (tailleSelected.toUpperCase().contains("X")) {
+
+                    int position = 0;
+                    for (int i = 0; i < tailleSelected.length(); i++) {
+                        if (tailleSelected.toUpperCase().charAt(i) == 'X') {
+                            position = i;
+                            break;
+                        }
+                    }
+
+                    height = Integer.parseInt(tailleSelected.substring(0, position));
+                    width = Integer.parseInt(tailleSelected.substring(position + 1));
+                } else {
+                    width = 10;
+                    height = 10;
+                }
                 break;
         }
 
