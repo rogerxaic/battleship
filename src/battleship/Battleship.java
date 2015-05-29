@@ -54,8 +54,8 @@ public class Battleship extends Printer {
                         break;
                     }
                 }
-                if(isNumber(tailleSelected.substring(0, position)) 
-                        && isNumber(tailleSelected.substring(position + 1)) ) {
+                if (isNumber(tailleSelected.substring(0, position))
+                        && isNumber(tailleSelected.substring(position + 1))) {
                     break;
                 }
             }
@@ -263,9 +263,41 @@ public class Battleship extends Printer {
                             if (clone.containsKey(adver.toUpperCase())) {
                                 System.out.println("BO!");
                                 target = adver.toUpperCase();
-                                break;
+
+                                while (true) {
+
+                                    String donde = "\nOù voulez vous tirer? LETTRE ou LETTRE+NUMÉRO : ";
+                                    System.out.print(donde);
+                                    while (true) {
+                                        String letra = sc.next();
+                                        int y = 0;
+                                        for (int i = 0; i < ABC.length(); i++) {
+                                            if (letra.toUpperCase().charAt(0) == ABC.charAt(i)) {
+                                                y = i;
+                                            }
+                                        }
+                                        int x;
+                                        if (letra.length() > 1) {
+                                            x = Integer.parseInt(letra.substring(1));
+                                        } else {
+                                            System.out.print("NUMÉRO :");
+                                            String numero = sc.next();
+
+                                            x = Integer.parseInt("" + numero.charAt(0));
+                                        }
+
+                                        if (tablero.get(target).tirer(x, y)) {
+                                            break;
+                                        } else {
+//                                            badShot = true;
+                                        }
+                                        break;
+                                    }
+
+                                    break;
+                                }
+                                System.out.print("\nCe n'est pas une option.\nADVERSAIRE : ");
                             }
-                            System.out.print("\nCe n'est pas une option.\nADVERSAIRE : ");
                         }
                     } else {
                         for (String placer : clone.keySet()) {
