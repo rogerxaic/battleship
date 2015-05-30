@@ -30,6 +30,7 @@ public class Battleship extends Printer {
          * Possibilité de taille perso
          */
         String selectTaille = "Introduisez la taille des plateaux :\n"
+                + "(max. est 26x26)\n\n"
                 + "\t1. 10x10\n"
                 + "\t2. 15x10\n"
                 + "\t3. 15x15\n"
@@ -54,9 +55,14 @@ public class Battleship extends Printer {
                         break;
                     }
                 }
+
                 if (isNumber(tailleSelected.substring(0, position))
                         && isNumber(tailleSelected.substring(position + 1))) {
-                    break;
+                    int avant = Integer.parseInt(tailleSelected.substring(0, position));
+                    int apres = Integer.parseInt(tailleSelected.substring(position + 1));
+                    if ((avant > 0 && avant < 27) && (apres > 0 && apres < 27)) {
+                        break;
+                    }
                 }
             }
             System.out.print("\nCe n'est pas une option.\nTAILLE : ");
