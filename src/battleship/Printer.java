@@ -117,16 +117,11 @@ public class Printer extends Color {
 
     public static String getAffiche(int[][] plat1, int[][] plat2) {
 
-        //p1 bigger?
-        boolean p1Bigger = (plat1.length >= plat2.length);
-
         String base = "                     BATAILLE NAVALE\n";
 
-        base = (p1Bigger)
-                ? base + "      Mon plateau                                 Son plateau\n"
-                : base + "      Son plateau                                 Mon plateau\n";
+        base = base + "      Mon plateau                                 Son plateau\n";
 
-        String headerP1 = "  ";
+        String headerP1 = " ";
         String headerP2 = " ";
 
         for (int i = 0; i < plat1[0].length; i++) {
@@ -135,14 +130,12 @@ public class Printer extends Color {
         for (int i = 0; i < plat2[0].length; i++) {
             headerP2 += (i < 10) ? " " + i + " " : " " + i;
         }
-        String header = (p1Bigger)
-                ? headerP1 + "            " + headerP2 + "\n"
-                : headerP2 + "            " + headerP1 + "\n";
+        String header = headerP1 + "            " + headerP2 + "\n";
 
         base += header;
 
         for (int i = 0; i < plat1.length; i++) {
-            base += (i<26)?getLletra(i)+" ":getLletra(i);
+            base += getLletra(i);
             for (int j = 0; j < plat1[i].length; j++) {
                 switch (plat1[i][j]) {
                     case 1:

@@ -1,7 +1,13 @@
 package battleship;
 
-import java.io.*;
-import java.util.*;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
 
 /**
  *
@@ -11,6 +17,9 @@ public class Battleship extends Printer {
 
     public static final Printer pr = new Printer();
     public static final Scanner sc = new Scanner(System.in);
+    public static final String OS = System.getProperty("os.name").toLowerCase();
+    public static final boolean isWindows = OS.contains("win");
+    public static final String username = System.getProperty("user.name");
 
     /**
      * @param args the command line arguments
@@ -19,7 +28,26 @@ public class Battleship extends Printer {
     public static void main(String[] args) throws IOException {
         exe("start");
         exe("clear");
-        String username = System.getProperty("user.name");
+
+        boolean isInit = false;
+        for (String s : args) {
+            isInit |= s.contains("lc");
+        }
+
+        /**
+         * When run with runner (i.e. ./BatailleNavale) we are able to get the
+         * terminal size. If it is not run with runner, we suppose terminal size
+         * to be minimal.
+         */
+        int cols, lines;
+        if (isInit) {
+            cols = Integer.parseInt(check("tput cols"));
+            lines = Integer.parseInt(check("tput lines"));
+
+        } else {
+            cols = 80;
+            lines = 24;
+        }
 
         Printer.Banner();
 
@@ -418,6 +446,21 @@ public class Battleship extends Printer {
                 }
             }
         }
+    }
+
+    public static String check(String command) throws IOException {
+        String resultat = "";
+        if (!isWindows) {
+            Process p = Runtime.getRuntime().exec(command);
+            try (BufferedReader br = new BufferedReader(
+                    new InputStreamReader(p.getInputStream()))) {
+                String line;
+                while ((line = br.readLine()) != null) {
+                    resultat += line;
+                }
+            }
+        }
+        return resultat;
     }
 
 }
