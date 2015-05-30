@@ -13,9 +13,9 @@ import java.util.Scanner;
  *
  * @author Roger MIRET & Marta CORTÉS
  */
-public class Battleship extends Printer {
+public class Battleship extends Outils {
 
-    public static final Printer pr = new Printer();
+    public static final Outils ou = new Outils();
     public static final Scanner sc = new Scanner(System.in);
     public static final String OS = System.getProperty("os.name").toLowerCase();
     public static final boolean isWindows = OS.contains("win");
@@ -49,7 +49,7 @@ public class Battleship extends Printer {
             lines = 24;
         }
 
-        Printer.Banner();
+        Outils.Banner();
 
         System.out.println("Bienvenue " + username);
         /**
