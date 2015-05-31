@@ -270,4 +270,13 @@ public class Outils extends Color {
 
         return base + headerP1;
     }
+    
+    public static int surface2Bateaux (int surface){
+        int resultat = 5;
+        
+        return resultat;
+    }
+    public static int surface2Bateaux (int width, int height){
+        return surface2Bateaux(height*width);
+    }
 }

@@ -136,6 +136,9 @@ public class Battleship extends Outils {
                 }
                 break;
         }
+        
+        int nbBateaux;
+        nbBateaux = surface2Bateaux(width, height);
 
         exe("clear");
 
@@ -180,9 +183,6 @@ public class Battleship extends Outils {
          */
         ////////////////////////////////////////////////////////////////////////
         HashMap<String, Bateau> flota1 = new HashMap<>();
-
-        int nbBateaux;
-        nbBateaux = 6;
 
         for (int i = 0; i < nbBateaux; i++) {
             Bateau a = new Bateau(i, true);
