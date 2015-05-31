@@ -136,7 +136,7 @@ public class Battleship extends Outils {
                 }
                 break;
         }
-        
+
         int nbBateaux;
         nbBateaux = surface2Bateaux(width, height);
 
@@ -226,16 +226,10 @@ public class Battleship extends Outils {
 
             HashMap<String, Bateau> flota = new HashMap<>();
 
-            Bateau a2 = new Bateau(4);
-            flota.put("A", a2);
-            Bateau b2 = new Bateau(2);
-            flota.put("B", b2);
-            Bateau c2 = new Bateau(5);
-            flota.put("C", c2);
-            Bateau d2 = new Bateau(3);
-            flota.put("D", d2);
-            Bateau e2 = new Bateau(3);
-            flota.put("E", e2);
+            for (int i = 0; i < nbBateaux; i++) {
+                Bateau bato = new Bateau(i, true);
+                flota.put(getLletra(i), bato);
+            }
 
             Plateau p2 = new Plateau(height, width, flota, nomJoueur, true);
             tablero.put("B", p2);
@@ -246,7 +240,8 @@ public class Battleship extends Outils {
         /**
          * Affichage des profs. Not working /w my code.
          *
-         * PlateauGraphique pg = new PlateauGraphique();
+         *            //PlateauGraphique pg = new PlateauGraphique();
+         *
          */
         while (true) {
 //        1 porte-avions (5 cases)
@@ -281,7 +276,13 @@ public class Battleship extends Outils {
                     System.out.println("Tir de " + pla.getPropietari() + " : ");
                     clone.remove(entry);
 
-                    String target;
+                    /**
+                     * On cherche qui doit-on attacker. Si il y a plusieurs
+                     * plateaux, il faut choisir quel plateau on veut attacker.
+                     * S'il en y a qu'un, c'est pas la peine (^^'). On détermine
+                     * target.
+                     */
+                    String cible = "";
                     if (clone.size() > 1) {
                         //Qui attacker?
                         String toAttack = "";
@@ -296,49 +297,49 @@ public class Battleship extends Outils {
                             String adver = sc.next();
                             if (clone.containsKey(adver.toUpperCase())) {
                                 System.out.println("BO!");
-                                target = adver.toUpperCase();
+                                cible = adver.toUpperCase();
 
-                                while (true) {
-
-                                    String donde = "\nOù voulez vous tirer? LETTRE ou LETTRE+NUMÉRO : ";
-                                    System.out.print(donde);
-                                    while (true) {
-                                        String letra = sc.next();
-                                        int y = 0;
-                                        for (int i = 0; i < ABC.length(); i++) {
-                                            if (letra.toUpperCase().charAt(0) == ABC.charAt(i)) {
-                                                y = i;
-                                            }
-                                        }
-                                        int x;
-                                        if (letra.length() > 1) {
-                                            x = Integer.parseInt(letra.substring(1));
-                                        } else {
-                                            System.out.print("NUMÉRO :");
-                                            String numero = sc.next();
-
-                                            x = Integer.parseInt("" + numero.charAt(0));
-                                        }
-
-                                        if (tablero.get(target).tirer(x, y)) {
-                                            break;
-                                        } else {
-//                                            badShot = true;
-                                        }
-                                        break;
-                                    }
-
-                                    break;
-                                }
                                 System.out.print("\nCe n'est pas une option.\nADVERSAIRE : ");
                             }
                         }
                     } else {
                         for (String placer : clone.keySet()) {
-                            target = placer;
+                            cible = placer;
                         }
                     }
+                    Plateau target = tablero.get(cible);
+
                     clone.clear();
+
+                    String donde = "\nOù voulez vous tirer? LETTRE ou LETTRE+NUMÉRO : ";
+                    boolean badShot = false;
+                    while (true) {
+                        System.out.print((badShot)?red("Ce n'est pas possible de tirer dans cette case.")+donde :donde);
+                        badShot = false;
+                        String letra = sc.next();
+                        int y = 0;
+                        for (int i = 0; i < ABC.length(); i++) {
+                            if (letra.toUpperCase().charAt(0) == ABC.charAt(i)) {
+                                y = i;
+                            }
+                        }
+                        int x;
+                        if (letra.length() > 1) {
+                            x = Integer.parseInt(letra.substring(1));
+                        } else {
+                            System.out.print("NUMÉRO :");
+                            String numero = sc.next();
+
+                            x = Integer.parseInt("" + numero);
+                        }
+
+                        if (target.tirer(x, y)) {
+                            break;
+                        } else {
+                            badShot = true;
+                        }
+                    }
+
                     sc.next();
                 }
 
