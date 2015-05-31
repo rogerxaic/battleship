@@ -1,13 +1,11 @@
 package battleship;
 
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-
 
 /**
  *
@@ -38,6 +36,8 @@ public class Battleship extends Outils {
          * When run with runner (i.e. ./BatailleNavale) we are able to get the
          * terminal size. If it is not run with runner, we suppose terminal size
          * to be minimal.
+         *
+         * TODO : Throw error message on size choice if screen is too small
          */
         int cols, lines;
         if (isInit) {
@@ -180,22 +180,20 @@ public class Battleship extends Outils {
          */
         ////////////////////////////////////////////////////////////////////////
         HashMap<String, Bateau> flota1 = new HashMap<>();
-        
-        int voltes = 5;
-        
-        for(int i=0;i<voltes;){}
 
-        Bateau a1 = new Bateau(4); //4 BBBB V B8
-        flota1.put("A", a1);
-        Bateau b1 = new Bateau(2); //2 PP H G6
-        flota1.put("B", b1);
-        Bateau c1 = new Bateau(5); //5 AAAAA H I2
-        flota1.put("C", c1);
-        Bateau d1 = new Bateau(3); //3 DDD H C0
-        flota1.put("D", d1);
-        Bateau e1 = new Bateau(3); //3 SSS V E0
-        flota1.put("E", e1);
+        int nbBateaux;
+        nbBateaux = 6;
 
+        for (int i = 0; i < nbBateaux; i++) {
+            Bateau a = new Bateau(i, true);
+            flota1.put(getLletra(i), a);
+        }
+
+//        Bateau a1 = new Bateau(4); //4 BBBB V B8
+//        Bateau b1 = new Bateau(2); //2 PP H G6
+//        Bateau c1 = new Bateau(5); //5 AAAAA H I2
+//        Bateau d1 = new Bateau(3); //3 DDD H C0
+//        Bateau e1 = new Bateau(3); //3 SSS V E0
         Plateau p1 = new Plateau(height, width, flota1, username, false);
         tablero.put("A", p1);
 
@@ -213,16 +211,10 @@ public class Battleship extends Outils {
 
                 HashMap<String, Bateau> flota = new HashMap<>();
 
-                Bateau a2 = new Bateau(4);
-                flota.put("A", a2);
-                Bateau b2 = new Bateau(2);
-                flota.put("B", b2);
-                Bateau c2 = new Bateau(5);
-                flota.put("C", c2);
-                Bateau d2 = new Bateau(3);
-                flota.put("D", d2);
-                Bateau e2 = new Bateau(3);
-                flota.put("E", e2);
+                for (int j = 0; j < nbBateaux; j++) {
+                    Bateau bato = new Bateau(j, true);
+                    flota.put(getLletra(j), bato);
+                }
 
                 Plateau p2 = new Plateau(height, width, flota, nomJoueur, false);
                 tablero.put("" + getLletra(i), p2);
@@ -346,7 +338,7 @@ public class Battleship extends Outils {
                             target = placer;
                         }
                     }
-
+                    clone.clear();
                     sc.next();
                 }
 

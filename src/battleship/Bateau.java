@@ -18,6 +18,7 @@ public class Bateau implements BateauInterface {
     protected boolean positioned = false;
     protected boolean[] status; //1 flottant, 0 touché
     protected boolean coule;
+    protected int[] tailles;
 
     public Bateau(int taille) {
         this.taille = taille;
@@ -26,6 +27,25 @@ public class Bateau implements BateauInterface {
             status[i] = true;
         }
     }
+
+    public Bateau(int i, boolean auto) {
+        tailles = new int[11];
+        tailles[0] = 4;
+        tailles[1] = 2;
+        tailles[2] = 5;
+        tailles[3] = 3;
+        tailles[4] = 3;
+        tailles[5] = 4;
+        tailles[6] = 5;
+        tailles[7] = 2;
+        tailles[8] = 2;
+        tailles[9] = 3;
+        tailles[10] = 4;
+        
+        this.taille = tailles[i];
+    }
+    
+    
 
 //    public Bateau(int taille, boolean horizontal) {
 //        this.taille = taille;
