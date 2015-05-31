@@ -22,10 +22,10 @@ install:
 	echo "java -cp build battleship.Battleship lc165x38">>$(RUN);
 	chmod +x $(RUN)
 
-pull:
+update:
 	git pull origin master
 
-update:
+push:
 	git add .
 	git status
 	git commit -m "$$$$"
