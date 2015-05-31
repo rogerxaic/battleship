@@ -48,7 +48,6 @@ public class Battleship extends Outils {
             cols = 80;
             lines = 24;
         }
-        System.out.println("COLS I LINES = " + cols + " " +lines);
 
         Outils.Banner();
 
