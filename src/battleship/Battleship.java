@@ -183,7 +183,7 @@ public class Battleship extends Outils {
         
         int voltes = 5;
         
-        for(int i=0;i<voltes;)
+        for(int i=0;i<voltes;){}
 
         Bateau a1 = new Bateau(4); //4 BBBB V B8
         flota1.put("A", a1);
