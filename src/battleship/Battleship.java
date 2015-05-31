@@ -140,7 +140,7 @@ public class Battleship extends Outils {
         exe("clear");
 
         //PEDIR Adversaire
-        String selectVs = "Combien de joueurs voulez vous jouer avec :" + bred("  --PAS COMPLÈTEMENT IMPLEMENTÉ (MAX 26)--  ") + "\n"
+        String selectVs = "Combien de joueurs voulez vous jouer avec :\n"
                 + "\t0. (contre Ordinateur)\n"
                 + "\t#. (e.g. 2, vous et 2 autres)\n\n"
                 + "\tN. Network playing" + bred("PAS IMPLEMENTÉ") + "\n\n"
@@ -170,11 +170,20 @@ public class Battleship extends Outils {
                 isComputer = false;
                 break;
         }
-
+        /**
+         * Création du HashMap qui contient tous les plateaux des joueurs
+         */
         HashMap<String, Plateau> tablero = new HashMap<>();
 
+        /**
+         * Création du plateau du joueur principal (celui qui execute le jeu)
+         */
         ////////////////////////////////////////////////////////////////////////
         HashMap<String, Bateau> flota1 = new HashMap<>();
+        
+        int voltes = 5;
+        
+        for(int i=0;i<voltes;)
 
         Bateau a1 = new Bateau(4); //4 BBBB V B8
         flota1.put("A", a1);
