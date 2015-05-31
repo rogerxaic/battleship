@@ -1,6 +1,0 @@
-#!/bin/bash
-
-export COLUMNS=$(tput cols)
-export LINES=$(tput lines)
-
-java -cp build battleship.Battleship lc165x38
