@@ -227,6 +227,7 @@ public class Plateau implements PlateauInterface {
                 }
 
             }
+            resultat = true;
 
         } else if (this.plateau[y][x] == 1) {
             this.plateau[y][x] = 2;

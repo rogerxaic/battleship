@@ -28,7 +28,7 @@ public class Bateau implements BateauInterface {
         }
     }
 
-    public Bateau(int i, boolean auto) {
+    public Bateau(int ta, boolean auto) {
         tailles = new int[11];
         tailles[0] = 4;
         tailles[1] = 2;
@@ -42,7 +42,11 @@ public class Bateau implements BateauInterface {
         tailles[9] = 3;
         tailles[10] = 4;
         
-        this.taille = tailles[i];
+        this.taille = tailles[ta];
+        this.status = new boolean[tailles[ta]];
+        for (int i = 0; i < status.length; i++) {
+            status[i] = true;
+        }
     }
     
     
