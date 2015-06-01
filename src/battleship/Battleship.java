@@ -269,8 +269,11 @@ public class Battleship extends Outils {
                  *
                  */
                 for (String entry : tablero.keySet()) {
+                    clear();
+                    
 //                    dead |= tablero.get(entry).isDeadAllBateaux();
                     Plateau pla = tablero.get(entry);
+                    System.out.println(getAffiche(pla.getState(), p1.getState()) + "");
                     HashMap<String, Plateau> clone = new HashMap((Map) tablero.clone());
 //                    clone = tablero.clone();
                     System.out.println("Tir de " + pla.getPropietari() + " : ");
@@ -340,7 +343,7 @@ public class Battleship extends Outils {
                         }
                     }
 
-                    sc.next();
+//                    sc.next();
                 }
 
                 boolean dead = false;

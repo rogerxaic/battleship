@@ -192,19 +192,34 @@ public class Plateau implements PlateauInterface {
     }
 
     /**
-     * 
+     *
      * @param x
      * @param y
-     * @return True if shot was available and done, false if (e.g) we had already
-     * shoot there.
+     * @return True if shot was available and done, false if (e.g) we had
+     * already shoot there.
      */
     @Override
     public boolean tirer(int x, int y) {
-        for (String entry : flota.keySet()) {
+
+        boolean resultat = false;
+        boolean touche = false;
+
+        if (this.plateau[y][x] == 5) {
+
+            for (String entry : flota.keySet()) {
 //            flota.get(entry).resetBateau();
+                Bateau bat = flota.get(entry);
+                touche |= bat.tir(x, y);
+            }
+            if (touche) {
+                this.plateau[y][x] = 3;
+            }
+        } else if (this.plateau[y][x] == 1) {
+            this.plateau[y][x] = 2;
+            resultat = true;
         }
-        
-        return false;
+
+        return resultat;
     }
 
 }
