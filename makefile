@@ -5,6 +5,7 @@ RFLAGS = -cp build
 RUN=BatailleNavale
 
 all:
+	mkdir build
 	$(JAVAC) $(JFLAGS) src/*/*.ja*
 
 run: install
