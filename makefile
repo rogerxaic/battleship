@@ -5,14 +5,14 @@ RFLAGS = -cp build
 RUN=BatailleNavale
 
 all:
-	mkdir build
+	mkdir -p build
 	$(JAVAC) $(JFLAGS) src/*/*.ja*
 
 run: install
 	./$(RUN)
 
 errors:
-	mkdir build/
+	mkdir -p build/
 	$(JAVAC) $(JFLAGS) src/*/*.ja* -Xlint
 
 install:
