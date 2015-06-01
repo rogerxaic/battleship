@@ -277,6 +277,29 @@ public class Outils extends Color {
     public static int surface2Bateaux(int surface) {
         int resultat = 5;
 
+        if (surface < 50) {
+            resultat = 3;
+        } else if (surface >= 50 && surface < 100) {
+            resultat = 4;
+        } else if (surface >= 100 && surface < 175) {
+            resultat = 5;
+        } else if (surface >= 175 && surface < 225) {
+            resultat = 6;
+
+        } else if (surface >= 225 && surface < 300) {
+            resultat = 7;
+        } else if (surface >= 300 && surface < 400) {
+            resultat = 8;
+        } else if (surface >= 400 && surface < 550) {
+            resultat = 8;
+        } else if (surface>=550 && surface <600) {
+            resultat = 9;
+        } else if (surface>=600) {
+        resultat = 10;
+        } else {
+            resultat = 5;
+        }
+
         return resultat;
     }
 
