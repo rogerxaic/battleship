@@ -255,7 +255,7 @@ public class Battleship extends Outils {
             //exe("clear");
             clear();
 
-            System.out.println(getAffiche(p1.getState(), p1.getState()) + "");
+//            System.out.println(getAffiche(p1.getState(), p1.getState()) + "");
             //String ddd = sc.next();
 
             /**
@@ -266,17 +266,17 @@ public class Battleship extends Outils {
             while (true) {
 
                 /**
-                 *
+                 * Chaque joueur tire une fois, quand ils ont tous tiré, on
+                 * recomence le while
                  */
                 for (String entry : tablero.keySet()) {
                     clear();
                     
-//                    dead |= tablero.get(entry).isDeadAllBateaux();
-                    Plateau pla = tablero.get(entry);
-                    System.out.println(getAffiche(pla.getState(), p1.getState()) + "");
+                    Plateau tireur = tablero.get(entry); //tireur
+//                    System.out.println(getAffiche(tireur.getState(), p1.getState()) + "");
                     HashMap<String, Plateau> clone = new HashMap((Map) tablero.clone());
-//                    clone = tablero.clone();
-                    System.out.println("Tir de " + pla.getPropietari() + " : ");
+
+                    System.out.println("Tir de " + tireur.getPropietari() + " : ");
                     clone.remove(entry);
 
                     /**
@@ -299,7 +299,6 @@ public class Battleship extends Outils {
                         while (true) {
                             String adver = sc.next();
                             if (clone.containsKey(adver.toUpperCase())) {
-                                System.out.println("BO!");
                                 cible = adver.toUpperCase();
 
                                 System.out.print("\nCe n'est pas une option.\nADVERSAIRE : ");

@@ -202,18 +202,32 @@ public class Plateau implements PlateauInterface {
     public boolean tirer(int x, int y) {
 
         boolean resultat = false;
-        boolean touche = false;
 
         if (this.plateau[y][x] == 5) {
 
+            boolean touche = false;
+            boolean coule = false;
+
             for (String entry : flota.keySet()) {
-//            flota.get(entry).resetBateau();
                 Bateau bat = flota.get(entry);
                 touche |= bat.tir(x, y);
+                coule |= bat.isCoule();
+                if (coule) {
+                    if(bat.isHorizontal()){
+                        for (int i=bat.getX();i<(bat.getX()+bat.getTaille());i++){
+                            this.plateau[bat.getY()][i]=4;
+                        }
+                    } else {
+                        for (int i=bat.getY();i<(bat.getY()+bat.getTaille());i++){
+                            this.plateau[i][bat.getX()]=4;
+                        }
+                    }
+                } else if (touche) {
+                    this.plateau[y][x] = 3;
+                }
+
             }
-            if (touche) {
-                this.plateau[y][x] = 3;
-            }
+
         } else if (this.plateau[y][x] == 1) {
             this.plateau[y][x] = 2;
             resultat = true;
