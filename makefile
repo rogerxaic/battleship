@@ -11,7 +11,7 @@ run: install
 	./$(RUN)
 
 errors:
-	mkdir build
+	mkdir build/
 	$(JAVAC) $(JFLAGS) src/*/*.ja* -Xlint
 
 install:
