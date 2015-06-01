@@ -52,11 +52,11 @@ public class Outils extends Color {
 
     }
 
-    public static void affiche(int[][] plat1, int[][] plat2) {
+    public static void affiche(Plateau plat1, Plateau plat2) {
         System.out.println(getAffiche(plat1, plat2));
     }
 
-    public static void affiche(int[][] plat1, int[][] plat2, String info) {
+    public static void affiche(Plateau plat1, Plateau plat2, String info) {
         System.out.println(getAffiche(plat1, plat2) + info);
     }
 
@@ -115,11 +115,14 @@ public class Outils extends Color {
 
     }
 
-    public static String getAffiche(int[][] plat1, int[][] plat2) {
+    public static String getAffiche(Plateau plat, Plateau plato) {
+
+        int[][] plat1 = plat.getState();
+        int[][] plat2 = plato.getState();
 
         String base = "                     BATAILLE NAVALE\n";
 
-        base = base + "      Mon plateau                                 Son plateau\n";
+        base = base + "      " + plat.getPropietari() + "                                       " + plato.getPropietari() + "\n";
 
         String headerP1 = " ";
         String headerP2 = " ";
@@ -233,7 +236,7 @@ public class Outils extends Color {
         }
         return true;
     }
-    
+
     public static String monPlacement(int[][] plat1) {
 
         String base = "";
@@ -270,13 +273,14 @@ public class Outils extends Color {
 
         return base + headerP1;
     }
-    
-    public static int surface2Bateaux (int surface){
+
+    public static int surface2Bateaux(int surface) {
         int resultat = 5;
-        
+
         return resultat;
     }
-    public static int surface2Bateaux (int width, int height){
-        return surface2Bateaux(height*width);
+
+    public static int surface2Bateaux(int width, int height) {
+        return surface2Bateaux(height * width);
     }
 }

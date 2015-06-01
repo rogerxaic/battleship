@@ -146,7 +146,7 @@ public class Battleship extends Outils {
         String selectVs = "Combien de joueurs voulez vous jouer avec :\n"
                 + "\t0. (contre Ordinateur)\n"
                 + "\t#. (e.g. 2, vous et 2 autres)\n\n"
-//                + "\tN. Network playing " + bred("PAS IMPLEMENTÉ") + "\n\n"
+                //                + "\tN. Network playing " + bred("PAS IMPLEMENTÉ") + "\n\n"
                 + "ADVERSAIRE : ";
 
         System.out.print(selectVs);
@@ -299,9 +299,11 @@ public class Battleship extends Outils {
                             String adver = sc.next();
                             if (clone.containsKey(adver.toUpperCase())) {
                                 cible = adver.toUpperCase();
-
-                                System.out.print("\nCe n'est pas une option.\nADVERSAIRE : ");
+                                break;
                             }
+
+                            System.out.print("\nCe n'est pas une option.\nADVERSAIRE : ");
+
                         }
                     } else {
                         for (String placer : clone.keySet()) {
@@ -311,8 +313,8 @@ public class Battleship extends Outils {
                     Plateau target = tablero.get(cible);
 
                     clone.clear();
-                    
-                    affiche(tireur.getState(), target.getState());
+
+                    affiche(tireur, target);
 
                     String donde = "\nOù voulez vous tirer? LETTRE ou LETTRE+NUMÉRO : ";
                     boolean badShot = false;
