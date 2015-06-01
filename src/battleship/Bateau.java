@@ -30,10 +30,10 @@ public class Bateau extends Outils implements BateauInterface {
 
     public Bateau(int ta, boolean auto) {
         tailles = new int[11];
-        tailles[0] = 4;
-        tailles[1] = 2;
-        tailles[2] = 5;
-        tailles[3] = 3;
+        tailles[0] = 2;
+        tailles[1] = 4;
+        tailles[2] = 3;
+        tailles[3] = 5;
         tailles[4] = 3;
         tailles[5] = 4;
         tailles[6] = 5;
