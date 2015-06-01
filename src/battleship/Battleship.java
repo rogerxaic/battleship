@@ -146,7 +146,7 @@ public class Battleship extends Outils {
         String selectVs = "Combien de joueurs voulez vous jouer avec :\n"
                 + "\t0. (contre Ordinateur)\n"
                 + "\t#. (e.g. 2, vous et 2 autres)\n\n"
-                + "\tN. Network playing" + bred("PAS IMPLEMENTÉ") + "\n\n"
+//                + "\tN. Network playing " + bred("PAS IMPLEMENTÉ") + "\n\n"
                 + "ADVERSAIRE : ";
 
         System.out.print(selectVs);
