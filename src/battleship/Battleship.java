@@ -319,32 +319,41 @@ public class Battleship extends Outils {
                             cible = placer;
                         }
                     }
+                    clear();
                     Plateau target = tablero.get(cible);
 
                     clone.clear();
 
                     affiche(tireur, target);
 
-                    String donde = "\nOù voulez vous tirer? LETTRE ou LETTRE+NUMÉRO : ";
+                    String donde = "Tir de " + tireur.getPropietari() + "\nOù voulez vous tirer? LETTRE ou LETTRE+NUMÉRO : ";
                     boolean badShot = false;
                     while (true) {
-                        System.out.print((badShot) ? red("Ce n'est pas possible de tirer dans cette case.") + donde : donde);
-                        badShot = false;
-                        String letra = sc.next();
-                        int y = 0;
-                        for (int i = 0; i < ABC.length(); i++) {
-                            if (letra.toUpperCase().charAt(0) == ABC.charAt(i)) {
-                                y = i;
-                            }
-                        }
-                        int x;
-                        if (letra.length() > 1) {
-                            x = Integer.parseInt(letra.substring(1));
-                        } else {
-                            System.out.print("NUMÉRO :");
-                            String numero = sc.next();
+                        int y = -1;
+                        int x = -1;
+                        if (!tireur.isComputer) {
+                            System.out.print((badShot) ? red("Ce n'est pas possible de tirer dans cette case.") + donde : donde);
+                            badShot = false;
+                            String letra = sc.next();
 
-                            x = Integer.parseInt("" + numero);
+                            for (int i = 0; i < ABC.length(); i++) {
+                                if (letra.toUpperCase().charAt(0) == ABC.charAt(i)) {
+                                    y = i;
+                                }
+                            }
+
+                            if (letra.length() > 1) {
+                                x = Integer.parseInt(letra.substring(1));
+                            } else {
+                                System.out.print("NUMÉRO :");
+                                String numero = sc.next();
+
+                                x = Integer.parseInt("" + numero);
+                            }
+                        } else {
+                            y = rnd.nextInt(tireur.plateau.length);
+                            x = rnd.nextInt(tireur.plateau[y].length);
+
                         }
 
                         if (target.tirer(x, y)) {

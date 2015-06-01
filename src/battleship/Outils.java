@@ -8,6 +8,7 @@ package battleship;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Random;
 
 /**
  *
@@ -19,6 +20,7 @@ public class Outils extends Color {
 //    private Plateau p2;
     public static final String ABC = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     public static final String abc = "abcdefghijklmnopqrstuvwxyz";
+    public static Random rnd = new Random();
 
     protected static String[] banner = new String[23];
 

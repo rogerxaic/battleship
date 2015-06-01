@@ -6,7 +6,6 @@
 package battleship;
 
 import java.util.HashMap;
-import java.util.Random;
 
 /**
  *
@@ -18,7 +17,6 @@ public class Plateau extends Outils implements PlateauInterface {
     protected HashMap<String, Bateau> flota;
     protected String propietari;
     protected boolean[][] waterBateau; // Is there ship? True / false
-    private static Random rnd = new Random();
     protected int tirsFaits;
     protected boolean isComputer;
 
