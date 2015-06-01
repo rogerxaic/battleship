@@ -273,7 +273,7 @@ public class Plateau extends Outils implements PlateauInterface {
                             this.plateau[i][bat.getX()]=4;
                         }
                     }
-                } else if (touche) {
+                } else if (touche && !coule) {
                     this.plateau[y][x] = 3;
                     bell();
                 }
