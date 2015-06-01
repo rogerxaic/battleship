@@ -68,57 +68,15 @@ public class Battleship extends Outils {
                 + "TAILLE : ";
 
         System.out.print(selectTaille);
-
+        int width, height;
         String tailleSelected;
         while (true) {
-            tailleSelected = sc.next();
-            if (isNumber(tailleSelected) && Integer.parseInt(tailleSelected) > 0 && Integer.parseInt(tailleSelected) < 6) {
-                break;
-            } else if (tailleSelected.toUpperCase().contains("X")) {
 
-                int position = 0;
-                for (int i = 0; i < tailleSelected.length(); i++) {
-                    if (tailleSelected.toUpperCase().charAt(i) == 'X') {
-                        position = i;
-                        break;
-                    }
-                }
-
-                if (isNumber(tailleSelected.substring(0, position))
-                        && isNumber(tailleSelected.substring(position + 1))) {
-                    int avant = Integer.parseInt(tailleSelected.substring(0, position));
-                    int apres = Integer.parseInt(tailleSelected.substring(position + 1));
-                    if ((avant > 0 && avant < 27) && (apres > 0 && apres < 27)) {
-                        break;
-                    }
-                }
-            }
-            System.out.print("\nCe n'est pas une option.\nTAILLE : ");
-        }
-        int width, height;
-        switch (tailleSelected) {
-            case "1":
-                width = 10;
-                height = 10;
-                break;
-            case "2":
-                width = 10;
-                height = 15;
-                break;
-            case "3":
-                width = 15;
-                height = 15;
-                break;
-            case "4":
-                width = 15;
-                height = 20;
-                break;
-            case "5":
-                width = 20;
-                height = 20;
-                break;
-            default:
-                if (tailleSelected.toUpperCase().contains("X")) {
+            while (true) {
+                tailleSelected = sc.next();
+                if (isNumber(tailleSelected) && Integer.parseInt(tailleSelected) > 0 && Integer.parseInt(tailleSelected) < 6) {
+                    break;
+                } else if (tailleSelected.toUpperCase().contains("X")) {
 
                     int position = 0;
                     for (int i = 0; i < tailleSelected.length(); i++) {
@@ -128,13 +86,64 @@ public class Battleship extends Outils {
                         }
                     }
 
-                    height = Integer.parseInt(tailleSelected.substring(0, position));
-                    width = Integer.parseInt(tailleSelected.substring(position + 1));
-                } else {
+                    if (isNumber(tailleSelected.substring(0, position))
+                            && isNumber(tailleSelected.substring(position + 1))) {
+                        int avant = Integer.parseInt(tailleSelected.substring(0, position));
+                        int apres = Integer.parseInt(tailleSelected.substring(position + 1));
+                        if ((avant > 0 && avant < 27) && (apres > 0 && apres < 27)) {
+                            break;
+                        }
+                    }
+                }
+                System.out.print("\nCe n'est pas une option.\nTAILLE : ");
+            }
+
+            switch (tailleSelected) {
+                case "1":
                     width = 10;
                     height = 10;
-                }
+                    break;
+                case "2":
+                    width = 10;
+                    height = 15;
+                    break;
+                case "3":
+                    width = 15;
+                    height = 15;
+                    break;
+                case "4":
+                    width = 15;
+                    height = 20;
+                    break;
+                case "5":
+                    width = 20;
+                    height = 20;
+                    break;
+                default:
+                    if (tailleSelected.toUpperCase().contains("X")) {
+
+                        int position = 0;
+                        for (int i = 0; i < tailleSelected.length(); i++) {
+                            if (tailleSelected.toUpperCase().charAt(i) == 'X') {
+                                position = i;
+                                break;
+                            }
+                        }
+
+                        height = Integer.parseInt(tailleSelected.substring(0, position));
+                        width = Integer.parseInt(tailleSelected.substring(position + 1));
+                    } else {
+                        width = 10;
+                        height = 10;
+                    }
+                    break;
+            }
+            int amplada = ((width*3)+2)*2+11;
+            int alsada = (height+2+4+5);
+            if(amplada<=cols && alsada<=lines){
                 break;
+            }
+            System.out.println(red("Cette taille risque de ne pas laisser rentrer les plateaux dans l'ecran."));
         }
 
         int nbBateaux;
