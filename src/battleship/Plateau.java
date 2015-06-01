@@ -12,7 +12,7 @@ import java.util.Random;
  *
  * @author Roger
  */
-public class Plateau implements PlateauInterface {
+public class Plateau extends Outils implements PlateauInterface {
 
     protected int[][] plateau; //1=WATER;2=FAIL;3=GOOD;4=SUNK;5=SHIP
     protected HashMap<String, Bateau> flota;
@@ -211,7 +211,7 @@ public class Plateau implements PlateauInterface {
             for (String entry : flota.keySet()) {
                 Bateau bat = flota.get(entry);
                 touche |= bat.tir(x, y);
-                coule |= bat.isCoule();
+                coule = bat.isCoule();
                 if (coule) {
                     if(bat.isHorizontal()){
                         for (int i=bat.getX();i<(bat.getX()+bat.getTaille());i++){
@@ -224,6 +224,7 @@ public class Plateau implements PlateauInterface {
                     }
                 } else if (touche) {
                     this.plateau[y][x] = 3;
+                    bell();
                 }
 
             }

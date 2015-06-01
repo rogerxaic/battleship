@@ -9,7 +9,7 @@ package battleship;
  *
  * @author Roger
  */
-public class Bateau implements BateauInterface {
+public class Bateau extends Outils implements BateauInterface {
 
     protected int taille;
     protected boolean horizontal;
