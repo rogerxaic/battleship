@@ -138,12 +138,12 @@ public class Battleship extends Outils {
                     }
                     break;
             }
-            int amplada = ((width*3)+2)*2+11;
-            int alsada = (height+2+4+5);
-            if(amplada<=cols && alsada<=lines){
+            int amplada = ((width * 3) + 2) * 2 + 11;
+            int alsada = (height + 2 + 4 + 5);
+            if (amplada <= cols && alsada <= lines) {
                 break;
             }
-            System.out.println(red("Cette taille risque de ne pas laisser rentrer les plateaux dans l'ecran.")+"\nTAILLE : ");
+            System.out.println(red("Cette taille risque de ne pas laisser rentrer les plateaux dans l'ecran.") + "\nTAILLE : ");
         }
 
         int nbBateaux;
@@ -352,6 +352,14 @@ public class Battleship extends Outils {
                         } else {
                             badShot = true;
                         }
+                    }
+
+                    boolean dead = false;
+                    for (String precheck : tablero.keySet()) {
+                        dead |= tablero.get(precheck).isDeadAllBateaux();
+                    }
+                    if (dead) {
+                        break;
                     }
 
 //                    sc.next();
