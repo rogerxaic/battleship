@@ -143,7 +143,7 @@ public class Battleship extends Outils {
             if(amplada<=cols && alsada<=lines){
                 break;
             }
-            System.out.println(red("Cette taille risque de ne pas laisser rentrer les plateaux dans l'ecran."));
+            System.out.println(red("Cette taille risque de ne pas laisser rentrer les plateaux dans l'ecran.")+"\nTAILLE : ");
         }
 
         int nbBateaux;
