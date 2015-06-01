@@ -257,7 +257,6 @@ public class Battleship extends Outils {
 
 //            System.out.println(getAffiche(p1.getState(), p1.getState()) + "");
             //String ddd = sc.next();
-
             /**
              * Affichage des profs. Not working /w my code.
              * pg.afficher(p1.plateauGr());
@@ -271,7 +270,7 @@ public class Battleship extends Outils {
                  */
                 for (String entry : tablero.keySet()) {
                     clear();
-                    
+
                     Plateau tireur = tablero.get(entry); //tireur
 //                    System.out.println(getAffiche(tireur.getState(), p1.getState()) + "");
                     HashMap<String, Plateau> clone = new HashMap((Map) tablero.clone());
@@ -312,11 +311,13 @@ public class Battleship extends Outils {
                     Plateau target = tablero.get(cible);
 
                     clone.clear();
+                    
+                    affiche(tireur.getState(), target.getState());
 
                     String donde = "\nOù voulez vous tirer? LETTRE ou LETTRE+NUMÉRO : ";
                     boolean badShot = false;
                     while (true) {
-                        System.out.print((badShot)?red("Ce n'est pas possible de tirer dans cette case.")+donde :donde);
+                        System.out.print((badShot) ? red("Ce n'est pas possible de tirer dans cette case.") + donde : donde);
                         badShot = false;
                         String letra = sc.next();
                         int y = 0;
