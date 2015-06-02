@@ -327,7 +327,7 @@ public class Battleship extends Outils {
                     affiche(tireur, target);
 
                     String donde = "Tir de " + tireur.getPropietari() + "\nOù voulez vous tirer? LETTRE ou LETTRE+NUMÉRO : ";
-                    boolean badShot = false;
+                    boolean badShot = false, goodShot = false;
                     while (true) {
                         int y = -1;
                         int x = -1;
@@ -356,8 +356,12 @@ public class Battleship extends Outils {
 
                         }
 
-                        if (target.tirer(x, y)) {
-                            break;
+                        if (target.isTirValid(x, y)) {
+                            if (target.tirer(x, y)) {
+                                goodShot = true;
+                            } else {
+                                break;
+                            }
                         } else {
                             badShot = true;
                         }

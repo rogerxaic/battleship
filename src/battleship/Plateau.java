@@ -260,7 +260,7 @@ public class Plateau extends Outils implements PlateauInterface {
             for (String entry : flota.keySet()) {
                 Bateau bat = flota.get(entry);
                 touche |= bat.tir(x, y);
-                coule = bat.isCoule();
+                coule |= bat.isCoule();
                 if (coule) {
                     if (bat.isHorizontal()) {
                         for (int i = bat.getX(); i < (bat.getX() + bat.getTaille()); i++) {
@@ -271,20 +271,28 @@ public class Plateau extends Outils implements PlateauInterface {
                             this.plateau[i][bat.getX()] = 4;
                         }
                     }
+                    bell();
+                    break;
                 } else if (touche && !coule) {
                     this.plateau[y][x] = 3;
                     bell();
+                    break;
                 }
 
             }
-            resultat = true;
+            resultat = touche;
 
         } else if (this.plateau[y][x] == 1) {
             this.plateau[y][x] = 2;
-            resultat = true;
+            resultat = false;
         }
 
         return resultat;
+    }
+
+    @Override
+    public boolean isTirValid(int x, int y) {
+        return (this.plateau[y][x] == 1 || this.plateau[y][x] == 5);
     }
 
 }
