@@ -144,7 +144,7 @@ public class Outils extends Color {
             for (int j = 0; j < plat1[i].length; j++) {
                 switch (plat1[i][j]) {
                     case 1:
-                        base += ANSI_BLUE + " ▓" + ANSI_RESET + " "; //WATER
+                        base += ANSI_BLUE + " ·" + ANSI_RESET + " "; //WATER
                         break;
                     case 2:
                         base += ANSI_GREEN + " o" + ANSI_RESET + " "; //FAIL SHOT
@@ -171,7 +171,7 @@ public class Outils extends Color {
                 for (int j = 0; j < plat2[i].length; j++) {
                     switch (plat2[i][j]) {
                         case 1:
-                            base += ANSI_BLUE + " ▓" + ANSI_RESET + " ";
+                            base += ANSI_BLUE + " ·" + ANSI_RESET + " ";
                             break;
                         case 2:
                             base += ANSI_GREEN + " o" + ANSI_RESET + " ";
