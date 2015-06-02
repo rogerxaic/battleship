@@ -331,6 +331,10 @@ public class Battleship extends Outils {
                     while (true) {
                         int y = -1;
                         int x = -1;
+                        
+                        /**
+                         * On cherche les coordonnées où on va attacker.
+                         */
                         if (!tireur.isComputer) {
                             System.out.print((badShot) ? red("Ce n'est pas possible de tirer dans cette case.") + donde : donde);
                             badShot = false;
@@ -351,6 +355,11 @@ public class Battleship extends Outils {
                                 x = Integer.parseInt("" + numero);
                             }
                         } else {
+                            
+                            /**
+                             * VIVE L'INTÉLIGENCE ARTIFICIELLE
+                             */
+                            
                             y = rnd.nextInt(tireur.plateau.length);
                             x = rnd.nextInt(tireur.plateau[y].length);
 
