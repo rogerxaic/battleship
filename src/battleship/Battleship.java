@@ -331,7 +331,7 @@ public class Battleship extends Outils {
                     while (true) {
                         int y = -1;
                         int x = -1;
-                        
+
                         /**
                          * On cherche les coordonnées où on va attacker.
                          */
@@ -355,24 +355,39 @@ public class Battleship extends Outils {
                                 x = Integer.parseInt("" + numero);
                             }
                         } else {
-                            
+
                             /**
                              * VIVE L'INTÉLIGENCE ARTIFICIELLE
                              */
-                            
                             y = rnd.nextInt(tireur.plateau.length);
                             x = rnd.nextInt(tireur.plateau[y].length);
 
                         }
 
+                        /**
+                         * On regarde si le tir est valide
+                         */
                         if (target.isTirValid(x, y)) {
                             if (target.tirer(x, y)) {
                                 goodShot = true;
+                                clear();
+                                affiche(tireur, target);
+                                System.out.println(("TIR DE " + tireur.getPropietari()).toUpperCase());
+                                System.out.println("Votre tir [" + getLletra(y) + x + "] a touché un bateau, vous avez le droit à un autre. ");
                             } else {
+                                //The other one's turn
+                                clear();
+                                affiche(tireur, target);
+                                if (!isComputer) {
+                                    System.out.println("Tir à l'eau :/\nAppuyez sur [INTRO] pour continuer");
+                                    sc.next();
+                                }
                                 break;
                             }
                         } else {
                             badShot = true;
+                            clear();
+                            affiche(tireur, target);
                         }
                     }
 
