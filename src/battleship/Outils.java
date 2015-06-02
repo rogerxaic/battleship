@@ -256,14 +256,14 @@ public class Outils extends Color {
             for (int j = 0; j < plat1[i].length; j++) {
                 switch (plat1[i][j]) {
                     case 1:
-                        base += ANSI_BLUE + " ▓" + ANSI_RESET + " "; //WATER
+                        base += ANSI_BLUE + " ·" + ANSI_RESET + " "; //WATER
                         break;
 
                     case 5:
                         base += ANSI_PURPLE + " H" + ANSI_RESET + " "; //SHIP 
                         break;
                     default:
-                        base += " ▓ ";
+                        base += " · ";
                         break;
                 }
             }
