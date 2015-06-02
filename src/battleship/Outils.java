@@ -183,7 +183,7 @@ public class Outils extends Color {
                             base += ANSI_YELLOW + " x" + ANSI_RESET + " ";
                             break;
                         default:
-                            base += ANSI_BLUE + " ▓ " + ANSI_RESET;
+                            base += ANSI_BLUE + " · " + ANSI_RESET;
                             break;
                     }
                 }
