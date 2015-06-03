@@ -3,12 +3,13 @@
 Projet JAVA de l'INSA de Lyon. Création du jeu "bataille navale".
 
 ##Build & execute instructions
+
+Pour compiler, il suffit d'executer les commandes suivantes :
 ```bash
-javac -d build -s src/ src/battleship/*.java
-java -cp build/ battleship.Battleship
+make 
+make install
 ```
-Il faut que le dossier "build" existe pour que les commandes fonctionnent. Pour faire cela il suffit d'executer :
+Et pour executer le jeu, il suffit d'executer
 ```bash
-mkdir build
+./BatailleNavale
 ```
-Autrement, on pourrait créer un dossier avec un nom différent et changer chaque "build" qui apparait dans les commandes précedentes pour le nom du dossier qu'on vient de créer.
