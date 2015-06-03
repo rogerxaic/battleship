@@ -31,7 +31,7 @@ public interface PlateauInterface {
     
     public void reset();
     
-    public boolean tirer(int x, int y);
+    public boolean bonTir(int x, int y);
     
     public boolean isTirValid(int x, int y);
 

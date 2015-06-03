@@ -248,7 +248,7 @@ public class Plateau extends Outils implements PlateauInterface {
      * already shoot there.
      */
     @Override
-    public boolean tirer(int x, int y) {
+    public boolean bonTir(int x, int y) {
 
         boolean resultat = false;
 

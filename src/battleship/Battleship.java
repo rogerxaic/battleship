@@ -363,10 +363,11 @@ public class Battleship extends Outils {
                         }
 
                         /**
-                         * On regarde si le tir est valide
+                         * On regarde si le tir est valide et on tire
                          */
                         if (target.isTirValid(x, y)) {
-                            if (target.tirer(x, y)) {
+                            bell();
+                            if (target.bonTir(x, y)) {
                                 goodShot = true;
                                 clear();
                                 affiche(tireur, target);
@@ -384,8 +385,7 @@ public class Battleship extends Outils {
                             }
                         } else {
                             badShot = true;
-//                            clear();
-                            bell();
+                            clear();
                             affiche(tireur, target);
                         }
                     }
