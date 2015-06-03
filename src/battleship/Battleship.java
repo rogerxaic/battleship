@@ -332,7 +332,7 @@ public class Battleship extends Outils {
                             if (badShot){
                                 System.out.print(red("Ce n'est pas possible de tirer dans cette case.\n") + donde);
                             } else if (goodShot) {
-                                System.out.print("Où voulez vous tirer? LETTRE ou LETTRE+NUMÉRO");
+                                System.out.print("Où voulez vous tirer? LETTRE ou LETTRE+NUMÉRO : ");
                             } else {
                                 System.out.print(donde);
                             }
@@ -419,7 +419,7 @@ public class Battleship extends Outils {
             
             for(String onePlat : tablero.keySet()) {
                 Plateau plat = tablero.get(onePlat);
-                System.out.println(plat.getPropietari() + " a coulé "+plat.nbDeaths);
+                System.out.println(plat.getPropietari() + " a coulé "+plat.nbDeaths + "bateaux.");
             }
 
             System.out.println("Rejouer ? [YN] ");
