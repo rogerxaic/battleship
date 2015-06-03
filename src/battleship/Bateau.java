@@ -121,7 +121,7 @@ public class Bateau extends Outils implements BateauInterface {
         boolean appartient = (horizontal)
                 ? (this.y == y) && (x >= this.x && x < (this.x + this.taille))
                 : (this.x == x) && (y >= this.y && y < (this.y + this.taille));
-        return true;
+        return appartient;
     }
 
 
@@ -129,28 +129,37 @@ public class Bateau extends Outils implements BateauInterface {
     public boolean tir(int x, int y) {
 
         boolean tir = false;
-        if (horizontal) {
-            for (int i = this.x; i < this.x + this.taille; i++) {
-                if (x == i && y == this.y) {
-                    tir = true;
-                    status[x-this.x]= false;  
-                    break;
-                } else {
-                    tir = false;
-                }
-                
-            }
-        } else {
-            for (int i = this.y; i < this.y + this.taille; i++) {
-                if (y == i && x == this.x) {
-                    tir = true;
-                    status[y-this.y]= false;
-                    break;
-                } else {
-                    tir = false;
-                }
+//        if (horizontal) {
+//            for (int i = this.x; i < this.x + this.taille; i++) {
+//                if (x == i && y == this.y) {
+//                    tir = true;
+//                    status[x-this.x]= false;  
+//                    break;
+//                } else {
+//                    tir = false;
+//                }
+//                
+//            }
+//        } else {
+//            for (int i = this.y; i < this.y + this.taille; i++) {
+//                if (y == i && x == this.x) {
+//                    tir = true;
+//                    status[y-this.y]= false;
+//                    break;
+//                } else {
+//                    tir = false;
+//                }
+//            }
+//        }
+        if(isBateau(x, y)){
+            tir = true;
+            if(horizontal) {
+                status[x-this.x]= false;  
+            } else {
+                status[y-this.y]= false;
             }
         }
+        
         return tir;
     }
     

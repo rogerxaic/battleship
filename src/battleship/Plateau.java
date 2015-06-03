@@ -173,9 +173,9 @@ public class Plateau extends Outils implements PlateauInterface {
     @Override
     public void placerRandom(Bateau bat) {
         while (!bat.isPositioned()) {
-            boolean horizontal = rnd.nextBoolean();
-            int y = rnd.nextInt(plateau.length);
-            int x = rnd.nextInt(plateau[y].length);
+            boolean horizontal = RAND.nextBoolean();
+            int y = RAND.nextInt(plateau.length);
+            int x = RAND.nextInt(plateau[y].length);
 
             if (isRoom(x, y, horizontal, bat)) {
                 setBateau(bat, x, y, horizontal);
@@ -241,9 +241,10 @@ public class Plateau extends Outils implements PlateauInterface {
     }
 
     /**
-     *
-     * @param x
-     * @param y
+     * Cette methode tire et nous renvoie true si le tir a touché un bateau (ou coulé)
+     * et false si le tir est dans l'eau.
+     * @param x Coordonnée X du plateau
+     * @param y Coordonnée Y du plateau 
      * @return True if shot was available and done, false if (e.g) we had
      * already shoot there.
      */
@@ -254,13 +255,16 @@ public class Plateau extends Outils implements PlateauInterface {
 
         if (this.plateau[y][x] == 5) {
 
-            boolean touche = false;
+            boolean touche = true;
             boolean coule = false;
+            
+            this.plateau[y][x] = 3;
 
             for (String entry : flota.keySet()) {
                 Bateau bat = flota.get(entry);
-                touche |= bat.tir(x, y);
-                coule |= bat.isCoule();
+                
+                touche = bat.tir(x, y);
+                coule = bat.isCoule();
                 if (coule) {
                     if (bat.isHorizontal()) {
                         for (int i = bat.getX(); i < (bat.getX() + bat.getTaille()); i++) {
@@ -280,7 +284,7 @@ public class Plateau extends Outils implements PlateauInterface {
                 }
 
             }
-            resultat = touche;
+            resultat = true;
 
         } else if (this.plateau[y][x] == 1) {
             this.plateau[y][x] = 2;

@@ -13,11 +13,9 @@ import java.util.Scanner;
  */
 public class Battleship extends Outils {
 
-    public static final Outils ou = new Outils();
-    public static final Scanner sc = new Scanner(System.in);
-    public static final String OS = System.getProperty("os.name").toLowerCase();
-    public static final boolean isWindows = OS.contains("win");
-    public static final String username = System.getProperty("user.name");
+    public static final Outils OUTIL = new Outils();
+    public static final boolean IS_WINDOWS = System.getProperty("os.name").toLowerCase().contains("win");
+    public static final String USERNAME = System.getProperty("user.name");
     
 
 
@@ -54,7 +52,7 @@ public class Battleship extends Outils {
         Outils.Banner();
         
 
-        System.out.println("Bienvenue " + username);
+        System.out.println("Bienvenue " + USERNAME);
         /**
          * On cherche la taille du plateau
          *
@@ -76,7 +74,7 @@ public class Battleship extends Outils {
         while (true) {
 
             while (true) {
-                tailleSelected = sc.next();
+                tailleSelected = SCAN.next();
                 if (isNumber(tailleSelected) && Integer.parseInt(tailleSelected) > 0 && Integer.parseInt(tailleSelected) < 6) {
                     break;
                 } else if (tailleSelected.toUpperCase().contains("X")) {
@@ -166,7 +164,7 @@ public class Battleship extends Outils {
         boolean networking = false;
         int vsSelected = -1;
         while (true) {
-            String inter = sc.next();
+            String inter = SCAN.next();
             if (inter.toUpperCase().charAt(0) == 'N') {
                 networking = true;
                 break;
@@ -201,7 +199,7 @@ public class Battleship extends Outils {
             flota1.put(getLletra(i), a);
         }
 
-        Plateau p1 = new Plateau(height, width, flota1, username, false);
+        Plateau p1 = new Plateau(height, width, flota1, USERNAME, false);
         tablero.put("A", p1);
 
         ////////////////////////////////////////////////////////////////////////
@@ -214,7 +212,7 @@ public class Battleship extends Outils {
                 int joueur = i + 1;
                 System.out.println("Comment s'appelle-t-il le joueur " + joueur + " :\n\n"
                         + "NOM : ");
-                nomJoueur = sc.next();
+                nomJoueur = SCAN.next();
 
                 HashMap<String, Bateau> flota = new HashMap<>();
 
@@ -263,7 +261,7 @@ public class Battleship extends Outils {
             clear();
 
 //            System.out.println(getAffiche(p1.getState(), p1.getState()) + "");
-            //String ddd = sc.next();
+            //String ddd = SCAN.next();
             /**
              * Affichage des profs. Not working /w my code.
              * pg.afficher(p1.plateauGr());
@@ -303,7 +301,7 @@ public class Battleship extends Outils {
                         System.out.println("Selectionnez qui attacker : " + toAttack.substring(3));
 
                         while (true) {
-                            String adver = sc.next();
+                            String adver = SCAN.next();
                             if (clone.containsKey(adver.toUpperCase())) {
                                 cible = adver.toUpperCase();
                                 break;
@@ -336,7 +334,7 @@ public class Battleship extends Outils {
                         if (!tireur.isComputer) {
                             System.out.print((badShot) ? red("Ce n'est pas possible de tirer dans cette case.") + donde : donde);
                             badShot = false;
-                            String letra = sc.next();
+                            String letra = SCAN.next();
 
                             for (int i = 0; i < ABC.length(); i++) {
                                 if (letra.toUpperCase().charAt(0) == ABC.charAt(i)) {
@@ -348,7 +346,7 @@ public class Battleship extends Outils {
                                 x = Integer.parseInt(letra.substring(1));
                             } else {
                                 System.out.print("NUMÉRO :");
-                                String numero = sc.next();
+                                String numero = SCAN.next();
 
                                 x = Integer.parseInt("" + numero);
                             }
@@ -357,8 +355,8 @@ public class Battleship extends Outils {
                             /**
                              * VIVE L'INTÉLIGENCE ARTIFICIELLE
                              */
-                            y = rnd.nextInt(tireur.plateau.length);
-                            x = rnd.nextInt(tireur.plateau[y].length);
+                            y = RAND.nextInt(tireur.plateau.length);
+                            x = RAND.nextInt(tireur.plateau[y].length);
 
                         }
 
@@ -379,7 +377,7 @@ public class Battleship extends Outils {
                                 affiche(tireur, target);
                                 if (!isComputer) {
                                     System.out.println("Tir à l'eau :/\nAppuyez sur [INTRO] pour continuer");
-                                    sc.next();
+                                    SCAN.next();
                                 }
                                 break;
                             }
@@ -398,7 +396,7 @@ public class Battleship extends Outils {
                         break;
                     }
 
-//                    sc.next();
+//                    SCAN.next();
                 }
 
                 boolean dead = false;
@@ -411,7 +409,7 @@ public class Battleship extends Outils {
             }
 
             System.out.println("Rejouer ? [YN] ");
-            String rejouer = sc.next();
+            String rejouer = SCAN.next();
             boolean rejeu = (rejouer.charAt(0) == 'Y' || rejouer.charAt(0) == 'y');
             if (!rejeu) {
                 break;
@@ -459,7 +457,7 @@ public class Battleship extends Outils {
                 pasDePlace = false;
 
                 while (true) {
-                    String ddd = sc.next();
+                    String ddd = SCAN.next();
                     String dd = "" + ddd.toUpperCase().charAt(0);
                     if (plat.flota.containsKey(dd) && !plat.flota.get(dd).isPositioned()) {
                         String donde = "\nCe bateau a une taille de "
@@ -467,7 +465,7 @@ public class Battleship extends Outils {
                                 + "Où placer le bateau? LETTRE ou LETTRE+NUMÉRO : ";
                         System.out.print(donde);
                         while (true) {
-                            String letra = sc.next();
+                            String letra = SCAN.next();
                             int y = 0;
                             for (int i = 0; i < ABC.length(); i++) {
                                 if (letra.toUpperCase().charAt(0) == ABC.charAt(i)) {
@@ -479,12 +477,12 @@ public class Battleship extends Outils {
                                 x = Integer.parseInt(letra.substring(1));
                             } else {
                                 System.out.print("NUMÉRO :");
-                                String numero = sc.next();
+                                String numero = SCAN.next();
 
                                 x = Integer.parseInt("" + numero.charAt(0));
                             }
                             System.out.print("VERTICAL ou HORIZONTAL ? [V/H]");
-                            String vouh = sc.next();
+                            String vouh = SCAN.next();
                             boolean horizontal = false;
                             horizontal = (vouh.charAt(0) == 'H' || vouh.charAt(0) == 'h');
 
@@ -510,7 +508,7 @@ public class Battleship extends Outils {
 
     public static String check(String command) throws IOException {
         String resultat = "";
-        if (!isWindows) {
+        if (!IS_WINDOWS) {
             Process p = Runtime.getRuntime().exec(command);
             try (BufferedReader br = new BufferedReader(
                     new InputStreamReader(p.getInputStream()))) {

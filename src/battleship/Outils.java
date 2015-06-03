@@ -20,9 +20,9 @@ public class Outils extends Color {
 //    private Plateau p1;
 //    private Plateau p2;
     public static final String ABC = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    public static final String abc = "abcdefghijklmnopqrstuvwxyz";
-    public static Random rnd = new Random();
-    public static Scanner sc = new Scanner(System.in);
+    public static final String ABC_MIN = "abcdefghijklmnopqrstuvwxyz";
+    public static final Random RAND = new Random();
+    public static final Scanner SCAN = new Scanner(System.in);
 
     protected static String[] banner = new String[23];
 
@@ -187,7 +187,7 @@ public class Outils extends Color {
                             base += ANSI_YELLOW + " x" + ANSI_RESET + " ";
                             break;
                         case 5:
-                            base += ANSI_YELLOW + " 5" + ANSI_RESET + " ";
+                            base += ANSI_PURPLE + " 5" + ANSI_RESET + " ";
                             break;
                         default:
                             base += ANSI_BLUE + " · " + ANSI_RESET;
