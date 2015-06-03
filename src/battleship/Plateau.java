@@ -304,7 +304,7 @@ public class Plateau extends Outils implements PlateauInterface {
 
     @Override
     public boolean isTirValid(int x, int y) {
-        boolean isInPlateau = (x>0&&x<this.plateau[0].length) && (y>0 &&y<this.plateau.length);
+        boolean isInPlateau = (x>=0&&x<this.plateau[0].length) && (y>=0 &&y<this.plateau.length);
         return isInPlateau&&(this.plateau[y][x] == 1 || this.plateau[y][x] == 5);
     }
 

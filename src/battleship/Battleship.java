@@ -207,7 +207,7 @@ public class Battleship extends Outils {
             //On a un nombre de joueurs vsSelected.
             for (int i = 1; i < vsSelected + 1; i++) {
                 int joueur = i + 1;
-                System.out.println("Comment s'appelle-t-il le joueur " + joueur + " :\n\n"
+                System.out.print("Comment s'appelle-t-il le joueur " + joueur + " :\n\n"
                         + "NOM : ");
                 nomJoueur = SCAN.next();
 
