@@ -33,6 +33,6 @@ public interface PlateauInterface {
     
     public boolean tir(int x, int y);
     
-    public boolean isTirValid(int x, int y);
+    public boolean isTirValide(int x, int y);
 
 }
