@@ -5,6 +5,7 @@
  */
 package battleship;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -255,17 +256,19 @@ public class Plateau extends Outils implements PlateauInterface {
 
         if (this.plateau[y][x] == 5) {
 
-            boolean touche = true;
-            boolean coule = false;
+            
             
             this.plateau[y][x] = 3;
 
             for (String entry : flota.keySet()) {
                 Bateau bat = flota.get(entry);
+                boolean touche = false;
+                boolean coule = false;
                 
                 touche = bat.tir(x, y);
                 coule = bat.isCoule();
-                if (coule) {
+               
+                if (touche && coule) {
                     if (bat.isHorizontal()) {
                         for (int i = bat.getX(); i < (bat.getX() + bat.getTaille()); i++) {
                             this.plateau[bat.getY()][i] = 4;

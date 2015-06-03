@@ -19,6 +19,7 @@ public class Bateau extends Outils implements BateauInterface {
     protected boolean[] status; //1 flottant, 0 touché
     protected boolean coule;
     protected int[] tailles;
+    protected int degats;
 
     public Bateau(int taille) {
         this.taille = taille;
@@ -26,6 +27,7 @@ public class Bateau extends Outils implements BateauInterface {
         for (int i = 0; i < status.length; i++) {
             status[i] = true;
         }
+        this.degats=0;
     }
 
     public Bateau(int ta, boolean auto) {
@@ -42,11 +44,13 @@ public class Bateau extends Outils implements BateauInterface {
         tailles[9] = 3;
         tailles[10] = 4;
         
-        this.taille = tailles[ta];
-        this.status = new boolean[tailles[ta]];
+        int tailleAvant = tailles[ta];
+        this.taille = tailleAvant;
+        this.status = new boolean[tailleAvant];
         for (int i = 0; i < status.length; i++) {
             status[i] = true;
         }
+        this.degats=0;
     }
     
     
@@ -153,6 +157,7 @@ public class Bateau extends Outils implements BateauInterface {
 //        }
         if(isBateau(x, y)){
             tir = true;
+            this.degats++;
             if(horizontal) {
                 status[x-this.x]= false;  
             } else {

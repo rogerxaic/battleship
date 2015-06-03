@@ -364,7 +364,6 @@ public class Battleship extends Outils {
                          * On regarde si le tir est valide et on tire
                          */
                         if (target.isTirValid(x, y)) {
-                            bell();
                             if (target.bonTir(x, y)) {
                                 goodShot = true;
                                 clear();
