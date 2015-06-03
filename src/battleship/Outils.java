@@ -64,13 +64,15 @@ public class Outils extends Color {
         System.out.println(getAffiche(plat1, plat2) + info);
     }
 
-    public static String Banner() throws IOException {
+    public static void Banner() throws IOException {
         System.out.println(getBanner());
 
-        String resultat = sc.next();
+        try {
+            System.in.read();
+        } catch (Exception e) {
+        }
 
         exe("clear");
-        return resultat;
     }
 
     public static void exe(String command) throws IOException {

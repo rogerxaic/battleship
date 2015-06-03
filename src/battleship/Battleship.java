@@ -6,8 +6,6 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-import java.net.*;
-import java.io.*;
 
 /**
  *
@@ -21,38 +19,7 @@ public class Battleship extends Outils {
     public static final boolean isWindows = OS.contains("win");
     public static final String username = System.getProperty("user.name");
     
-    private ServerSocket serverSocket;
 
-    public Battleship(int port) throws IOException {
-        serverSocket = new ServerSocket(port);
-        serverSocket.setSoTimeout(100000); 
-    }
-
-    public void run() {
-        while (true) {
-            try {
-                System.out.println("Waiting for client on port "
-                        + serverSocket.getLocalPort() + "...");
-                Socket server = serverSocket.accept();
-                System.out.println("Just connected to "
-                        + server.getRemoteSocketAddress());
-                DataInputStream in
-                        = new DataInputStream(server.getInputStream());
-                System.out.println(in.readUTF());
-                DataOutputStream out
-                        = new DataOutputStream(server.getOutputStream());
-                out.writeUTF("Thank you for connecting to "
-                        + server.getLocalSocketAddress() + "\nGoodbye!");
-                server.close();
-            } catch (SocketTimeoutException s) {
-                System.out.println("Socket timed out!");
-                break;
-            } catch (IOException e) {
-                e.printStackTrace();
-                break;
-            }
-        }
-    }
 
     /**
      * @param args the command line arguments
@@ -84,7 +51,7 @@ public class Battleship extends Outils {
             lines = 24;
         }
 
-        boolean isClient = (Outils.Banner().toUpperCase().charAt(0)=='C');
+        Outils.Banner();
         
 
         System.out.println("Bienvenue " + username);
@@ -239,22 +206,7 @@ public class Battleship extends Outils {
 
         ////////////////////////////////////////////////////////////////////////
         String nomJoueur;
-        if (networking) {
-            System.out.print("PORT ? ");
-            int port = Integer.parseInt(sc.next());
-            
-            clear();
-            System.out.println("Connectez-vous au serveur : "); 
-            exe("ifconfig");
-            System.out.println("Avec le port : " + port);
-           
-            try {
-                Thread t = new Battleship(port);
-                t.start();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else if (!isComputer && !networking) {
+        if (!isComputer && !networking) {
             exe("clear");
 
             //On a un nombre de joueurs vsSelected.

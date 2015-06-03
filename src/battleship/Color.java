@@ -9,7 +9,7 @@ package battleship;
  *
  * @author Roger
  */
-public class Color extends Thread {
+public class Color {
 
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_BOLD = "\u001B[1m";
