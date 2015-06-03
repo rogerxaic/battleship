@@ -11,7 +11,7 @@ package battleship;
  */
 public interface PlateauInterface {
 
-    public int[][] getState();
+    public int[][] getStatus();
 
     public boolean isSetAllBateaux();
 

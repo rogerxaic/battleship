@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  *
@@ -21,6 +22,7 @@ public class Outils extends Color {
     public static final String ABC = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     public static final String abc = "abcdefghijklmnopqrstuvwxyz";
     public static Random rnd = new Random();
+    public static Scanner sc = new Scanner(System.in);
 
     protected static String[] banner = new String[23];
 
@@ -62,16 +64,13 @@ public class Outils extends Color {
         System.out.println(getAffiche(plat1, plat2) + info);
     }
 
-    public static void Banner() throws IOException {
+    public static String Banner() throws IOException {
         System.out.println(getBanner());
 
-        try {
-            System.in.read();
-        } catch (Exception e) {
-        }
+        String resultat = sc.next();
 
         exe("clear");
-
+        return resultat;
     }
 
     public static void exe(String command) throws IOException {
@@ -91,6 +90,9 @@ public class Outils extends Color {
                     break;
                 case "finish":
                     toPass = (isWindows) ? "" : "tput rmcup";
+                    break;
+                case "ifconfig":
+                    toPass = (isWindows) ? "ipconfig" : "ifconfig | grep inet\\ ";
                     break;
                 default:
                     toPass = "";
@@ -119,8 +121,8 @@ public class Outils extends Color {
 
     public static String getAffiche(Plateau plat, Plateau plato) {
 
-        int[][] plat1 = plat.getState();
-        int[][] plat2 = plato.getState();
+        int[][] plat1 = plat.getStatus();
+        int[][] plat2 = plato.getStatus();
 
         String base = "                     BATAILLE NAVALE\n";
 

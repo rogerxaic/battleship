@@ -37,7 +37,7 @@ public class Plateau extends Outils implements PlateauInterface {
     }
 
     @Override
-    public int[][] getState() {
+    public int[][] getStatus() {
         return plateau;
     }
 
