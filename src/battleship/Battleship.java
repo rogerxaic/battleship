@@ -16,8 +16,6 @@ public class Battleship extends Outils {
     public static final Outils OUTIL = new Outils();
     public static final boolean IS_WINDOWS = System.getProperty("os.name").toLowerCase().contains("win");
     public static final String USERNAME = System.getProperty("user.name");
-    
-
 
     /**
      * @param args the command line arguments
@@ -50,7 +48,6 @@ public class Battleship extends Outils {
         }
 
         Outils.Banner();
-        
 
         System.out.println("Bienvenue " + USERNAME);
         /**
@@ -280,7 +277,7 @@ public class Battleship extends Outils {
 //                    System.out.println(getAffiche(tireur.getState(), p1.getState()) + "");
                     HashMap<String, Plateau> clone = new HashMap((Map) tablero.clone());
 
-                    System.out.println("Tir de " + tireur.getPropietari() + " : ");
+                    System.out.println("Tir de " + tireur.getPropietari() + " : \n");
                     clone.remove(entry);
 
                     /**
@@ -322,7 +319,7 @@ public class Battleship extends Outils {
 
                     affiche(tireur, target);
 
-                    String donde = "Tir de " + tireur.getPropietari() + "\nOù voulez vous tirer? LETTRE ou LETTRE+NUMÉRO : ";
+                    String donde = "Tir de " + bcyan(tireur.getPropietari()) + "\nOù voulez vous tirer? LETTRE ou LETTRE+NUMÉRO : ";
                     boolean badShot = false, goodShot = false;
                     while (true) {
                         int y = -1;
@@ -332,7 +329,13 @@ public class Battleship extends Outils {
                          * On cherche les coordonnées où on va attacker.
                          */
                         if (!tireur.isComputer) {
-                            System.out.print((badShot) ? red("Ce n'est pas possible de tirer dans cette case.") + donde : donde);
+                            if (badShot){
+                                System.out.print(red("Ce n'est pas possible de tirer dans cette case.") + donde);
+                            } else if (goodShot) {
+                                System.out.print("Où voulez vous tirer? LETTRE ou LETTRE+NUMÉRO");
+                            } else {
+                                System.out.print(donde);
+                            }
                             badShot = false;
                             String letra = SCAN.next();
 
@@ -368,7 +371,7 @@ public class Battleship extends Outils {
                                 goodShot = true;
                                 clear();
                                 affiche(tireur, target);
-                                System.out.println(("TIR DE " + tireur.getPropietari()).toUpperCase());
+                                System.out.println("TIR DE " + bcyan(tireur.getPropietari().toUpperCase()));
                                 System.out.println("Votre tir [" + getLletra(y) + x + "] a touché un bateau, vous avez le droit à un autre. ");
                             } else {
                                 //The other one's turn
@@ -376,7 +379,10 @@ public class Battleship extends Outils {
                                 affiche(tireur, target);
                                 if (!isComputer) {
                                     System.out.println("Tir à l'eau :/\nAppuyez sur [INTRO] pour continuer");
-                                    SCAN.next();
+                                    try {
+                                        System.in.read();
+                                    } catch (Exception e) {
+                                    }
                                 }
                                 break;
                             }
