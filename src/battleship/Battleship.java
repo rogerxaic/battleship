@@ -432,7 +432,8 @@ public class Battleship extends Outils {
                             }
                         } else {
                             badShot = true;
-                            clear();
+//                            clear();
+                            bell();
                             affiche(tireur, target);
                         }
                     }
