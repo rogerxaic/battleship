@@ -367,8 +367,12 @@ public class Battleship extends Outils {
                          * On regarde si le tir est valide et on tire
                          */
                         if (target.isTirValid(x, y)) {
-                            if (target.bonTir(x, y)) {
+                            if (target.tir(x, y)) {
                                 goodShot = true;
+                                if(target.isIsLastCoule()){
+                                    tireur.addNbDeaths();
+                                }
+                                
                                 clear();
                                 affiche(tireur, target);
                                 //System.out.println("TIR DE " + bcyan(tireur.getPropietari().toUpperCase()));
@@ -411,6 +415,11 @@ public class Battleship extends Outils {
                 if (dead) {
                     break;
                 }
+            }
+            
+            for(String onePlat : tablero.keySet()) {
+                Plateau plat = tablero.get(onePlat);
+                System.out.println(plat.getPropietari() + " a coulé "+plat.nbDeaths);
             }
 
             System.out.println("Rejouer ? [YN] ");

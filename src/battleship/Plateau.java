@@ -20,6 +20,8 @@ public class Plateau extends Outils implements PlateauInterface {
     protected boolean[][] waterBateau; // Is there ship? True / false
     protected int tirsFaits;
     protected boolean isComputer;
+    protected boolean isLastCoule; //true if last shot has coulé 1 ship
+    protected int nbDeaths;
 
     public Plateau(int width, int height, HashMap<String, Bateau> flota, String propietari, boolean isComputer) {
         this.plateau = new int[width][height];
@@ -28,6 +30,7 @@ public class Plateau extends Outils implements PlateauInterface {
         this.propietari = propietari;
         this.tirsFaits = 0;
         this.isComputer = isComputer;
+        this.isLastCoule = false;
 
         for (int i = 0; i < plateau.length; i++) {
             for (int j = 0; j < plateau[i].length; j++) {
@@ -250,9 +253,10 @@ public class Plateau extends Outils implements PlateauInterface {
      * already shoot there.
      */
     @Override
-    public boolean bonTir(int x, int y) {
+    public boolean tir(int x, int y) {
 
         boolean resultat = false;
+        isLastCoule = false;
 
         if (this.plateau[y][x] == 5) {
 
@@ -279,6 +283,7 @@ public class Plateau extends Outils implements PlateauInterface {
                         }
                     }
                     bell();
+                    isLastCoule = true;
                     break;
                 } else if (touche && !coule) {
                     this.plateau[y][x] = 3;
@@ -301,5 +306,15 @@ public class Plateau extends Outils implements PlateauInterface {
     public boolean isTirValid(int x, int y) {
         return (this.plateau[y][x] == 1 || this.plateau[y][x] == 5);
     }
+
+    public boolean isIsLastCoule() {
+        return isLastCoule;
+    }
+
+    public void addNbDeaths() {
+        this.nbDeaths ++;
+    }
+    
+    
 
 }
