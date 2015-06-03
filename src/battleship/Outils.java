@@ -126,7 +126,9 @@ public class Outils extends Color {
         int[][] plat1 = plat.getStatus();
         int[][] plat2 = plato.getStatus();
 
-        String base = "                     BATAILLE NAVALE\n";
+        String base = "                     BATAILLE NAVALE\n\n";
+        
+        base += "Tir de " + bcyan(plat.getPropietari())+"\n\n";
 
         base = base + "      " + plat.getPropietari() + "                                       " + plato.getPropietari() + "\n";
 

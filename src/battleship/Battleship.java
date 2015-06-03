@@ -319,7 +319,7 @@ public class Battleship extends Outils {
 
                     affiche(tireur, target);
 
-                    String donde = "Tir de " + bcyan(tireur.getPropietari()) + "\nOù voulez vous tirer? LETTRE ou LETTRE+NUMÉRO : ";
+                    String donde = /*"Tir de " + bcyan(tireur.getPropietari()) + */"\nOù voulez vous tirer? LETTRE ou LETTRE+NUMÉRO : ";
                     boolean badShot = false, goodShot = false;
                     while (true) {
                         int y = -1;
@@ -330,7 +330,7 @@ public class Battleship extends Outils {
                          */
                         if (!tireur.isComputer) {
                             if (badShot){
-                                System.out.print(red("Ce n'est pas possible de tirer dans cette case.") + donde);
+                                System.out.print(red("Ce n'est pas possible de tirer dans cette case.\n") + donde);
                             } else if (goodShot) {
                                 System.out.print("Où voulez vous tirer? LETTRE ou LETTRE+NUMÉRO");
                             } else {
@@ -371,14 +371,14 @@ public class Battleship extends Outils {
                                 goodShot = true;
                                 clear();
                                 affiche(tireur, target);
-                                System.out.println("TIR DE " + bcyan(tireur.getPropietari().toUpperCase()));
+                                //System.out.println("TIR DE " + bcyan(tireur.getPropietari().toUpperCase()));
                                 System.out.println("Votre tir [" + getLletra(y) + x + "] a touché un bateau, vous avez le droit à un autre. ");
                             } else {
                                 //The other one's turn
                                 clear();
                                 affiche(tireur, target);
                                 if (!isComputer) {
-                                    System.out.println("Tir à l'eau :/\nAppuyez sur [INTRO] pour continuer");
+                                    System.out.println("Tir à l'eau :/\nAppuyez sur [INTRO] pour laisser jouer le prochain joueur.");
                                     try {
                                         System.in.read();
                                     } catch (Exception e) {
