@@ -160,7 +160,7 @@ public class Outils extends Color {
                         base += ANSI_YELLOW + " X" + ANSI_RESET + " "; //SUNK 
                         break;
                     case 5:
-                        base += ANSI_PURPLE + " S" + ANSI_RESET + " "; //SUNK 
+                        base += ANSI_PURPLE + " 5" + ANSI_RESET + " "; //SUNK 
                         break;
                     default:
                         base += " ▓ ";
@@ -185,6 +185,9 @@ public class Outils extends Color {
                             break;
                         case 4:
                             base += ANSI_YELLOW + " x" + ANSI_RESET + " ";
+                            break;
+                        case 5:
+                            base += ANSI_YELLOW + " 5" + ANSI_RESET + " ";
                             break;
                         default:
                             base += ANSI_BLUE + " · " + ANSI_RESET;
