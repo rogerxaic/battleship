@@ -425,7 +425,13 @@ public class Plateau extends Outils implements PlateauInterface {
                     bell();
                     isLastCoule = true;
                     
-                    int newX = bat.getX();
+                    /**
+                     * Code qui ne marche pas. On voulait changer les cases qui sont a coté d'un bateau
+                     * coulé, car on sait qu'à coté d'un bateau il n'y a que de l'eau.
+                     * Donc les cases à coté deviendraient "tirs à l'eau", qui serveraient
+                     * comme information au joueur.
+                     */
+                    /*int newX = bat.getX();
                     int newY = bat.getY();
 
                     if (bat.isHorizontal()) {
@@ -478,7 +484,7 @@ public class Plateau extends Outils implements PlateauInterface {
                                 this.plateau[i][newX + 1] = 2;
                             }
                         }
-                    }
+                    }*/
 
                     break; 
                 } else if (touche && !coule) {

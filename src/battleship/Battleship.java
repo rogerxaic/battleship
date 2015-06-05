@@ -29,7 +29,8 @@ public class Battleship extends Outils {
 
     /**
      * @param args the command line arguments
-     * @throws java.io.IOException Quand on execute la méthode exe et qu'il y a eu un erreur
+     * @throws java.io.IOException Quand on execute la méthode exe et qu'il y a
+     * eu un erreur
      */
     public static void main(String[] args) throws IOException {
         exe("start");
@@ -151,8 +152,8 @@ public class Battleship extends Outils {
                 break;
             }
             System.out.println(red("Cette taille risque de ne pas laisser rentrer les plateaux dans l'ecran.")
-                    +((!isInit)?"\nIl faut démarrer le jeu avec "+green("./BatailleNavale")+".\n"
-                            +"Veuillez lire le fichier README.md, sinon la taille maximale est 13x10.":"") 
+                    + ((!isInit) ? "\nIl faut démarrer le jeu avec " + green("./BatailleNavale") + ".\n"
+                            + "Veuillez lire le fichier README.md, sinon la taille maximale est 13x10." : "")
                     + "\nTAILLE : ");
         }
 
@@ -251,27 +252,18 @@ public class Battleship extends Outils {
 
         exe("clear");
 
-        /**
-         * Affichage des profs. Not working /w my code.
-         *
-         *            //PlateauGraphique pg = new PlateauGraphique();
-         *
-         */
         while (true) {
 
             placerAll(tablero);
 
-            //exe("clear");
             clear();
 
-//            System.out.println(getAffiche(p1.getState(), p1.getState()) + "");
-            //String ddd = SCAN.next();
             /**
              * Affichage des profs. Not working /w my code.
              * pg.afficher(p1.plateauGr());
              */
             //JEU
-            while (true) {
+            do {
 
                 /**
                  * Chaque joueur tire une fois, quand ils ont tous tiré, on
@@ -326,9 +318,9 @@ public class Battleship extends Outils {
 
                     affiche(tireur, target);
 
-                    String donde = /*"Tir de " + bcyan(tireur.getPropietari()) + */"\nOù voulez vous tirer? LETTRE ou LETTRE+NUMÉRO : ";
+                    String donde = /*"Tir de " + bcyan(tireur.getPropietari()) + */ "\nOù voulez vous tirer? LETTRE ou LETTRE+NUMÉRO : ";
                     boolean badShot = false, goodShot = false;
-                    while (true) {
+                    do {
                         int y = -1;
                         int x = -1;
 
@@ -336,7 +328,7 @@ public class Battleship extends Outils {
                          * On cherche les coordonnées où on va attacker.
                          */
                         if (!tireur.isComputer) {
-                            if (badShot){
+                            if (badShot) {
                                 System.out.print(red("Ce n'est pas possible de tirer dans cette case.\n") + donde);
                             } else if (goodShot) {
                                 System.out.print("Où voulez vous tirer? LETTRE ou LETTRE+NUMÉRO : ");
@@ -376,10 +368,10 @@ public class Battleship extends Outils {
                         if (target.isTirValide(x, y)) {
                             if (target.tir(x, y)) {
                                 goodShot = true;
-                                if(target.isIsLastCoule()){
+                                if (target.isIsLastCoule()) {
                                     tireur.addNbDeaths();
                                 }
-                                
+
                                 clear();
                                 affiche(tireur, target);
                                 //System.out.println("TIR DE " + bcyan(tireur.getPropietari().toUpperCase()));
@@ -402,32 +394,32 @@ public class Battleship extends Outils {
                             clear();
                             affiche(tireur, target);
                         }
-                    }
+                    } while (!isGameOver(tablero));
 
-                    boolean dead = false;
-                    for (String precheck : tablero.keySet()) {
-                        dead |= tablero.get(precheck).isDeadAllBateaux();
-                    }
-                    if (dead) {
+                    if (isGameOver(tablero)) {
                         break;
                     }
+                }
+            } while (!isGameOver(tablero));
 
-//                    SCAN.next();
-                }
-
-                boolean dead = false;
-                for (String entry : tablero.keySet()) {
-                    dead |= tablero.get(entry).isDeadAllBateaux();
-                }
-                if (dead) {
-                    break;
-                }
-            }
-            
-            for(String onePlat : tablero.keySet()) {
+            /**
+             * On cherche qui a coulé plus de bateaux.
+             */
+            String winner = "";
+            int maxDeaths = 0;
+            int nbWinners = 0;
+            for (String onePlat : tablero.keySet()) {
                 Plateau plat = tablero.get(onePlat);
-                System.out.println(plat.getPropietari() + " a coulé "+plat.nbDeaths + "bateaux.");
+                if (plat.nbDeaths > maxDeaths) {
+                    maxDeaths = plat.nbDeaths;
+                    winner = plat.getPropietari();
+                    nbWinners = 1;
+                } else if (plat.nbDeaths == maxDeaths) {
+                    winner += " et " + plat.getPropietari();
+                    nbWinners++;
+                }
             }
+            System.out.println(((nbWinners > 1) ? "Les gagneurs sont " : "Le gagneur est ") + winner + ".");
 
             System.out.println("Rejouer ? [YN] ");
             String rejouer = SCAN.next();
@@ -446,8 +438,9 @@ public class Battleship extends Outils {
     }
 
     /**
-     * Méthode qui démande au joueur de placer tous ses bateaux. Le joueur a 
+     * Méthode qui démande au joueur de placer tous ses bateaux. Le joueur a
      * l'option de les placer au hasard s'il veut.
+     *
      * @param tablero
      * @throws IOException
      */
@@ -474,8 +467,8 @@ public class Battleship extends Outils {
 
                 String errorBat = red("Bateau incorrect/inexistant. \n");
                 String errorPlace = red("Il n'y a pas de place. \n");
-                String information = plat.getPropietari() + ", selectionnez bateau "/*[" + plat.getBateauxToSet() + " R] */+"à placer : ";
-                information += "\n"+plat.getListeBateauxToSet()+"BATEAU : ";
+                String information = plat.getPropietari() + ", selectionnez bateau "/*[" + plat.getBateauxToSet() + " R] */ + "à placer : ";
+                information += "\n" + plat.getListeBateauxToSet() + "BATEAU : ";
 
                 System.out.print(monPlacement(plat.getStatus()) + "\n"
                         + ((errorBateau) ? errorBat + information : "")
@@ -553,6 +546,14 @@ public class Battleship extends Outils {
             }
         }
         return resultat;
+    }
+
+    public static boolean isGameOver(HashMap<String, Plateau> tablero) {
+        boolean gameOver = false;
+        for (String key : tablero.keySet()) {
+            gameOver |= tablero.get(key).isDeadAllBateaux();
+        }
+        return gameOver;
     }
 
 }
