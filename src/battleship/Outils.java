@@ -326,7 +326,7 @@ public class Outils extends Color {
         String headerP1 = " ";
 
         for (int i = 0; i < plat1[0].length; i++) {
-            headerP1 += (i < 10) ? " " + i + " " : " " + i;
+            headerP1 += (i < 10) ? "  " + i + " " : "  " + i;
         }
 
         base += headerP1 + "\n";
@@ -336,18 +336,18 @@ public class Outils extends Color {
             for (int j = 0; j < plat1[i].length; j++) {
                 switch (plat1[i][j]) {
                     case 1:
-                        base += ANSI_BLUE + " ·" + ANSI_RESET + " "; //WATER
+                        base += ANSI_BLUE + " ·" + ANSI_RESET + ""; //WATER
                         break;
 
                     case 5:
-                        base += ANSI_PURPLE + " H" + ANSI_RESET + " "; //SHIP 
+                        base += ANSI_PURPLE + " H" + ANSI_RESET + ""; //SHIP 
                         break;
                     default:
                         base += " · ";
                         break;
                 }
                 
-                base += "         " + ((triche[i][j])?"T":"F");
+                base += ((triche[i][j])?"T ":"F ");
             }
             base += getLettre(i);
 
