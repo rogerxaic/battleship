@@ -431,7 +431,13 @@ public class Plateau extends Outils implements PlateauInterface {
                      * Donc les cases à coté deviendraient "tirs à l'eau", qui serveraient
                      * comme information au joueur.
                      */
-                    /*int newX = bat.getX();
+                    
+                    /**
+                     * Au moins le code pour les extremes du bateau marche, donc on le
+                     * laisse.
+                     */
+                    
+                    int newX = bat.getX();
                     int newY = bat.getY();
 
                     if (bat.isHorizontal()) {
@@ -444,7 +450,7 @@ public class Plateau extends Outils implements PlateauInterface {
                         if (newX + bat.getTaille() < this.plateau[newY].length) {
                             this.plateau[newY][newX + bat.getTaille()] = 2;
                             existsColApres = true;
-                        }
+                        }/*
                         if (newY - 1 >= 0) {
                             for (int i = (existsColAvant) ? (newX - 1) : newX;
                                     i < ((existsColApres) ? (newX + bat.getTaille() + 1) : newX + bat.getTaille());
@@ -458,7 +464,7 @@ public class Plateau extends Outils implements PlateauInterface {
                                     i++) {
                                 this.plateau[newY + 1][i] = 2;
                             }
-                        }
+                        }*/
                     } else {
                         boolean existsFilAvant = false;
                         if (newY - 1 >= 0) {
@@ -469,7 +475,7 @@ public class Plateau extends Outils implements PlateauInterface {
                         if (newY + bat.getTaille() < this.plateau.length) {
                             this.plateau[newY + bat.getTaille()][newX] = 2;
                             existsFilApres = true;
-                        }
+                        }/*
                         if (newX - 1 >= 0) {
                             for (int i = (existsFilAvant) ? (newX - 1) : newX;
                                     i < ((existsFilApres) ? (newY + bat.getTaille() + 1) : newY + bat.getTaille());
@@ -483,8 +489,8 @@ public class Plateau extends Outils implements PlateauInterface {
                                     i++) {
                                 this.plateau[i][newX + 1] = 2;
                             }
-                        }
-                    }*/
+                        }*/
+                    }
 
                     break; 
                 } else if (touche && !coule) {
