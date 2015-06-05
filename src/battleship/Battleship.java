@@ -477,7 +477,7 @@ public class Battleship extends Outils {
                 String information = plat.getPropietari() + ", selectionnez bateau "/*[" + plat.getBateauxToSet() + " R] */+"à placer : ";
                 information += "\n"+plat.getListeBateauxToSet()+"BATEAU : ";
 
-                System.out.print(monPlacement(plat.getStatus()) + "\n"
+                System.out.print(monPlacementTrichage(plat.getStatus(), plat.waterBateau) + "\n"
                         + ((errorBateau) ? errorBat + information : "")
                         + ((pasDePlace) ? errorPlace + information : "")
                         + ((!pasDePlace && !errorBateau) ? information : ""));

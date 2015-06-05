@@ -316,6 +316,7 @@ public class Outils extends Color {
     /**
      *
      * @param plat1 Plateau dont on veut connaître le placement des bateaux.
+     * @param triche Plateau avec Water ou Bateau (true)
      * @return Le plateau dans un format human-readable pour qu'on puisse l'afficher.
      */
     public static String monPlacementTrichage(int[][] plat1, boolean[][] triche) {
