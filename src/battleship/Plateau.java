@@ -389,7 +389,7 @@ public class Plateau extends Outils implements PlateauInterface {
      * Cette methode tire et nous renvoie true si le tir a touché un bateau (ou
      * coulé) et false si le tir est dans l'eau.
      *
-     * @param newX Coordonnée X du plateau
+     * @param x Coordonnée X du plateau
      * @param y Coordonnée Y du plateau
      * @return True if shot was available and done, false if (e.g) we had
      * already shoot there.
@@ -438,7 +438,7 @@ public class Plateau extends Outils implements PlateauInterface {
                         if (newX + bat.getTaille() < this.plateau[newY].length) {
                             this.plateau[newY][newX + bat.getTaille()] = 2;
                             existsColApres = true;
-                        }
+                        }/*
                         if (newY - 1 >= 0) {
                             for (int i = (existsColAvant) ? (x - 1) : x;
                                     i < ((existsColApres) ? (x + bat.getTaille() + 1) : x + bat.getTaille());
@@ -452,7 +452,7 @@ public class Plateau extends Outils implements PlateauInterface {
                                     i++) {
                                 this.plateau[newY + 1][i] = 2;
                             }
-                        }
+                        }*/
                     } else {
                         boolean existsFilAvant = false;
                         if (newY - 1 >= 0) {
@@ -463,7 +463,7 @@ public class Plateau extends Outils implements PlateauInterface {
                         if (newY + bat.getTaille() < this.plateau.length) {
                             this.plateau[newY + bat.getTaille()][newX] = 2;
                             existsFilApres = true;
-                        }
+                        }/*
                         if (x - 1 >= 0) {
                             for (int i = (existsFilAvant) ? (x - 1) : x;
                                     i < ((existsFilApres) ? (newY + bat.getTaille() + 1) : newY + bat.getTaille());
@@ -477,7 +477,7 @@ public class Plateau extends Outils implements PlateauInterface {
                                     i++) {
                                 this.plateau[i][x + 1] = 2;
                             }
-                        }
+                        }*/
                     }
 
                     break; 
