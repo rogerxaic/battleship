@@ -258,7 +258,7 @@ public class Plateau extends Outils implements PlateauInterface {
             }
             if (horizontal) {
                 boolean existsColAvant = false;
-                if (x - 1 > 0) {
+                if (x - 1 >= 0) {
                     waterBateau[y][b - 1] = true;
                     existsColAvant = true;
                 }
@@ -267,7 +267,7 @@ public class Plateau extends Outils implements PlateauInterface {
                     waterBateau[y][b + bat.getTaille()] = true;
                     existsColApres = true;
                 }
-                if (y - 1 > 0) {
+                if (y - 1 >= 0) {
                     for (int i = (existsColAvant) ? (x - 1) : x;
                             i < ((existsColApres) ? (b + bat.getTaille()) : b + bat.getTaille() - 1);
                             i++) {
@@ -283,7 +283,7 @@ public class Plateau extends Outils implements PlateauInterface {
                 }
             } else {
                 boolean existsFilAvant = false;
-                if (y - 1 > 0) {
+                if (y - 1 >= 0) {
                     waterBateau[y - 1][x] = true;
                     existsFilAvant = true;
                 }
@@ -292,7 +292,7 @@ public class Plateau extends Outils implements PlateauInterface {
                     waterBateau[y + bat.getTaille()][x] = true;
                     existsFilApres = true;
                 }
-                if (x - 1 > 0) {
+                if (x - 1 >= 0) {
                     for (int i = (existsFilAvant) ? (x - 1) : x;
                             i < ((existsFilApres) ? (b + bat.getTaille()) : b + bat.getTaille() - 1);
                             i++) {
