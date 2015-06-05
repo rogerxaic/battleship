@@ -27,6 +27,11 @@ install:
 	@echo "">>$(RUN);
 	@echo "java -cp build battleship.Battleship lc">>$(RUN);
 	@chmod +x $(RUN)
+	
+	@echo ""
+	@echo "Vous devriez executer : "
+	@echo "./$(RUN)"
+	@echo ""
 
 update:
 	git pull origin master
