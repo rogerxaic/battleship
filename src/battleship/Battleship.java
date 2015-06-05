@@ -386,6 +386,8 @@ public class Battleship extends Outils {
                                         System.in.read();
                                     } catch (Exception e) {
                                     }
+                                } else {
+                                    clear();
                                 }
                                 break;
                             }
