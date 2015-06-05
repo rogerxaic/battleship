@@ -7,6 +7,10 @@ RUN=BatailleNavale
 all:
 	@mkdir -p build
 	@$(JAVAC) $(JFLAGS) src/*/*.ja*
+	echo ""
+	echo "Vous devriez executer : "
+	echo "make install"
+	echo ""
 
 run: install
 	./$(RUN)
