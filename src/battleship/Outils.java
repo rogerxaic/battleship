@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package battleship;
 
 import java.io.BufferedReader;
@@ -12,58 +7,52 @@ import java.util.Random;
 import java.util.Scanner;
 
 /**
- *
- * @author Roger
+ * Differents outils qu'on utilise lors qu'on execute le programme. Des outils
+ * pour afficher les tableaux, vérifier si un String est bien un numéro, faire
+ * un "clean" de l'écran, etc.
+ * @author Roger && Marta
  */
 public class Outils extends Color {
 
-//    private Plateau p1;
-//    private Plateau p2;
+    /**
+     * String qui contient l'alphabet.
+     */
     public static final String ABC = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    public static final String ABC_MIN = "abcdefghijklmnopqrstuvwxyz";
+
+    /**
+     * Objet Random d'où on obtient des entiers et booleans random.
+     */
     public static final Random RAND = new Random();
+
+    /**
+     * Objet Scanner dont on s'en sert pour lire les données que l'utilisateur
+     * va entrer dans programme.
+     */
     public static final Scanner SCAN = new Scanner(System.in);
 
-    protected static String[] banner = new String[23];
-
-    public Outils() {
-//        this.p1 = p1;
-//        this.p2 = p2;
-
-        banner[0] = "   888888b.            888             d8b 888 888          ";
-        banner[1] = "   888  \"88b           888             Y8P 888 888          ";
-        banner[2] = "   888  .88P           888                 888 888          ";
-        banner[3] = "   8888888K.   8888b.  888888  8888b.  888 888 888  .d88b.  ";
-        banner[4] = "   888  \"Y88b     \"88b 888        \"88b 888 888 888 d8P  Y8b ";
-        banner[5] = "   888    888 .d888888 888    .d888888 888 888 888 88888888 ";
-        banner[6] = "   888   d88P 888  888 Y88b.  888  888 888 888 888 Y8b.     ";
-        banner[7] = "   8888888P\"  \"Y888888  \"Y888 \"Y888888 888 888 888  \"Y8888  ";
-        banner[8] = "                                                         ";
-        banner[9] = "                                                         ";
-        banner[10] = "                                                         ";
-        banner[11] = "                                       888                  ";
-        banner[12] = "                                       888                  ";
-        banner[13] = "                                       888                  ";
-        banner[14] = "   88888b.   8888b.  888  888  8888b.  888  .d88b.          ";
-        banner[15] = "   888 \"88b     \"88b 888  888     \"88b 888 d8P  Y8b         ";
-        banner[16] = "   888  888 .d888888 Y88  88P .d888888 888 88888888         ";
-        banner[17] = "   888  888 888  888  Y8bd8P  888  888 888 Y8b.             ";
-        banner[18] = "   888  888 \"Y888888   Y88P   \"Y888888 888  \"Y8888          ";
-        banner[19] = "                                                         ";
-        banner[20] = "                                                         ";
-        banner[21] = "                                                         ";
-        banner[22] = "              [Press ENTER to continue]                   ";
-
-    }
-
+    /**
+     * Méthode qui affiche 2 plateaux.
+     * @param plat1 Plateau du joueur.
+     * @param plat2 Plateau de l'adversaire.
+     */
     public static void affiche(Plateau plat1, Plateau plat2) {
         System.out.println(getAffiche(plat1, plat2));
     }
 
-    public static void affiche(Plateau plat1, Plateau plat2, String info) {
-        System.out.println(getAffiche(plat1, plat2) + info);
+    /**
+     * Méthode qui affiche 2 plateaux et un texte en plus (e.g. des instructions).
+     * @param plat1 Plateau du joueur.
+     * @param plat2 Plateau de l'adversaire.
+     * @param text Texte qu'on veut afficher après avoir affiché les plateaux.
+     */
+    public static void affiche(Plateau plat1, Plateau plat2, String text) {
+        System.out.println(getAffiche(plat1, plat2) +"\n"+ text);
     }
 
+    /**
+     * Méthode qui affiche le Banner de bienvenue.
+     * @throws IOException ...
+     */
     public static void Banner() throws IOException {
         System.out.println(getBanner());
 
@@ -75,6 +64,12 @@ public class Outils extends Color {
         exe("clear");
     }
 
+    /**
+     *
+     * @param command Commande qu'on veut executer dans le système, passée par un 
+     * filtre.
+     * @throws IOException ...
+     */
     public static void exe(String command) throws IOException {
         String OS = System.getProperty("os.name").toLowerCase();
         boolean isWindows = OS.contains("win");
@@ -85,19 +80,19 @@ public class Outils extends Color {
 
             switch (command) {
                 case "clear":
-                    toPass = (isWindows) ? "" : "clear";
+                    toPass = (isWindows) ? ":" : "clear";
                     break;
                 case "start":
-                    toPass = (isWindows) ? "" : "tput smcup";
+                    toPass = (isWindows) ? ":" : "tput smcup";
                     break;
                 case "finish":
-                    toPass = (isWindows) ? "" : "tput rmcup";
+                    toPass = (isWindows) ? ":" : "tput rmcup";
                     break;
                 case "ifconfig":
                     toPass = (isWindows) ? "ipconfig" : "ifconfig | grep inet\\ ";
                     break;
                 default:
-                    toPass = "";
+                    toPass = ":"; // ':' est la commande qui ne fait rien.
                     break;
             }
 
@@ -121,6 +116,13 @@ public class Outils extends Color {
 
     }
 
+    /**
+     *
+     * @param plat Plateau du joueur
+     * @param plato Plateau de l'adversaire
+     * @return Les deux plateux (joueur et adversaire) dans un format human-readable
+     * pour qu'on puisse les afficher a l'écran.
+     */
     public static String getAffiche(Plateau plat, Plateau plato) {
 
         int[][] plat1 = plat.getStatus();
@@ -146,7 +148,7 @@ public class Outils extends Color {
         base += header;
 
         for (int i = 0; i < plat1.length; i++) {
-            base += getLletra(i);
+            base += getLettre(i);
             for (int j = 0; j < plat1[i].length; j++) {
                 switch (plat1[i][j]) {
                     case 1:
@@ -202,7 +204,37 @@ public class Outils extends Color {
         return base + header;
     }
 
+    /**
+     *
+     * @return Le banner de bienvenue en format string.
+     */
     public static String getBanner() {
+
+        String[] banner = new String[22];
+
+        banner[0] = "   888888b.            888             d8b 888 888          ";
+        banner[1] = "   888  \"88b           888             Y8P 888 888          ";
+        banner[2] = "   888  .88P           888                 888 888          ";
+        banner[3] = "   8888888K.   8888b.  888888  8888b.  888 888 888  .d88b.  ";
+        banner[4] = "   888  \"Y88b     \"88b 888        \"88b 888 888 888 d8P  Y8b ";
+        banner[5] = "   888    888 .d888888 888    .d888888 888 888 888 88888888 ";
+        banner[6] = "   888   d88P 888  888 Y88b.  888  888 888 888 888 Y8b.     ";
+        banner[7] = "   8888888P\"  \"Y888888  \"Y888 \"Y888888 888 888 888  \"Y8888  ";
+        banner[8] = "                                                         ";
+        banner[9] = "                                                         ";
+        banner[10] = "                                                         ";
+        banner[11] = "                                       888                  ";
+        banner[12] = "                                       888                  ";
+        banner[13] = "                                       888                  ";
+        banner[14] = "   88888b.   8888b.  888  888  8888b.  888  .d88b.          ";
+        banner[15] = "   888 \"88b     \"88b 888  888     \"88b 888 d8P  Y8b         ";
+        banner[16] = "   888  888 .d888888 Y88  88P .d888888 888 88888888         ";
+        banner[17] = "   888  888 888  888  Y8bd8P  888  888 888 Y8b.             ";
+        banner[18] = "   888  888 \"Y888888   Y88P   \"Y888888 888  \"Y8888          ";
+        banner[19] = "                                                         ";
+        banner[20] = "                                                         ";
+        banner[21] = "              [Press ENTER to continue]                   ";
+
         String resultat = "";
         for (int i = 0; i < banner.length; i++) {
             resultat += banner[i] + "\n";
@@ -210,32 +242,26 @@ public class Outils extends Color {
         return resultat;
     }
 
-    public static String getLettre(int x) {
-        String letra = "";
-        if (x < 26) {
-            letra = "" + ABC.charAt(x);
-        } else {
-            int fois = 0;
-            while (x >= 0) {
-                letra = "" + ABC.charAt(x % 26);
-                x -= 26;
-                fois++;
-            }
-            if (fois < 26) {
-                letra = ABC.charAt(fois - 2) + letra;
-            }
-        }
-        return letra;
-    }
-
-    public static String getLletra(int x) {
+    /**
+     * Méthode qui renvoie la lettre de l'alphabet qui correspond a un numéro donné
+     * en paramètre. Après le Z, elle renvoie AA, AB, AC, etc.
+     * 
+     * @param numero Numéro qu'on veut transformer en lettre de l'alphabet.
+     * @return Lettre de l'alphabet qui est en position 'numero'.
+     */
+    public static String getLettre(int numero) {
         String resultat;
-        for (resultat = ""; x >= 0; x = Integer.parseInt("" + (x / 26)) - 1) {
-            resultat = (char) (x % 26 + 0x41) + resultat;
+        for (resultat = ""; numero >= 0; numero = Integer.parseInt("" + (numero / 26)) - 1) {
+            resultat = (char) (numero % 26 + 0x41) + resultat;
         }
         return resultat;
     }
 
+    /**
+     *
+     * @param string String qu'on veut savoir si s'agit d'un numéro.
+     * @return True si le string est un numéro, false sinon.
+     */
     public static boolean isNumber(String string) {
         try {
             Long.parseLong(string);
@@ -245,6 +271,11 @@ public class Outils extends Color {
         return true;
     }
 
+    /**
+     *
+     * @param plat1 Plateau dont on veut connaître le placement des bateaux.
+     * @return Le plateau dans un format human-readable pour qu'on puisse l'afficher.
+     */
     public static String monPlacement(int[][] plat1) {
 
         String base = "";
@@ -258,7 +289,7 @@ public class Outils extends Color {
         base += headerP1 + "\n";
 
         for (int i = 0; i < plat1.length; i++) {
-            base += getLletra(i);
+            base += getLettre(i);
             for (int j = 0; j < plat1[i].length; j++) {
                 switch (plat1[i][j]) {
                     case 1:
@@ -273,7 +304,51 @@ public class Outils extends Color {
                         break;
                 }
             }
-            base += getLletra(i);
+            base += getLettre(i);
+
+            base += "\n";
+
+        }
+
+        return base + headerP1;
+    }
+    
+    /**
+     *
+     * @param plat1 Plateau dont on veut connaître le placement des bateaux.
+     * @return Le plateau dans un format human-readable pour qu'on puisse l'afficher.
+     */
+    public static String monPlacementTrichage(int[][] plat1, boolean[][] triche) {
+
+        String base = "";
+
+        String headerP1 = " ";
+
+        for (int i = 0; i < plat1[0].length; i++) {
+            headerP1 += (i < 10) ? " " + i + " " : " " + i;
+        }
+
+        base += headerP1 + "\n";
+
+        for (int i = 0; i < plat1.length; i++) {
+            base += getLettre(i);
+            for (int j = 0; j < plat1[i].length; j++) {
+                switch (plat1[i][j]) {
+                    case 1:
+                        base += ANSI_BLUE + " ·" + ANSI_RESET + " "; //WATER
+                        break;
+
+                    case 5:
+                        base += ANSI_PURPLE + " H" + ANSI_RESET + " "; //SHIP 
+                        break;
+                    default:
+                        base += " · ";
+                        break;
+                }
+                
+                base += "         " + ((triche[i][j])?"T":"F");
+            }
+            base += getLettre(i);
 
             base += "\n";
 
@@ -282,6 +357,11 @@ public class Outils extends Color {
         return base + headerP1;
     }
 
+    /**
+     *
+     * @param surface La surface du plateau.
+     * @return Le numéro de bateaux qu'on va mettre dans un plateau de surface surface.
+     */
     public static int surface2Bateaux(int surface) {
         int resultat = 5;
 
@@ -314,6 +394,12 @@ public class Outils extends Color {
         return resultat;
     }
 
+    /**
+     *
+     * @param width La largeur du plateau.
+     * @param height L'hauteur du plateau.
+     * @return La surface d'un plateau de dimensions width et height.
+     */
     public static int surface2Bateaux(int width, int height) {
         return surface2Bateaux(height * width);
     }

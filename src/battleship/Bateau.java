@@ -1,39 +1,60 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package battleship;
 
 /**
  *
- * @author Roger
+ * @author Roger && Marta
  */
 public class Bateau extends Outils implements BateauInterface {
 
+    /**
+     * Taille du bateau
+     */
     protected int taille;
+
+    /**
+     * True si le bateau est en position horizontale, false s'il est en position verticale
+     */
     protected boolean horizontal;
+
+    /**
+     * Abscisse où la première case du bateau est placée
+     */
     protected int x = -1;
+
+    /**
+     * Ordonnée où la première case du bateau est placée
+     */
     protected int y = -1;
+
+    /**
+     * On s'en sert pour savoir si le bateau est placé ou non
+     */
     protected boolean positioned = false;
-    protected boolean[] status; //1 flottant, 0 touché
+
+    /**
+     * Tableau avec l'état du bateau, true pour la partie qui flote, false pour
+     * la partie qui est touchée
+     */
+    protected boolean[] status; 
+
+    /**
+     * État [coulé] du bateau, true s'il est coulé, false sinon
+     */
     protected boolean coule;
-    protected int[] tailles;
-    protected int degats;
+
+    /**
+     * Nom du bateau. On l'obtient automatiquement avec sa taille.
+     */
     protected String nom;
 
+    
+    
+    /**
+     * Constructeur d'un bateau d'après sa taille.
+     * @param taille Taille du bateau
+     */
     public Bateau(int taille) {
-        this.taille = taille;
-        this.status = new boolean[taille];
-        for (int i = 0; i < status.length; i++) {
-            status[i] = true;
-        }
-        this.degats = 0;
-        this.nom = getNomBateaux(taille);
-    }
-
-    public Bateau(int ta, boolean auto) {
-        tailles = new int[11];
+        int[] tailles = new int[11];
         tailles[0] = 2;
         tailles[1] = 4;
         tailles[2] = 3;
@@ -46,46 +67,67 @@ public class Bateau extends Outils implements BateauInterface {
         tailles[9] = 3;
         tailles[10] = 4;
 
-        int tailleAvant = tailles[ta];
+        int tailleAvant = tailles[taille];
         this.taille = tailleAvant;
         this.status = new boolean[tailleAvant];
         for (int i = 0; i < status.length; i++) {
             status[i] = true;
         }
-        this.degats = 0;
+
         this.nom = getNomBateaux(tailleAvant);
     }
 
+    /**
+     *
+     * @return True si le bateau est déjà mis sur le plateau, false sinon.
+     */
     @Override
     public boolean isPositioned() {
         return (positioned || (x > -1 && y > -1));
     }
 
+    /**
+     * Méthode pour changer la abscisse où le bateau commence.
+     * @param x
+     */
     @Override
     public void setPositionX(int x) {
         this.x = x;
     }
 
+    /**
+     * Méthode pour changer l'ordonnée où le bateau commence.
+     * @param y
+     */
     @Override
     public void setPositionY(int y) {
         this.y = y;
     }
 
-    @Override
-    public String toString() {
-        return "Bateau{" + "taille=" + taille + ", horizontal=" + horizontal + ", x=" + x + ", y=" + y + ", positioned=" + positioned + ", status=" + status + '}';
-    }
-
+    /**
+     * 
+     * @return La taille du bateau.
+     */
     @Override
     public int getTaille() {
         return taille;
     }
 
+    /**
+     * Méthode qui établit la direction d'un bateau.
+     * @param horizontal
+     */
     @Override
     public void setHorizontal(boolean horizontal) {
         this.horizontal = horizontal;
     }
 
+    /**
+     * Méthode qu'on utilise lorsqu'on met un bateau dans un plateau.
+     * @param x La abscisse où la première case du bateau est placée.
+     * @param y La ordonnée où la première case du bateau est placée. 
+     * @param horizontal True si le bateau est en horizontal, false sinon.
+     */
     @Override
     public void setStartPosition(int x, int y, boolean horizontal) {
         this.x = x;
@@ -94,18 +136,39 @@ public class Bateau extends Outils implements BateauInterface {
         this.positioned = true;
     }
 
+    /**
+     *
+     * @return True si le bateau est positionné en horizontal, false sinon.
+     */
+    @Override
     public boolean isHorizontal() {
         return horizontal;
     }
 
+    /**
+     *
+     * @return La abscisse où le bateau commence.
+     */
+    @Override
     public int getX() {
         return x;
     }
 
+    /**
+     *
+     * @return La ordonnée où le bateau commence.
+     */
+    @Override
     public int getY() {
         return y;
     }
 
+    /**
+     * Méthode qui renvoie si des coordonnées x et y appartiennent au bateau.
+     * @param x Abscisse qu'on veut vérifier.
+     * @param y Ordonnée qu'on veut vérifier.
+     * @return True si elles y appartiennent, false sinon.
+     */
     @Override
     public boolean isBateau(int x, int y) {
 
@@ -115,6 +178,13 @@ public class Bateau extends Outils implements BateauInterface {
         return appartient;
     }
 
+    /**
+     * Méthode qui sert a notifier un bateau qu'on vient de tirer aux coordonnées
+     * x et y.
+     * @param x Abscisse où on vient de tirer.
+     * @param y Ordonnée où on vient de tirer.
+     * @return True si on a touché le bateau, false sinon.
+     */
     @Override
     public boolean tir(int x, int y) {
 
@@ -143,7 +213,6 @@ public class Bateau extends Outils implements BateauInterface {
 //        }
         if (isBateau(x, y)) {
             tir = true;
-            this.degats++;
             if (horizontal) {
                 status[x - this.x] = false;
             } else {
@@ -154,6 +223,10 @@ public class Bateau extends Outils implements BateauInterface {
         return tir;
     }
 
+    /**
+     * Méthode qu'on utilise pour connaître l'état d'un bateau.
+     * @return True si le bateau est coulé, false sinon.
+     */
     @Override
     public boolean isCoule() {
         boolean resultat = false;
@@ -164,6 +237,12 @@ public class Bateau extends Outils implements BateauInterface {
 
     }
 
+    /**
+     * Méthode utilisée lorsqu'on joue une deuxième (ou n-ième) fois. Elle 
+     * mets les valeurs du bateau a celles qu'on avait avant de démarrer le jeu
+     * pour qu'on puisse jouer encore une fois.
+     */
+    @Override
     public void resetBateau() {
 
         for (int i = 0; i < status.length; i++) {
@@ -175,6 +254,13 @@ public class Bateau extends Outils implements BateauInterface {
         this.positioned = false;
     }
 
+    /**
+     * Méthode qu'on utilise pour obtenir automatiquement le nom d'un bateau
+     * d'après sa taille.
+     * @param taille Taille du bateau.
+     * @return Nom du bateau d'après la taille.
+     */
+    @Override
     public String getNomBateaux(int taille) {
 
 //        1 contre-torpilleurs (3 cases)
@@ -205,6 +291,11 @@ public class Bateau extends Outils implements BateauInterface {
         return resultat;
     }
 
+    /**
+     * Méthode pour connaître le nom d'un bateau crée.
+     * @return Nom du bateau
+     */
+    @Override
     public String getNom() {
         return nom;
     }

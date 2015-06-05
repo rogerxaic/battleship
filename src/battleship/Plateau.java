@@ -1,28 +1,61 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package battleship;
 
-import java.util.Arrays;
 import java.util.HashMap;
 
 /**
  *
- * @author Roger
+ * @author Roger && Marta
  */
 public class Plateau extends Outils implements PlateauInterface {
 
+    /**
+     *
+     */
     protected int[][] plateau; //1=WATER;2=FAIL;3=GOOD;4=SUNK;5=SHIP
+
+    /**
+     *
+     */
     protected HashMap<String, Bateau> flota;
+
+    /**
+     *
+     */
     protected String propietari;
+
+    /**
+     *
+     */
     protected boolean[][] waterBateau; // Is there ship? True / false
+
+    /**
+     *
+     */
     protected int tirsFaits;
+
+    /**
+     *
+     */
     protected boolean isComputer;
+
+    /**
+     *
+     */
     protected boolean isLastCoule; //true if last shot has coulé 1 ship
+
+    /**
+     *
+     */
     protected int nbDeaths;
 
+    /**
+     *
+     * @param width
+     * @param height
+     * @param flota
+     * @param propietari
+     * @param isComputer
+     */
     public Plateau(int width, int height, HashMap<String, Bateau> flota, String propietari, boolean isComputer) {
         this.plateau = new int[width][height];
         this.waterBateau = new boolean[width][height];
@@ -40,10 +73,17 @@ public class Plateau extends Outils implements PlateauInterface {
         }
     }
 
+    /**
+     *
+     */
     public void addNbDeaths() {
         this.nbDeaths++;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String getBateauxToSet() {
         String toPlace = "";
@@ -57,6 +97,10 @@ public class Plateau extends Outils implements PlateauInterface {
         return toPlace;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String getListeBateauxToSet() {
         String toPlace = "";
@@ -71,20 +115,35 @@ public class Plateau extends Outils implements PlateauInterface {
         return toPlace;
     }
     
+    /**
+     *
+     * @return
+     */
     public String getPropietari() {
         return propietari;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int[][] getStatus() {
         return plateau;
     }
     
-    
+    /**
+     *
+     * @return
+     */
     public boolean[][] getWaterBateau() {
         return waterBateau;
     }
     
+    /**
+     *
+     * @return
+     */
     @Override
     public boolean isDeadAllBateaux() {
         boolean isDead = true;
@@ -94,16 +153,35 @@ public class Plateau extends Outils implements PlateauInterface {
         return isDead;
     }
     
+    /**
+     *
+     * @return
+     */
     public boolean isIsLastCoule() {
         return isLastCoule;
     }
 
-    
+    /**
+     *
+     * @param x
+     * @param y
+     * @param horizontal
+     * @param bat
+     * @return
+     */
     @Override
     public boolean isRoom(int x, int y, boolean horizontal, Bateau bat) {
         return isRoom(x, y, horizontal, bat.getTaille());
     }
 
+    /**
+     *
+     * @param x
+     * @param y
+     * @param horizontal
+     * @param taille
+     * @return
+     */
     @Override
     public boolean isRoom(int x, int y, boolean horizontal, int taille) {
 
@@ -128,6 +206,10 @@ public class Plateau extends Outils implements PlateauInterface {
         return !isThereShip;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public boolean isSetAllBateaux() {
         boolean isSet = true;
@@ -139,12 +221,25 @@ public class Plateau extends Outils implements PlateauInterface {
         return isSet;
     }
     
+    /**
+     *
+     * @param x
+     * @param y
+     * @return
+     */
     @Override
     public boolean isTirValide(int x, int y) {
         boolean isInPlateau = (x >= 0 && x < this.plateau[0].length) && (y >= 0 && y < this.plateau.length);
         return isInPlateau && (this.plateau[y][x] == 1 || this.plateau[y][x] == 5);
     }
 
+    /**
+     *
+     * @param bat
+     * @param x
+     * @param y
+     * @param horizontal
+     */
     @Override
     public void setBateau(Bateau bat, int x, int y, boolean horizontal) {
         if (isRoom(x, y, horizontal, bat)) {
@@ -216,6 +311,9 @@ public class Plateau extends Outils implements PlateauInterface {
         }
     }
 
+    /**
+     * Méthode pour placer au hasard tous les bateaux.
+     */
     @Override
     public void placerAll() {
         for (String entry : flota.keySet()) {
@@ -224,6 +322,10 @@ public class Plateau extends Outils implements PlateauInterface {
 
     }
 
+    /**
+     * Méthode pour placer au hasard un bateau.
+     * @param bat Bateau qu'on veut placer.
+     */
     @Override
     public void placerRandom(Bateau bat) {
         while (!bat.isPositioned()) {
@@ -238,11 +340,10 @@ public class Plateau extends Outils implements PlateauInterface {
         }
     }
 
-    
-
-    
-
-
+    /**
+     * Méthode pour rétablir le plateau. Il rétablit aussi les bateaux que le
+     * plateau contient.
+     */
     @Override
     public void reset() {
         for (String entry : flota.keySet()) {
@@ -257,6 +358,10 @@ public class Plateau extends Outils implements PlateauInterface {
 
     }
 
+    /**
+     * Méthode pour l'affichage des profs. On s'en sert pas.
+     * @return Un tableau int[][] pour l'affichage des profs (Moodle2).
+     */
     public int[][] plateauGr() {
         int[][] resultat = new int[plateau.length][plateau[0].length];
 

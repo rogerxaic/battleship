@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 /**
  *
@@ -13,13 +12,24 @@ import java.util.Scanner;
  */
 public class Battleship extends Outils {
 
+    /**
+     *
+     */
     public static final Outils OUTIL = new Outils();
+
+    /**
+     *
+     */
     public static final boolean IS_WINDOWS = System.getProperty("os.name").toLowerCase().contains("win");
+
+    /**
+     *
+     */
     public static final String USERNAME = System.getProperty("user.name");
 
     /**
      * @param args the command line arguments
-     * @throws java.io.IOException
+     * @throws java.io.IOException Quand on execute la méthode exe et qu'il y a eu un erreur
      */
     public static void main(String[] args) throws IOException {
         exe("start");
@@ -35,7 +45,6 @@ public class Battleship extends Outils {
          * terminal size. If it is not run with runner, we suppose terminal size
          * to be minimal.
          *
-         * TODO : Throw error message on size choice if screen is too small
          */
         int cols, lines;
         if (isInit) {
@@ -141,7 +150,10 @@ public class Battleship extends Outils {
             if (amplada <= cols && alsada <= lines) {
                 break;
             }
-            System.out.println(red("Cette taille risque de ne pas laisser rentrer les plateaux dans l'ecran.") + "\nTAILLE : ");
+            System.out.println(red("Cette taille risque de ne pas laisser rentrer les plateaux dans l'ecran.")
+                    +((!isInit)?"\nIl faut démarrer le jeu avec "+green("./BatailleNavale")+".\n"
+                            +"Veuillez lire le fichier README.md, sinon la taille maximale est 13x10.":"") 
+                    + "\nTAILLE : ");
         }
 
         int nbBateaux;
@@ -192,8 +204,8 @@ public class Battleship extends Outils {
         HashMap<String, Bateau> flota1 = new HashMap<>();
 
         for (int i = 0; i < nbBateaux; i++) {
-            Bateau a = new Bateau(i, true);
-            flota1.put(getLletra(i), a);
+            Bateau a = new Bateau(i);
+            flota1.put(getLettre(i), a);
         }
 
         Plateau p1 = new Plateau(height, width, flota1, USERNAME, false);
@@ -214,12 +226,12 @@ public class Battleship extends Outils {
                 HashMap<String, Bateau> flota = new HashMap<>();
 
                 for (int j = 0; j < nbBateaux; j++) {
-                    Bateau bato = new Bateau(j, true);
-                    flota.put(getLletra(j), bato);
+                    Bateau bato = new Bateau(j);
+                    flota.put(getLettre(j), bato);
                 }
 
                 Plateau p2 = new Plateau(height, width, flota, nomJoueur, false);
-                tablero.put("" + getLletra(i), p2);
+                tablero.put("" + getLettre(i), p2);
             }
 
 //            System.out.print(nomJoueur);
@@ -229,8 +241,8 @@ public class Battleship extends Outils {
             HashMap<String, Bateau> flota = new HashMap<>();
 
             for (int i = 0; i < nbBateaux; i++) {
-                Bateau bato = new Bateau(i, true);
-                flota.put(getLletra(i), bato);
+                Bateau bato = new Bateau(i);
+                flota.put(getLettre(i), bato);
             }
 
             Plateau p2 = new Plateau(height, width, flota, nomJoueur, true);
@@ -371,7 +383,7 @@ public class Battleship extends Outils {
                                 clear();
                                 affiche(tireur, target);
                                 //System.out.println("TIR DE " + bcyan(tireur.getPropietari().toUpperCase()));
-                                System.out.println("Votre tir [" + getLletra(y) + x + "] a touché un bateau, vous avez le droit à un autre. ");
+                                System.out.println("Votre tir [" + getLettre(y) + x + "] a touché un bateau, vous avez le droit à un autre. ");
                             } else {
                                 //The other one's turn
                                 clear();
@@ -433,6 +445,12 @@ public class Battleship extends Outils {
         exe("finish");
     }
 
+    /**
+     * Méthode qui démande au joueur de placer tous ses bateaux. Le joueur a 
+     * l'option de les placer au hasard s'il veut.
+     * @param tablero
+     * @throws IOException
+     */
     public static void placerAll(HashMap<String, Plateau> tablero) throws IOException {
 //        Color c = new Color();
         for (String entry : tablero.keySet()) {
@@ -516,6 +534,12 @@ public class Battleship extends Outils {
         }
     }
 
+    /**
+     *
+     * @param command
+     * @return
+     * @throws IOException
+     */
     public static String check(String command) throws IOException {
         String resultat = "";
         if (!IS_WINDOWS) {
