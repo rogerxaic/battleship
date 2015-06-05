@@ -40,20 +40,8 @@ public class Plateau extends Outils implements PlateauInterface {
         }
     }
 
-    @Override
-    public int[][] getStatus() {
-        return plateau;
-    }
-
-    @Override
-    public boolean isSetAllBateaux() {
-        boolean isSet = true;
-        for (String entry : flota.keySet()) {
-            String key = entry;
-            Bateau value = flota.get(key);
-            isSet &= value.isPositioned();
-        }
-        return isSet;
+    public void addNbDeaths() {
+        this.nbDeaths++;
     }
 
     @Override
@@ -67,6 +55,53 @@ public class Plateau extends Outils implements PlateauInterface {
             }
         }
         return toPlace;
+    }
+
+    @Override
+    public String getListeBateauxToSet() {
+        String toPlace = "";
+        for (String entry : flota.keySet()) {
+            String key = entry;
+            Bateau value = flota.get(key);
+            if (!value.isPositioned()) {
+                toPlace += "\t" + key + ". " + value.getNom() + " [TAILLE " + value.getTaille() + "]\n";
+            }
+        }
+        toPlace += "\n\tR. Random\n";
+        return toPlace;
+    }
+    
+    public String getPropietari() {
+        return propietari;
+    }
+
+    @Override
+    public int[][] getStatus() {
+        return plateau;
+    }
+    
+    
+    public boolean[][] getWaterBateau() {
+        return waterBateau;
+    }
+    
+    @Override
+    public boolean isDeadAllBateaux() {
+        boolean isDead = true;
+        for (String entry : flota.keySet()) {
+            isDead &= flota.get(entry).isCoule();
+        }
+        return isDead;
+    }
+    
+    public boolean isIsLastCoule() {
+        return isLastCoule;
+    }
+
+    
+    @Override
+    public boolean isRoom(int x, int y, boolean horizontal, Bateau bat) {
+        return isRoom(x, y, horizontal, bat.getTaille());
     }
 
     @Override
@@ -94,8 +129,20 @@ public class Plateau extends Outils implements PlateauInterface {
     }
 
     @Override
-    public boolean isRoom(int x, int y, boolean horizontal, Bateau bat) {
-        return isRoom(x, y, horizontal, bat.getTaille());
+    public boolean isSetAllBateaux() {
+        boolean isSet = true;
+        for (String entry : flota.keySet()) {
+            String key = entry;
+            Bateau value = flota.get(key);
+            isSet &= value.isPositioned();
+        }
+        return isSet;
+    }
+    
+    @Override
+    public boolean isTirValide(int x, int y) {
+        boolean isInPlateau = (x >= 0 && x < this.plateau[0].length) && (y >= 0 && y < this.plateau.length);
+        return isInPlateau && (this.plateau[y][x] == 1 || this.plateau[y][x] == 5);
     }
 
     @Override
@@ -114,63 +161,67 @@ public class Plateau extends Outils implements PlateauInterface {
                 }
 
             }
-//            if (horizontal) {
-//                boolean existsColAvant = false;
-//                if (x - 1 > 0) {
-//                    waterBateau[y][b - 1] = true;
-//                    existsColAvant = true;
-//                }
-//                boolean existsColApres = false;
-//                if (x + bat.getTaille() < this.plateau[y].length) {
-//                    waterBateau[y][b + bat.getTaille()] = true;
-//                    existsColApres = true;
-//                }
-//                if (y - 1 > 0) {
-//                    for (int i = (existsColAvant) ? (x - 1) : x;
-//                            i < ((existsColApres) ? (b + bat.getTaille()) : b + bat.getTaille() - 1);
-//                            i++) {
-//                        waterBateau[y - 1][i] = true;
-//                    }
-//                }
-//                if (y + 1 < this.plateau.length) {
-//                    for (int i = (existsColAvant) ? (x - 1) : x;
-//                            i < ((existsColApres) ? (b + bat.getTaille()) : b + bat.getTaille() - 1);
-//                            i++) {
-//                        waterBateau[y + 1][i] = true;
-//                    }
-//                }
-//            } else {
-//                boolean existsFilAvant = false;
-//                if (y - 1 > 0) {
-//                    waterBateau[y - 1][x] = true;
-//                    existsFilAvant = true;
-//                }
-//                boolean existsFilApres = false;
-//                if (y + bat.getTaille() < this.plateau.length) {
-//                    waterBateau[y + bat.getTaille()][x] = true;
-//                    existsFilApres = true;
-//                }
-//                if (x - 1 > 0) {
-//                    for (int i = (existsFilAvant) ? (x - 1) : x;
-//                            i < ((existsFilApres) ? (b + bat.getTaille()) : b + bat.getTaille() - 1);
-//                            i++) {
-//                        waterBateau[i][x - 1] = true;
-//                    }
-//                }
-//                if (x + 1 < this.plateau[y].length) {
-//                    for (int i = (existsFilAvant) ? (x + 1) : x;
-//                            i < ((existsFilApres) ? (b + bat.getTaille()) : b + bat.getTaille() - 1);
-//                            i++) {
-//                        waterBateau[i][x + 1] = true;
-//                    }
-//                }
-//            }
+            if (horizontal) {
+                boolean existsColAvant = false;
+                if (x - 1 > 0) {
+                    waterBateau[y][b - 1] = true;
+                    existsColAvant = true;
+                }
+                boolean existsColApres = false;
+                if (x + bat.getTaille() < this.plateau[y].length) {
+                    waterBateau[y][b + bat.getTaille()] = true;
+                    existsColApres = true;
+                }
+                if (y - 1 > 0) {
+                    for (int i = (existsColAvant) ? (x - 1) : x;
+                            i < ((existsColApres) ? (b + bat.getTaille()) : b + bat.getTaille() - 1);
+                            i++) {
+                        waterBateau[y - 1][i] = true;
+                    }
+                }
+                if (y + 1 < this.plateau.length) {
+                    for (int i = (existsColAvant) ? (x - 1) : x;
+                            i < ((existsColApres) ? (b + bat.getTaille()) : b + bat.getTaille() - 1);
+                            i++) {
+                        waterBateau[y + 1][i] = true;
+                    }
+                }
+            } else {
+                boolean existsFilAvant = false;
+                if (y - 1 > 0) {
+                    waterBateau[y - 1][x] = true;
+                    existsFilAvant = true;
+                }
+                boolean existsFilApres = false;
+                if (y + bat.getTaille() < this.plateau.length) {
+                    waterBateau[y + bat.getTaille()][x] = true;
+                    existsFilApres = true;
+                }
+                if (x - 1 > 0) {
+                    for (int i = (existsFilAvant) ? (x - 1) : x;
+                            i < ((existsFilApres) ? (b + bat.getTaille()) : b + bat.getTaille() - 1);
+                            i++) {
+                        waterBateau[i][x - 1] = true;
+                    }
+                }
+                if (x + 1 < this.plateau[y].length) {
+                    for (int i = (existsFilAvant) ? (x + 1) : x;
+                            i < ((existsFilApres) ? (b + bat.getTaille()) : b + bat.getTaille() - 1);
+                            i++) {
+                        waterBateau[i][x + 1] = true;
+                    }
+                }
+            }
 
         }
     }
 
-    public String getPropietari() {
-        return propietari;
+    @Override
+    public void placerAll() {
+        for (String entry : flota.keySet()) {
+            placerRandom(flota.get(entry));
+        }
+
     }
 
     @Override
@@ -187,26 +238,10 @@ public class Plateau extends Outils implements PlateauInterface {
         }
     }
 
-    @Override
-    public void placerAll() {
-        for (String entry : flota.keySet()) {
-            placerRandom(flota.get(entry));
-        }
+    
 
-    }
+    
 
-    @Override
-    public boolean isDeadAllBateaux() {
-        boolean isDead = true;
-        for (String entry : flota.keySet()) {
-            isDead &= flota.get(entry).isCoule();
-        }
-        return isDead;
-    }
-
-    public boolean[][] getWaterBateau() {
-        return waterBateau;
-    }
 
     @Override
     public void reset() {
@@ -244,10 +279,11 @@ public class Plateau extends Outils implements PlateauInterface {
     }
 
     /**
-     * Cette methode tire et nous renvoie true si le tir a touché un bateau (ou coulé)
-     * et false si le tir est dans l'eau.
+     * Cette methode tire et nous renvoie true si le tir a touché un bateau (ou
+     * coulé) et false si le tir est dans l'eau.
+     *
      * @param x Coordonnée X du plateau
-     * @param y Coordonnée Y du plateau 
+     * @param y Coordonnée Y du plateau
      * @return True if shot was available and done, false if (e.g) we had
      * already shoot there.
      */
@@ -259,18 +295,16 @@ public class Plateau extends Outils implements PlateauInterface {
 
         if (this.plateau[y][x] == 5) {
 
-            
-            
             this.plateau[y][x] = 3;
 
             for (String entry : flota.keySet()) {
                 Bateau bat = flota.get(entry);
                 boolean touche = false;
                 boolean coule = false;
-                
+
                 touche = bat.tir(x, y);
                 coule = bat.isCoule();
-               
+
                 if (touche && coule) {
                     if (bat.isHorizontal()) {
                         for (int i = bat.getX(); i < (bat.getX() + bat.getTaille()); i++) {
@@ -301,34 +335,8 @@ public class Plateau extends Outils implements PlateauInterface {
         return resultat;
     }
 
-    @Override
-    public boolean isTirValide(int x, int y) {
-        boolean isInPlateau = (x>=0&&x<this.plateau[0].length) && (y>=0 &&y<this.plateau.length);
-        return isInPlateau&&(this.plateau[y][x] == 1 || this.plateau[y][x] == 5);
-    }
-
-    public boolean isIsLastCoule() {
-        return isLastCoule;
-    }
-
-    public void addNbDeaths() {
-        this.nbDeaths ++;
-    }
-
-    @Override
-    public String getListeBateauxToSet() {
-        String toPlace = "";
-        for (String entry : flota.keySet()) {
-            String key = entry;
-            Bateau value = flota.get(key);
-            if (!value.isPositioned()) {
-                toPlace += "\t"+key+". "+value.getNom()+" [TAILLE "+value.getTaille()+"]\n";
-            }
-        }
-        toPlace += "\n\tR. Random\n";
-        return toPlace;
-    }
     
+
     
 
 }

@@ -1,0 +1,2 @@
+2 lletres quan demana LETTRE+NUMÉRO
+	(escollint bateau)

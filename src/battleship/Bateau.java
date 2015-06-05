@@ -28,7 +28,7 @@ public class Bateau extends Outils implements BateauInterface {
         for (int i = 0; i < status.length; i++) {
             status[i] = true;
         }
-        this.degats=0;
+        this.degats = 0;
         this.nom = getNomBateaux(taille);
     }
 
@@ -45,18 +45,17 @@ public class Bateau extends Outils implements BateauInterface {
         tailles[8] = 2;
         tailles[9] = 3;
         tailles[10] = 4;
-        
+
         int tailleAvant = tailles[ta];
         this.taille = tailleAvant;
         this.status = new boolean[tailleAvant];
         for (int i = 0; i < status.length; i++) {
             status[i] = true;
         }
-        this.degats=0;
+        this.degats = 0;
         this.nom = getNomBateaux(tailleAvant);
     }
-    
-    
+
     @Override
     public boolean isPositioned() {
         return (positioned || (x > -1 && y > -1));
@@ -116,7 +115,6 @@ public class Bateau extends Outils implements BateauInterface {
         return appartient;
     }
 
-
     @Override
     public boolean tir(int x, int y) {
 
@@ -143,19 +141,19 @@ public class Bateau extends Outils implements BateauInterface {
 //                }
 //            }
 //        }
-        if(isBateau(x, y)){
+        if (isBateau(x, y)) {
             tir = true;
             this.degats++;
-            if(horizontal) {
-                status[x-this.x]= false;  
+            if (horizontal) {
+                status[x - this.x] = false;
             } else {
-                status[y-this.y]= false;
+                status[y - this.y] = false;
             }
         }
-        
+
         return tir;
     }
-    
+
     @Override
     public boolean isCoule() {
         boolean resultat = false;
@@ -174,11 +172,11 @@ public class Bateau extends Outils implements BateauInterface {
         this.coule = false;
         this.x = -1;
         this.y = -1;
-        this.positioned = false ;
+        this.positioned = false;
     }
-    
+
     public String getNomBateaux(int taille) {
-        
+
 //        1 contre-torpilleurs (3 cases)
 //        1 sous-marin (3 cases)
         String resultat = "";
@@ -190,10 +188,10 @@ public class Bateau extends Outils implements BateauInterface {
                 resultat = "Croiseur";
                 break;
             case 3:
-                
-                if(RAND.nextBoolean()){
+
+                if (RAND.nextBoolean()) {
                     resultat = "Contre-torpilleurs";
-                }else{
+                } else {
                     resultat = "Sous-marin";
                 }
                 break;
@@ -210,6 +208,5 @@ public class Bateau extends Outils implements BateauInterface {
     public String getNom() {
         return nom;
     }
-    
 
 }
