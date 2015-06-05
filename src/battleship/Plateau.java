@@ -269,14 +269,14 @@ public class Plateau extends Outils implements PlateauInterface {
                 }
                 if (y - 1 >= 0) {
                     for (int i = (existsColAvant) ? (x - 1) : x;
-                            i < ((existsColApres) ? (b + bat.getTaille()) : b + bat.getTaille() - 1);
+                            i < ((existsColApres) ? (b + bat.getTaille()+1) : b + bat.getTaille());
                             i++) {
                         waterBateau[y - 1][i] = true;
                     }
                 }
                 if (y + 1 < this.plateau.length) {
                     for (int i = (existsColAvant) ? (x - 1) : x;
-                            i < ((existsColApres) ? (b + bat.getTaille()) : b + bat.getTaille() - 1);
+                            i < ((existsColApres) ? (b + bat.getTaille()+1) : b + bat.getTaille());
                             i++) {
                         waterBateau[y + 1][i] = true;
                     }
@@ -294,14 +294,14 @@ public class Plateau extends Outils implements PlateauInterface {
                 }
                 if (x - 1 >= 0) {
                     for (int i = (existsFilAvant) ? (x - 1) : x;
-                            i < ((existsFilApres) ? (b + bat.getTaille()) : b + bat.getTaille() - 1);
+                            i < ((existsFilApres) ? (b + bat.getTaille()+1) : b + bat.getTaille() );
                             i++) {
                         waterBateau[i][x - 1] = true;
                     }
                 }
                 if (x + 1 < this.plateau[y].length) {
                     for (int i = (existsFilAvant) ? (x + 1) : x;
-                            i < ((existsFilApres) ? (b + bat.getTaille()) : b + bat.getTaille() - 1);
+                            i < ((existsFilApres) ? (b + bat.getTaille()+1) : b + bat.getTaille());
                             i++) {
                         waterBateau[i][x + 1] = true;
                     }
