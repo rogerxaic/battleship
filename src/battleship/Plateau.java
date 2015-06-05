@@ -114,7 +114,7 @@ public class Plateau extends Outils implements PlateauInterface {
         toPlace += "\n\tR. Random\n";
         return toPlace;
     }
-    
+
     /**
      *
      * @return
@@ -131,7 +131,7 @@ public class Plateau extends Outils implements PlateauInterface {
     public int[][] getStatus() {
         return plateau;
     }
-    
+
     /**
      *
      * @return
@@ -139,7 +139,7 @@ public class Plateau extends Outils implements PlateauInterface {
     public boolean[][] getWaterBateau() {
         return waterBateau;
     }
-    
+
     /**
      *
      * @return
@@ -152,7 +152,7 @@ public class Plateau extends Outils implements PlateauInterface {
         }
         return isDead;
     }
-    
+
     /**
      *
      * @return
@@ -220,7 +220,7 @@ public class Plateau extends Outils implements PlateauInterface {
         }
         return isSet;
     }
-    
+
     /**
      *
      * @param x
@@ -269,14 +269,14 @@ public class Plateau extends Outils implements PlateauInterface {
                 }
                 if (y - 1 >= 0) {
                     for (int i = (existsColAvant) ? (x - 1) : x;
-                            i < ((existsColApres) ? (b + bat.getTaille()+1) : b + bat.getTaille());
+                            i < ((existsColApres) ? (b + bat.getTaille() + 1) : b + bat.getTaille());
                             i++) {
                         waterBateau[y - 1][i] = true;
                     }
                 }
                 if (y + 1 < this.plateau.length) {
                     for (int i = (existsColAvant) ? (x - 1) : x;
-                            i < ((existsColApres) ? (b + bat.getTaille()+1) : b + bat.getTaille());
+                            i < ((existsColApres) ? (b + bat.getTaille() + 1) : b + bat.getTaille());
                             i++) {
                         waterBateau[y + 1][i] = true;
                     }
@@ -294,14 +294,14 @@ public class Plateau extends Outils implements PlateauInterface {
                 }
                 if (x - 1 >= 0) {
                     for (int i = (existsFilAvant) ? (x - 1) : x;
-                            i < ((existsFilApres) ? (b + bat.getTaille()+1) : b + bat.getTaille() );
+                            i < ((existsFilApres) ? (b + bat.getTaille() + 1) : b + bat.getTaille());
                             i++) {
                         waterBateau[i][x - 1] = true;
                     }
                 }
                 if (x + 1 < this.plateau[y].length) {
                     for (int i = (existsFilAvant) ? (x + 1) : x;
-                            i < ((existsFilApres) ? (b + bat.getTaille()+1) : b + bat.getTaille());
+                            i < ((existsFilApres) ? (b + bat.getTaille() + 1) : b + bat.getTaille());
                             i++) {
                         waterBateau[i][x + 1] = true;
                     }
@@ -324,6 +324,7 @@ public class Plateau extends Outils implements PlateauInterface {
 
     /**
      * Méthode pour placer au hasard un bateau.
+     *
      * @param bat Bateau qu'on veut placer.
      */
     @Override
@@ -360,6 +361,7 @@ public class Plateau extends Outils implements PlateauInterface {
 
     /**
      * Méthode pour l'affichage des profs. On s'en sert pas.
+     *
      * @return Un tableau int[][] pour l'affichage des profs (Moodle2).
      */
     public int[][] plateauGr() {
@@ -387,7 +389,7 @@ public class Plateau extends Outils implements PlateauInterface {
      * Cette methode tire et nous renvoie true si le tir a touché un bateau (ou
      * coulé) et false si le tir est dans l'eau.
      *
-     * @param x Coordonnée X du plateau
+     * @param newX Coordonnée X du plateau
      * @param y Coordonnée Y du plateau
      * @return True if shot was available and done, false if (e.g) we had
      * already shoot there.
@@ -422,7 +424,63 @@ public class Plateau extends Outils implements PlateauInterface {
                     }
                     bell();
                     isLastCoule = true;
-                    break;
+                    
+                    int newX = bat.getX();
+                    int newY = bat.getY();
+
+                    if (bat.isHorizontal()) {
+                        boolean existsColAvant = false;
+                        if (newX - 1 >= 0) {
+                            this.plateau[newY][newX - 1] = 2;
+                            existsColAvant = true;
+                        }
+                        boolean existsColApres = false;
+                        if (newX + bat.getTaille() < this.plateau[newY].length) {
+                            this.plateau[newY][newX + bat.getTaille()] = 2;
+                            existsColApres = true;
+                        }
+                        if (newY - 1 >= 0) {
+                            for (int i = (existsColAvant) ? (x - 1) : x;
+                                    i < ((existsColApres) ? (x + bat.getTaille() + 1) : x + bat.getTaille());
+                                    i++) {
+                                this.plateau[newY - 1][i] = 2;
+                            }
+                        }
+                        if (newY + 1 < this.plateau.length) {
+                            for (int i = (existsColAvant) ? (x - 1) : x;
+                                    i < ((existsColApres) ? (x + bat.getTaille() + 1) : x + bat.getTaille());
+                                    i++) {
+                                this.plateau[newY + 1][i] = 2;
+                            }
+                        }
+                    } else {
+                        boolean existsFilAvant = false;
+                        if (newY - 1 >= 0) {
+                            this.plateau[newY - 1][newX] = 2;
+                            existsFilAvant = true;
+                        }
+                        boolean existsFilApres = false;
+                        if (newY + bat.getTaille() < this.plateau.length) {
+                            this.plateau[newY + bat.getTaille()][newX] = 2;
+                            existsFilApres = true;
+                        }
+                        if (x - 1 >= 0) {
+                            for (int i = (existsFilAvant) ? (x - 1) : x;
+                                    i < ((existsFilApres) ? (newY + bat.getTaille() + 1) : newY + bat.getTaille());
+                                    i++) {
+                                this.plateau[i][x - 1] = 2;
+                            }
+                        }
+                        if (x + 1 < this.plateau[newY].length) {
+                            for (int i = (existsFilAvant) ? (x + 1) : x;
+                                    i < ((existsFilApres) ? (newY + bat.getTaille() + 1) : newY + bat.getTaille());
+                                    i++) {
+                                this.plateau[i][x + 1] = 2;
+                            }
+                        }
+                    }
+
+                    break; 
                 } else if (touche && !coule) {
                     this.plateau[y][x] = 3;
                     bell();
@@ -439,9 +497,5 @@ public class Plateau extends Outils implements PlateauInterface {
 
         return resultat;
     }
-
-    
-
-    
 
 }
