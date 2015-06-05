@@ -438,21 +438,21 @@ public class Plateau extends Outils implements PlateauInterface {
                         if (newX + bat.getTaille() < this.plateau[newY].length) {
                             this.plateau[newY][newX + bat.getTaille()] = 2;
                             existsColApres = true;
-                        }/*
+                        }
                         if (newY - 1 >= 0) {
-                            for (int i = (existsColAvant) ? (x - 1) : x;
-                                    i < ((existsColApres) ? (x + bat.getTaille() + 1) : x + bat.getTaille());
+                            for (int i = (existsColAvant) ? (newX - 1) : newX;
+                                    i < ((existsColApres) ? (newX + bat.getTaille() + 1) : newX + bat.getTaille());
                                     i++) {
                                 this.plateau[newY - 1][i] = 2;
                             }
                         }
                         if (newY + 1 < this.plateau.length) {
-                            for (int i = (existsColAvant) ? (x - 1) : x;
-                                    i < ((existsColApres) ? (x + bat.getTaille() + 1) : x + bat.getTaille());
+                            for (int i = (existsColAvant) ? (newX - 1) : newX;
+                                    i < ((existsColApres) ? (newX + bat.getTaille() + 1) : newX + bat.getTaille());
                                     i++) {
                                 this.plateau[newY + 1][i] = 2;
                             }
-                        }*/
+                        }
                     } else {
                         boolean existsFilAvant = false;
                         if (newY - 1 >= 0) {
@@ -463,21 +463,21 @@ public class Plateau extends Outils implements PlateauInterface {
                         if (newY + bat.getTaille() < this.plateau.length) {
                             this.plateau[newY + bat.getTaille()][newX] = 2;
                             existsFilApres = true;
-                        }/*
-                        if (x - 1 >= 0) {
-                            for (int i = (existsFilAvant) ? (x - 1) : x;
+                        }
+                        if (newX - 1 >= 0) {
+                            for (int i = (existsFilAvant) ? (newX - 1) : newX;
                                     i < ((existsFilApres) ? (newY + bat.getTaille() + 1) : newY + bat.getTaille());
                                     i++) {
-                                this.plateau[i][x - 1] = 2;
+                                this.plateau[i][newX - 1] = 2;
                             }
                         }
-                        if (x + 1 < this.plateau[newY].length) {
-                            for (int i = (existsFilAvant) ? (x + 1) : x;
+                        if (newX + 1 < this.plateau[newY].length) {
+                            for (int i = (existsFilAvant) ? (newX + 1) : newX;
                                     i < ((existsFilApres) ? (newY + bat.getTaille() + 1) : newY + bat.getTaille());
                                     i++) {
-                                this.plateau[i][x + 1] = 2;
+                                this.plateau[i][newX + 1] = 2;
                             }
-                        }*/
+                        }
                     }
 
                     break; 
