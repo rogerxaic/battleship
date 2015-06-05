@@ -67,7 +67,6 @@ public class Plateau extends Outils implements PlateauInterface {
             }
         }
         return toPlace;
-
     }
 
     @Override
@@ -314,6 +313,20 @@ public class Plateau extends Outils implements PlateauInterface {
 
     public void addNbDeaths() {
         this.nbDeaths ++;
+    }
+
+    @Override
+    public String getListeBateauxToSet() {
+        String toPlace = "";
+        for (String entry : flota.keySet()) {
+            String key = entry;
+            Bateau value = flota.get(key);
+            if (!value.isPositioned()) {
+                toPlace += "\t"+key+". "+value.getNom()+" [TAILLE "+value.getTaille()+"]\n";
+            }
+        }
+        toPlace += "\n\tR. Random\n";
+        return toPlace;
     }
     
     

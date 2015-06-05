@@ -20,6 +20,7 @@ public class Bateau extends Outils implements BateauInterface {
     protected boolean coule;
     protected int[] tailles;
     protected int degats;
+    protected String nom;
 
     public Bateau(int taille) {
         this.taille = taille;
@@ -28,6 +29,7 @@ public class Bateau extends Outils implements BateauInterface {
             status[i] = true;
         }
         this.degats=0;
+        this.nom = getNomBateaux(taille);
     }
 
     public Bateau(int ta, boolean auto) {
@@ -51,24 +53,10 @@ public class Bateau extends Outils implements BateauInterface {
             status[i] = true;
         }
         this.degats=0;
+        this.nom = getNomBateaux(tailleAvant);
     }
     
     
-
-//    public Bateau(int taille, boolean horizontal) {
-//        this.taille = taille;
-//        this.horizontal = horizontal;
-//        this.status = new boolean[taille];
-//    }
-//
-//    public Bateau(int taille, boolean horizontal, int x, int y) {
-//        this.taille = taille;
-//        this.horizontal = horizontal;
-//        this.x = x;
-//        this.y = y;
-//        this.positioned = true;
-//        this.status = new boolean[taille];
-//    }
     @Override
     public boolean isPositioned() {
         return (positioned || (x > -1 && y > -1));
@@ -188,5 +176,40 @@ public class Bateau extends Outils implements BateauInterface {
         this.y = -1;
         this.positioned = false ;
     }
+    
+    public String getNomBateaux(int taille) {
+        
+//        1 contre-torpilleurs (3 cases)
+//        1 sous-marin (3 cases)
+        String resultat = "";
+        switch (taille) {
+            case 5:
+                resultat = "Porte-avions";
+                break;
+            case 4:
+                resultat = "Croiseur";
+                break;
+            case 3:
+                
+                if(RAND.nextBoolean()){
+                    resultat = "Contre-torpilleurs";
+                }else{
+                    resultat = "Sous-marin";
+                }
+                break;
+            case 2:
+                resultat = "Torpilleur";
+                break;
+            default:
+                resultat = "Bateau sans nom ^^'";
+                break;
+        }
+        return resultat;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+    
 
 }

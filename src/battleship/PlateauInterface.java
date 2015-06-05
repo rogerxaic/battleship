@@ -16,6 +16,8 @@ public interface PlateauInterface {
     public boolean isSetAllBateaux();
 
     public String getBateauxToSet();
+    
+    public String getListeBateauxToSet();
 
     public boolean isRoom(int x, int y, boolean horizontal, int taille);
 

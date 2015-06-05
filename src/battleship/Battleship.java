@@ -246,11 +246,6 @@ public class Battleship extends Outils {
          *
          */
         while (true) {
-//        1 porte-avions (5 cases)
-//        1 croiseur (4 cases)
-//        1 contre-torpilleurs (3 cases)
-//        1 sous-marin (3 cases)
-//        1 torpilleur (2 cases)
 
             placerAll(tablero);
 
@@ -461,7 +456,8 @@ public class Battleship extends Outils {
 
                 String errorBat = red("Bateau incorrect/inexistant. \n");
                 String errorPlace = red("Il n'y a pas de place. \n");
-                String information = plat.getPropietari() + ", selectionnez bateau [" + plat.getBateauxToSet() + " R] à placer : ";
+                String information = plat.getPropietari() + ", selectionnez bateau "/*[" + plat.getBateauxToSet() + " R] */+"à placer : ";
+                information += "\n"+plat.getListeBateauxToSet()+"BATEAU : ";
 
                 System.out.print(monPlacement(plat.getStatus()) + "\n"
                         + ((errorBateau) ? errorBat + information : "")
