@@ -10,6 +10,7 @@ import java.util.Scanner;
  * Differents outils qu'on utilise lors qu'on execute le programme. Des outils
  * pour afficher les tableaux, vérifier si un String est bien un numéro, faire
  * un "clean" de l'écran, etc.
+ *
  * @author Roger && Marta
  */
 public class Outils extends Color {
@@ -32,6 +33,7 @@ public class Outils extends Color {
 
     /**
      * Méthode qui affiche 2 plateaux.
+     *
      * @param plat1 Plateau du joueur.
      * @param plat2 Plateau de l'adversaire.
      */
@@ -40,17 +42,20 @@ public class Outils extends Color {
     }
 
     /**
-     * Méthode qui affiche 2 plateaux et un texte en plus (e.g. des instructions).
+     * Méthode qui affiche 2 plateaux et un texte en plus (e.g. des
+     * instructions).
+     *
      * @param plat1 Plateau du joueur.
      * @param plat2 Plateau de l'adversaire.
      * @param text Texte qu'on veut afficher après avoir affiché les plateaux.
      */
     public static void affiche(Plateau plat1, Plateau plat2, String text) {
-        System.out.println(getAffiche(plat1, plat2) +"\n"+ text);
+        System.out.println(getAffiche(plat1, plat2) + "\n" + text);
     }
 
     /**
      * Méthode qui affiche le Banner de bienvenue.
+     *
      * @throws IOException ...
      */
     public static void Banner() throws IOException {
@@ -66,8 +71,8 @@ public class Outils extends Color {
 
     /**
      *
-     * @param command Commande qu'on veut executer dans le système, passée par un 
-     * filtre.
+     * @param command Commande qu'on veut executer dans le système, passée par
+     * un filtre.
      * @throws IOException ...
      */
     public static void exe(String command) throws IOException {
@@ -120,8 +125,8 @@ public class Outils extends Color {
      *
      * @param plat Plateau du joueur
      * @param plato Plateau de l'adversaire
-     * @return Les deux plateux (joueur et adversaire) dans un format human-readable
-     * pour qu'on puisse les afficher a l'écran.
+     * @return Les deux plateux (joueur et adversaire) dans un format
+     * human-readable pour qu'on puisse les afficher a l'écran.
      */
     public static String getAffiche(Plateau plat, Plateau plato) {
 
@@ -243,9 +248,9 @@ public class Outils extends Color {
     }
 
     /**
-     * Méthode qui renvoie la lettre de l'alphabet qui correspond a un numéro donné
-     * en paramètre. Après le Z, elle renvoie AA, AB, AC, etc.
-     * 
+     * Méthode qui renvoie la lettre de l'alphabet qui correspond a un numéro
+     * donné en paramètre. Après le Z, elle renvoie AA, AB, AC, etc.
+     *
      * @param numero Numéro qu'on veut transformer en lettre de l'alphabet.
      * @return Lettre de l'alphabet qui est en position 'numero'.
      */
@@ -274,7 +279,8 @@ public class Outils extends Color {
     /**
      *
      * @param plat1 Plateau dont on veut connaître le placement des bateaux.
-     * @return Le plateau dans un format human-readable pour qu'on puisse l'afficher.
+     * @return Le plateau dans un format human-readable pour qu'on puisse
+     * l'afficher.
      */
     public static String monPlacement(int[][] plat1) {
 
@@ -312,56 +318,12 @@ public class Outils extends Color {
 
         return base + headerP1;
     }
-    
-    /**
-     *
-     * @param plat1 Plateau dont on veut connaître le placement des bateaux.
-     * @param triche Plateau avec Water ou Bateau (true)
-     * @return Le plateau dans un format human-readable pour qu'on puisse l'afficher.
-     */
-    public static String monPlacementTrichage(int[][] plat1, boolean[][] triche) {
-
-        String base = "";
-
-        String headerP1 = " ";
-
-        for (int i = 0; i < plat1[0].length; i++) {
-            headerP1 += (i < 10) ? "  " + i + " " : "  " + i;
-        }
-
-        base += headerP1 + "\n";
-
-        for (int i = 0; i < plat1.length; i++) {
-            base += getLettre(i);
-            for (int j = 0; j < plat1[i].length; j++) {
-                switch (plat1[i][j]) {
-                    case 1:
-                        base += ANSI_BLUE + " ·" + ANSI_RESET + ""; //WATER
-                        break;
-
-                    case 5:
-                        base += ANSI_PURPLE + " H" + ANSI_RESET + ""; //SHIP 
-                        break;
-                    default:
-                        base += " · ";
-                        break;
-                }
-                
-                base += ((triche[i][j])?"T ":"F ");
-            }
-            base += getLettre(i);
-
-            base += "\n";
-
-        }
-
-        return base + headerP1;
-    }
 
     /**
      *
      * @param surface La surface du plateau.
-     * @return Le numéro de bateaux qu'on va mettre dans un plateau de surface surface.
+     * @return Le numéro de bateaux qu'on va mettre dans un plateau de surface
+     * surface.
      */
     public static int surface2Bateaux(int surface) {
         int resultat = 5;
