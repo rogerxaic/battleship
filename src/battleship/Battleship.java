@@ -150,8 +150,8 @@ public class Battleship extends Outils {
                 break;
             }
             System.out.println(red("Cette taille risque de ne pas laisser rentrer les plateaux dans l'ecran.")
-                    + ((!isInit) ? "\nIl faut démarrer le jeu avec " + green("./BatailleNavale") + ".\n"
-                            + "Veuillez lire le fichier README.md, sinon la taille maximale est 13x10." : "")
+                    + ((!isInit) ? "\nVous devriez démarrer le jeu avec " + green("./BatailleNavale") + ".\n"
+                            + "Sinon la taille maximale est 13x10." : "")
                     + "\nTAILLE : ");
         }
 
@@ -160,7 +160,7 @@ public class Battleship extends Outils {
 
         exe("clear");
 
-        //PEDIR Adversaire
+        //Demander Adversaire
         String selectVs = "Combien de joueurs voulez vous jouer avec :\n"
                 + "\t0. (contre Ordinateur)\n"
                 + "\t#. (e.g. 2, vous et 2 autres)\n\n"
