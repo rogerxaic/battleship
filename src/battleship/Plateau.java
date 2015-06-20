@@ -1,5 +1,3 @@
-package battleship;
-
 import java.util.HashMap;
 
 /**
@@ -432,10 +430,7 @@ public class Plateau extends Outils implements PlateauInterface {
                      * comme information au joueur.
                      */
                     
-                    /**
-                     * Au moins le code pour les extremes du bateau marche, donc on le
-                     * laisse.
-                     */
+                    /*
                     
                     int newX = bat.getX();
                     int newY = bat.getY();
@@ -450,7 +445,7 @@ public class Plateau extends Outils implements PlateauInterface {
                         if (newX + bat.getTaille() < this.plateau[newY].length) {
                             this.plateau[newY][newX + bat.getTaille()] = 2;
                             existsColApres = true;
-                        }/*
+                        }
                         if (newY - 1 >= 0) {
                             for (int i = (existsColAvant) ? (newX - 1) : newX;
                                     i < ((existsColApres) ? (newX + bat.getTaille() + 1) : newX + bat.getTaille());
@@ -464,7 +459,7 @@ public class Plateau extends Outils implements PlateauInterface {
                                     i++) {
                                 this.plateau[newY + 1][i] = 2;
                             }
-                        }*/
+                        }
                     } else {
                         boolean existsFilAvant = false;
                         if (newY - 1 >= 0) {
@@ -489,8 +484,8 @@ public class Plateau extends Outils implements PlateauInterface {
                                     i++) {
                                 this.plateau[i][newX + 1] = 2;
                             }
-                        }*/
-                    }
+                        }
+                    }*/
 
                     break; 
                 } else if (touche && !coule) {
